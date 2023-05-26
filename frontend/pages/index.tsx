@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
       <p> uematsuatsushi</p>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          test ibaraki
         </h1>
         <p>Test_imamura_chinpo</p>
 
