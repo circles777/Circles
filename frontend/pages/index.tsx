@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        <p>Test_imamura_chinpo</p>
+        <p>Test_imamura_Hikakin_TV</p>
 
         <p className={styles.description}>
           Get started by editing{' '}
