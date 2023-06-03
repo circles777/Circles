@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+.main {
+  min-height: 100vh;
+}
+
 .gradient-01 {
   background-image: linear-gradient(
     270deg,
