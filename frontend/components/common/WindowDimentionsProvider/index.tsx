@@ -12,6 +12,7 @@ export const WindowDimentionsProvider: React.FC<WindowDimentionsProps> = ({
   useEffect(() => {
     setWindowHeight(window.innerHeight);
     setWindowWidth(window.innerWidth);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.innerWidth, window.innerHeight]);
   return <>{children}</>;
 };

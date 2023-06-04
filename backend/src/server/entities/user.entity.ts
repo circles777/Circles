@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Exclude } from 'class-transformer';
+import { Exclude, Type } from 'class-transformer';
 import mongoose from 'mongoose';
 import { SentenceCard } from './sentenceCard.entity';
 import { WordCard, WordCardSchema } from './wordCard.entity';
+import { Address } from './address.entitiy';
 
 export type UserDocument = User & Document;
 
@@ -74,6 +75,14 @@ export class User {
     required: true,
   })
   birthDate;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address', //Address.name,
+    required: true,
+  })
+  @Type(() => Address)
+  address;
 
   @Prop({
     type: String,
