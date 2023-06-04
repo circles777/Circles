@@ -6,8 +6,17 @@ import { extendTheme } from "@chakra-ui/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
 import { RecoilRoot } from "recoil";
-import { WindowDimentionsProvider } from "../components/common/WindowDimentionsProvider";
+import dynamic from "next/dynamic";
+//import { WindowDimentionsProvider } from "../components/common/WindowDimentionsProvider";
 //import store from "../hooks/store";
+
+// window is not defined errorを避けるため
+const WindowDimentionsProvider = dynamic(
+  () => import("../components/common/WindowDimentionsProvider"),
+  {
+    ssr: false, // <- ここで ssr を無効にするオプションを渡す
+  }
+);
 
 const colors = {
   jael: "FB8C6A",

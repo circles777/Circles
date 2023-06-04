@@ -5,7 +5,7 @@ interface WindowDimentionsProps {
   children: React.ReactNode;
 }
 
-export const WindowDimentionsProvider: React.FC<WindowDimentionsProps> = ({
+const WindowDimentionsProvider: React.FC<WindowDimentionsProps> = ({
   children,
 }) => {
   const { setWindowHeight, setWindowWidth } = useWindowMutators();
@@ -13,6 +13,8 @@ export const WindowDimentionsProvider: React.FC<WindowDimentionsProps> = ({
     setWindowHeight(window.innerHeight);
     setWindowWidth(window.innerWidth);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window.innerWidth, window.innerHeight]);
+  }, [window.innerHeight, window.innerWidth]);
   return <>{children}</>;
 };
+
+export default WindowDimentionsProvider;

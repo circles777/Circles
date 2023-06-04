@@ -1,3 +1,20 @@
+export enum UserRole {
+  Author = "author",
+  Visitor = "visitor",
+}
+
+export enum Gender {
+  Male = "male",
+  Female = "female",
+  Transgender = "transgender",
+}
+
+export enum UniversityType {
+  Private = "private",
+  Nation = "nation",
+  Public = "public",
+}
+
 export enum Prefecture {
   Hokkaido = "北海道",
   Aomori = "青森県",
