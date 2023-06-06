@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mobile/api/user/user.clent.dart';
 import 'package:mobile/components/common/Avater.dart';
+import 'package:mobile/components/common/ColumnWithGap.dart';
+import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/utils/helpers/alert.dart';
@@ -45,33 +47,37 @@ class Home extends HookWidget {
         appBar: AppBar(
             title: const Text('Home'),
             backgroundColor: Color.fromARGB(255, 106, 130, 251)),
-        body: Container(
-          padding: EdgeInsets.only(top: 8, bottom: 8),
-          child: Column(
-            children: [
-              Container(
-                  alignment: Alignment.center,
-                  height: 50, // 高さ固定しないとListViewでエラー
-                  padding: EdgeInsets.only(bottom: 4),
-                  decoration: BoxDecoration(
+        body: ColumnViewWithGap(
+          gap: 8,
+          children: [
+            Padding(
+                padding: EdgeInsets.only(left: 8, right: 8),
+                child: Text('おすすめサークル',
+                    textAlign: TextAlign.start,
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.w600))),
+            Container(
+                height: 70,
+                child: ListViewWithGap(
+                  gap: 8,
+                  horizontal: true,
+                  children: nums.map((key) {
+                    return Avater(image: AssetImage('public/circle1.jpg'));
+                  }).toList(),
+                )),
+            Padding(
+              padding: EdgeInsets.only(left: 8, right: 8),
+              child: Container(
+                decoration: BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(
-                        color: Colors.blueGrey,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: nums.map((key) {
-                      return Padding(
-                        padding: EdgeInsets.only(right: 4),
-                        child: Avater(image: AssetImage('public/mican.jpeg')),
-                      );
-                    }).toList(),
-                  ))
-            ],
-          ),
+                        bottom: BorderSide(
+                  color: Color.fromRGBO(
+                      166, 166, 166, 1), //Color.fromRGBO(96, 125, 139, 1),
+                  width: 1.0,
+                ))),
+              ),
+            )
+          ],
         ));
   }
 }
