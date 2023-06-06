@@ -13,6 +13,7 @@ class ListViewWithGap extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: (horizontal == true) ? Axis.horizontal : Axis.vertical,
+      shrinkWrap: true, //高さ指定が必要なくなる
       children: children.map((child) {
         return Padding(
           padding: (horizontal == true)
