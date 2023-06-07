@@ -80,7 +80,7 @@ export class Address {
     type: String,
     required: true,
   })
-  house_number; //番地等
+  houseNumber; //番地等
 }
 
 export const AddressSchema = SchemaFactory.createForClass(Address);

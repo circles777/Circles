@@ -4,10 +4,14 @@ import { WordCard, WordCardSchema } from 'src/server/entities/wordCard.entity';
 import { User, UserSchema } from '../../entities/user.entity';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+import { Tag, TagSchema } from 'src/server/entities/tag.entity';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]),
+    MongooseModule.forFeature([
+      { name: 'user', schema: UserSchema },
+      { name: Tag.name, schema: TagSchema },
+    ]),
     /*MongooseModule.forFeatureAsync([
       {
         name: WordCard.name,

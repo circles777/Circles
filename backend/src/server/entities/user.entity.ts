@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Exclude, Type } from 'class-transformer';
 import mongoose from 'mongoose';
-import { SentenceCard } from './sentenceCard.entity';
 import { WordCard, WordCardSchema } from './wordCard.entity';
 import { Address } from './address.entitiy';
+import { Tag } from './tag.entity';
 
 export type UserDocument = User & Document;
 
@@ -88,6 +88,15 @@ export class User {
     type: String,
   })
   introduction;
+
+  @Prop([
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: Tag.name,
+    },
+  ])
+  @Type(() => Tag)
+  tags;
 
   @Prop({
     type: String,

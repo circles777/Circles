@@ -3,12 +3,15 @@ import { User } from 'src/server/entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Tag } from 'src/server/entities/tag.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel('user')
     private readonly userRepository: Model<User>,
+    @InjectModel(Tag.name)
+    private readonly tagModel: Model<Tag>,
   ) {}
 
   async saveUser(user: User) {
