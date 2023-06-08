@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 
-export type TagDocument = Tag & Document;
+export type EventTagDocument = EventTag & Document;
 
-//For circle
 @Schema({
   autoIndex: true,
   toJSON: {
@@ -11,7 +10,7 @@ export type TagDocument = Tag & Document;
   },
   timestamps: true,
 })
-export class Tag {
+export class EventTag {
   _id: string;
 
   @Prop({
@@ -22,4 +21,4 @@ export class Tag {
   name;
 }
 
-export const TagSchema = SchemaFactory.createForClass(Tag);
+export const EventTagSchema = SchemaFactory.createForClass(EventTag);

@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { Address } from './address.entitiy';
-import { University } from './university.entity';
+import { Group } from './group.entity';
 import { Type } from 'class-transformer';
 import { Tag } from './tag.entity';
+import { User } from './user.entity';
 
 export type CircleDocument = Circle & Document;
 
@@ -16,6 +17,14 @@ export type CircleDocument = Circle & Document;
 })
 export class Circle {
   _id: string;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User.name, //Address.name,
+    required: true,
+  })
+  @Type(() => User)
+  creator;
 
   @Prop({
     type: String,
@@ -39,11 +48,11 @@ export class Circle {
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'University', //Address.name,
+    ref: Group.name, //Address.name,
     required: true,
   })
-  @Type(() => University)
-  university;
+  @Type(() => Group)
+  group;
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
@@ -81,6 +90,22 @@ export class Circle {
   ])
   @Type(() => Tag)
   tags;
+
+  //認可されてるかどうか(運営側で作成されたサークルを確認して認可する)
+  @Prop({
+    type: Boolean,
+    required: true,
+    default: false,
+  })
+  confirmed;
+
+  //募集中かどうか
+  @Prop({
+    type: Boolean,
+    required: true,
+    default: true,
+  })
+  isAvailable;
 }
 
 export const CircleSchema = SchemaFactory.createForClass(Circle);

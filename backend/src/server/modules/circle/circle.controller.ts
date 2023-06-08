@@ -34,11 +34,29 @@ export class CircleController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('get-circle-one')
-  async getCircleOne(
+  @Post('delete-circle')
+  async deleteCircleOne(
     @Req() req: RequestWithUser,
     @Body() body: { id: string },
   ) {
+    return await this.circleService.deleteCircleOne(body.id, req.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('get-circle-one')
+  async getCircleOne(
+    //@Req() req: RequestWithUser,
+    @Body() body: { id: string },
+  ) {
     return await this.circleService.getCircleOne(body.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('confirm-circle')
+  async confirmCircleOne(
+    @Req() req: RequestWithUser,
+    @Body() body: { id: string },
+  ) {
+    return await this.circleService.confirmCircle(body.id, req.user);
   }
 }

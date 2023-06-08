@@ -17,8 +17,8 @@ import { LessonModule } from './modules/lesson/lesson.module';
 import { join } from 'path';
 import { FrontendMiddleware } from './middleware/frontend.middleware';
 import { ViewModule } from './modules/view/view.module';
-import { TestQuestionModule } from './modules/testQuestion/testQuestion.module';
 import { CircleModule } from './modules/circle/circle.module';
+import { EventModule } from './modules/event/event.module';
 
 @Module({
   imports: [
@@ -42,8 +42,8 @@ import { CircleModule } from './modules/circle/circle.module';
     UserModule,
     AuthModule,
     LessonModule,
-    TestQuestionModule,
     CircleModule,
+    EventModule,
     ViewModule, //@Get(*) でサイトをレンダリングしているので最後におく
   ],
   controllers: [AppController],

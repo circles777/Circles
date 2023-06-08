@@ -3,12 +3,11 @@ import { Exclude, Type } from 'class-transformer';
 import mongoose from 'mongoose';
 import { Address } from './address.entitiy';
 
-export type UniversityDocument = University & Document;
+export type GroupDocument = Group & Document;
 
-export enum UniversityType {
-  Private = 'private',
-  Nation = 'nation',
-  Public = 'public',
+export enum GroupType {
+  School = 'school',
+  Company = 'company',
 }
 
 @Schema({
@@ -18,7 +17,7 @@ export enum UniversityType {
   },
   timestamps: true,
 })
-export class University {
+export class Group {
   _id: string;
 
   @Prop({
@@ -29,10 +28,10 @@ export class University {
 
   @Prop({
     type: String,
-    enum: UniversityType,
+    enum: GroupType,
     required: true,
   })
-  university_type;
+  type;
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
@@ -50,4 +49,4 @@ export class University {
   url;
 }
 
-export const UniversitySchema = SchemaFactory.createForClass(University);
+export const GroupSchema = SchemaFactory.createForClass(Group);

@@ -5,7 +5,7 @@ import { User } from 'src/server/entities/user.entity';
 import { SaveCircleProps } from './circle.controller';
 import { Address } from 'src/server/entities/address.entitiy';
 import { Circle } from 'src/server/entities/circle.entity';
-import { University } from 'src/server/entities/university.entity';
+import { Group } from 'src/server/entities/group.entity';
 import { Tag } from 'src/server/entities/tag.entity';
 
 @Injectable()
@@ -14,8 +14,8 @@ export class CircleService {
     @InjectModel(Circle.name)
     private readonly circleModel: Model<Circle>,
 
-    @InjectModel(University.name)
-    private readonly universityModel: Model<University>,
+    @InjectModel(Group.name)
+    private readonly universityModel: Model<Group>,
 
     @InjectModel(Address.name)
     private readonly addressModel: Model<Address>,
@@ -35,10 +35,11 @@ export class CircleService {
     });
     const savedAddress = (await newAddress.save()).toObject();
     const newCircle = new this.circleModel({
+      creator: user,
       name: body.name,
       introduction: body.introduction,
       detail: body.detail,
-      university: body.university,
+      group: body.group,
       address: savedAddress,
       foundedDate: body.foundedDate,
       contactNumber: body.contactNumber,
@@ -58,6 +59,12 @@ export class CircleService {
   }
 
   async updateCircle(body: Circle, user: User): Promise<Circle> {
+    if (user.role !== 'author' && body.creator !== user._id.toString()) {
+      throw new HttpException(
+        "You don't have the right to update this circle.",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     await body.address.updateOne({ _id: body.address._id }, body.address);
     const address = (
       await this.addressModel.findById(body.address._id)
@@ -68,7 +75,7 @@ export class CircleService {
     ).toObject();
     return {
       ...updatedCircle,
-      university: body.university,
+      group: body.group,
       address,
       tags: body.tags,
     };
@@ -82,5 +89,31 @@ export class CircleService {
         ).populate('address')
       ).populate('tags')
     ).toObject();
+  }
+
+  async deleteCircleOne(id: string, user: User): Promise<Circle> {
+    const deletedCircle = (await this.circleModel.findById(id)).toObject();
+    if (
+      user.role !== 'author' &&
+      deletedCircle.creator !== user._id.toString()
+    ) {
+      throw new HttpException(
+        "You don't have the right to delete this circle.",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    await this.circleModel.deleteOne(deletedCircle);
+    return deletedCircle;
+  }
+
+  async confirmCircle(id: string, user: User): Promise<Circle> {
+    if (user.role !== 'author') {
+      throw new HttpException(
+        "You don't have the right to confirm this circle.",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    await this.circleModel.updateOne({ _id: id }, { confirmed: true });
+    return await this.getCircleOne(id);
   }
 }
