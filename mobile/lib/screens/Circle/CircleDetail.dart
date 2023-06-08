@@ -37,6 +37,10 @@ class CircleDetail extends HookWidget {
     return null;
   }
 
+   _print(){
+      print('Yeyyy');
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
