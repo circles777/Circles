@@ -26,22 +26,11 @@ class BaseLayout extends HookConsumerWidget with RouteAware {
     }, [currentRoute]);*/
 
     return Scaffold(
-        appBar: AppBar(
-            toolbarHeight: 46,
-            title: Text(title),
-            backgroundColor: Color.fromARGB(166, 0, 167, 220)),
-        body: child,
-        bottomNavigationBar: CupertinoTabBar(
-            iconSize: 32,
-            inactiveColor: Color.fromARGB(255, 255, 255, 255),
-            activeColor: Color.fromARGB(166, 207, 0, 210),
-            backgroundColor: Color.fromARGB(166, 0, 167, 220),
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(icon: Icon(CupertinoIcons.home)),
-              BottomNavigationBarItem(icon: Icon(CupertinoIcons.search)),
-              BottomNavigationBarItem(icon: Icon(CupertinoIcons.heart_fill)),
-              BottomNavigationBarItem(icon: Icon(CupertinoIcons.mail)),
-              BottomNavigationBarItem(icon: Icon(CupertinoIcons.person))
-            ]));
+      appBar: AppBar(
+          toolbarHeight: 46,
+          title: Text(title),
+          backgroundColor: Color.fromARGB(166, 0, 167, 220)),
+      body: child,
+    );
   }
 }

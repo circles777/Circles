@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:mobile/screens/Auth/CreateNew.dart';
 import 'package:mobile/screens/Home/Home.dart';
+import 'package:mobile/screens/Home/index.dart';
 import 'package:mobile/screens/auth/Login.dart';
 
 class LandingPage extends StatelessWidget {
@@ -56,7 +57,7 @@ class LandingPage extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () => {
                               Navigator.of(context).push<dynamic>(
-                                Home.route(),
+                                Index.route(),
                               )
                             },
                         style: ButtonStyle(
