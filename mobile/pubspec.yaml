@@ -43,6 +43,7 @@ dependencies:
   localstore: ^1.2.3
   shared_preferences: ^2.0.18
   hooks_riverpod: ^1.0.4
+  persistent_bottom_nav_bar_v2: any
 
 dev_dependencies:
   flutter_test:
