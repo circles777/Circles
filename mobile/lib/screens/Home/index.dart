@@ -15,6 +15,7 @@ import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/Forum/ForumList.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -43,7 +44,7 @@ class Index extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pages = [Home(), CircleDetail(), Mypage()];
+    final pages = [Home(), ForumList(), Mypage()];
 
     Future<dynamic> pushCircleDetail() => Navigator.of(context).push<dynamic>(
           CircleDetail.route(),
@@ -70,6 +71,7 @@ class Index extends HookWidget {
               icon: Icon(CupertinoIcons.person),
               activeColorPrimary: Colors.red,
               inactiveColorPrimary: Colors.white),
+
           /*PersistentBottomNavBarItem(
               icon: Icon(CupertinoIcons.mail),
               activeColorPrimary: Colors.red,
