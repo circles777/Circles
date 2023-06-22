@@ -20,8 +20,10 @@ class ColumnViewWithGap extends StatelessWidget {
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
       children: children.map((child) {
+        final index = children.indexWhere((element) => element == child);
         return Padding(
-          padding: EdgeInsets.only(bottom: gap),
+          padding:
+              EdgeInsets.only(bottom: index + 1 == children.length ? gap : 0),
           child: child,
         );
       }).toList(),
