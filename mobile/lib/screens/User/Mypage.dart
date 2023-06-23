@@ -47,7 +47,7 @@ class Mypage extends HookWidget {
         style:TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromRGBO(
                       166, 166, 166, 1))
         ),
-         Text('佐藤 太郎',
+         Text('佐藤太郎',
         style:TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color.fromRGBO(
                       0, 0, 0, 1))
          ),
