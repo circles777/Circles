@@ -22,6 +22,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../Circle/CircleDetail.dart';
 import '../User/Mypage.dart';
 import 'Home.dart';
+import '../Forum/Forum_Categories.dart';
 
 class Index extends HookWidget {
   Index({super.key});
@@ -43,7 +44,7 @@ class Index extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pages = [Home(), CircleDetail(), Mypage()];
+    final pages = [Home(), ForumCategories(), Mypage()];
 
     Future<dynamic> pushCircleDetail() => Navigator.of(context).push<dynamic>(
           CircleDetail.route(),
