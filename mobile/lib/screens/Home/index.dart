@@ -20,6 +20,9 @@ import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../Circle/CircleDetail.dart';
+import '../Circle/CircleList.dart';
+import '../Event/EventList.dart';
+import '../User/Mypage.dart';
 import 'Home.dart';
 
 class Index extends HookWidget {
@@ -42,7 +45,7 @@ class Index extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pages = [Home(), CircleDetail()];
+    final pages = [Home(), CircleList(), EventList(),  CircleDetail(), Mypage()];
 
     Future<dynamic> pushCircleDetail() => Navigator.of(context).push<dynamic>(
           CircleDetail.route(),
@@ -61,22 +64,23 @@ class Index extends HookWidget {
               icon: Icon(CupertinoIcons.home),
               activeColorPrimary: Colors.red,
               inactiveColorPrimary: Colors.white),
-          PersistentBottomNavBarItem(
-              icon: Icon(Icons.forum),
+           PersistentBottomNavBarItem(
+              icon: Icon(Icons.groups),
               activeColorPrimary: Colors.red,
               inactiveColorPrimary: Colors.white),
-          /*PersistentBottomNavBarItem(
-              icon: Icon(CupertinoIcons.heart_fill),
+          PersistentBottomNavBarItem(
+              icon: Icon(Icons.group_add),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),*/
-          /*PersistentBottomNavBarItem(
-              icon: Icon(CupertinoIcons.mail),
+              inactiveColorPrimary: Colors.white),
+          PersistentBottomNavBarItem(
+              icon: Icon(Icons.forum),
               activeColorPrimary: Colors.red,
               inactiveColorPrimary: Colors.white),
           PersistentBottomNavBarItem(
               icon: Icon(CupertinoIcons.person),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white)*/
+              inactiveColorPrimary: Colors.white),
+         
         ]);
   }
 }
