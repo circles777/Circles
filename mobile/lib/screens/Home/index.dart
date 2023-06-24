@@ -25,6 +25,7 @@ import '../Circle/CircleList.dart';
 import '../Event/EventList.dart';
 import '../User/Mypage.dart';
 import 'Home.dart';
+import '../Forum/Forum_Categories.dart';
 
 class Index extends HookWidget {
   Index({super.key});
@@ -46,7 +47,13 @@ class Index extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pages = [Home(), CircleList(), EventList(), ForumList(), Mypage()];
+    final pages = [
+      Home(),
+      CircleList(),
+      EventList(),
+      ForumCategories(),
+      Mypage()
+    ];
 
     Future<dynamic> pushCircleDetail() => Navigator.of(context).push<dynamic>(
           CircleDetail.route(),
