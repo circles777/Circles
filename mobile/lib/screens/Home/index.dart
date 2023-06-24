@@ -47,8 +47,13 @@ class Index extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final pages = [Home(), CircleList(), EventList(), Forum_Categories(), Mypage()];
+    final pages = [
+      Home(),
+      CircleList(),
+      EventList(),
+      ForumCategories(),
+      Mypage()
+    ];
 
     Future<dynamic> pushCircleDetail() => Navigator.of(context).push<dynamic>(
           CircleDetail.route(),
