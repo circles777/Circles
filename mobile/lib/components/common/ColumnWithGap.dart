@@ -23,7 +23,7 @@ class ColumnViewWithGap extends StatelessWidget {
         final index = children.indexWhere((element) => element == child);
         return Padding(
           padding:
-              EdgeInsets.only(bottom: index + 1 == children.length ? gap : 0),
+              EdgeInsets.only(bottom: (index + 1) == children.length ? 0 : gap),
           child: child,
         );
       }).toList(),

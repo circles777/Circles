@@ -18,6 +18,8 @@ import 'package:mobile/components/common/Tag.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/components/forum/ForumCard.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/Forum/ForumDetail.dart';
+import 'package:mobile/utils/constants/constants.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 
@@ -35,6 +37,16 @@ class ForumList extends HookWidget {
   Widget build(BuildContext context) {
     const List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     final double deviceHeight = MediaQuery.of(context).size.height;
+    Future<dynamic> pushForumDetail({
+      required DateTime date,
+      required title,
+      required String content,
+      required int goodNum,
+    }) =>
+        Navigator.of(context).push<dynamic>(
+          ForumDetail.route(
+              date: date, title: title, content: content, goodNum: goodNum),
+        );
     return BaseLayout(
       title: "掲示板一覧",
       // body部分の画面のpaddingが全て8pxだから、一番上をpaddingで囲っていい
@@ -90,15 +102,22 @@ class ForumList extends HookWidget {
           ]),
           Container(
             padding: EdgeInsets.only(left: 8, right: 8),
-            height: deviceHeight - 46 - 48 - 52 - 4,
+            height: deviceHeight - heightOfHeaderAndBottomNav - 56,
             child: ListViewWithGap(
                 gap: 0,
                 children: nums.map((n) {
                   return ForumCard(
-                      date: DateTime.now(),
-                      title: "一番狙い目の会社は?",
-                      commentNum: 128,
-                      goodNum: 37);
+                    date: DateTime.now(),
+                    title: "一番狙い目の会社は?",
+                    commentNum: 128,
+                    goodNum: 37,
+                    onTap: () => pushForumDetail(
+                        date: DateTime.now(),
+                        title: "一番狙い目の会社は?",
+                        goodNum: 37,
+                        content:
+                            "現在、大学４年生の男子学生です。今就活をしていて、不動産業界を視能しています。 しかし、大学時代にこれといったことをしておらず、面接で話せる内容がありません。 そのため、選考倍率もそこまで高くなくかつ、福利厚生もそこそこいい会社があれば教えていただきたいです。"),
+                  );
                 }).toList()),
           )
         ],
