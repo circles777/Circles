@@ -15,8 +15,10 @@ import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/Tag.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
+import 'package:mobile/components/forum/ForumCommentCard.dart';
 import 'package:mobile/components/forum/ForumDetailCard.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/utils/constants/constants.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 
@@ -57,20 +59,37 @@ class ForumDetail extends HookWidget {
       inputUserName.value = text;
     }
 
-    const List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    const List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
     return BaseLayout(
       title: '掲示板詳細',
       child: Padding(
-          padding: EdgeInsets.all(8),
-          child: ColumnViewWithGap(
-            gap: 16,
-            children: [
-              ForumDetailCard(
-                  date: date, title: title, content: content, goodNum: goodNum),
-              ColumnViewWithGap(gap: 8, children: [])
-            ],
+          padding: EdgeInsets.only(top: 8, right: 8, left: 8),
+          child: Container(
+            height: deviceHeight - heightOfHeaderAndBottomNav - 8,
+            child: ListViewWithGap(
+              gap: 16,
+              children: [
+                ForumDetailCard(
+                    date: date,
+                    title: title,
+                    content: content,
+                    goodNum: goodNum),
+                Padding(
+                  padding: EdgeInsets.only(top: 8),
+                  child: ColumnViewWithGap(
+                      gap: 8,
+                      children: nums.map((n) {
+                        return ForumCommentCard(
+                            date: date,
+                            userName: "satou845",
+                            content:
+                                "不動産業界だったら大塚商会がおすすめです。大量に新卒枠ありますし、倍率もそこそこです。");
+                      }).toList()),
+                )
+              ],
+            ),
           )),
     );
   }
