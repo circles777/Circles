@@ -6,8 +6,12 @@ class ListViewWithGap extends StatelessWidget {
   final double gap;
   final List<Widget> children;
   final bool? horizontal;
-  const ListViewWithGap(
-      {super.key, required this.gap, required this.children, this.horizontal});
+  const ListViewWithGap({
+    super.key,
+    required this.gap,
+    required this.children,
+    this.horizontal,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +19,12 @@ class ListViewWithGap extends StatelessWidget {
       scrollDirection: (horizontal == true) ? Axis.horizontal : Axis.vertical,
       shrinkWrap: true, //高さ指定が必要なくなる
       children: children.map((child) {
+        final index = children.indexWhere((element) => element == child);
+        final bool flag = index + 1 == children.length;
         return Padding(
           padding: (horizontal == true)
-              ? EdgeInsets.only(right: gap)
-              : EdgeInsets.only(bottom: gap),
+              ? EdgeInsets.only(right: flag ? 0 : gap)
+              : EdgeInsets.only(bottom: flag ? 0 : gap),
           child: child,
         );
       }).toList(),
