@@ -23,8 +23,8 @@ class ListViewWithGap extends StatelessWidget {
         final bool flag = index + 1 == children.length;
         return Padding(
           padding: (horizontal == true)
-              ? EdgeInsets.only(right: flag ? gap : 0)
-              : EdgeInsets.only(bottom: flag ? gap : 0),
+              ? EdgeInsets.only(right: flag ? 0 : gap)
+              : EdgeInsets.only(bottom: flag ? 0 : gap),
           child: child,
         );
       }).toList(),
