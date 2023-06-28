@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { Address } from './address.entitiy';
-import { Group } from './group.entity';
+import { University } from './university.entity';
 import { Type } from 'class-transformer';
 import { Tag } from './tag.entity';
 import { User } from './user.entity';
+import { Address } from '../type/types';
 
 export type CircleDocument = Circle & Document;
 
@@ -48,19 +48,20 @@ export class Circle {
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: Group.name, //Address.name,
+    ref: University.name, //Address.name,
     required: true,
   })
-  @Type(() => Group)
-  group;
+  @Type(() => University)
+  university;
 
   @Prop({
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Address', //Address.name,
+    //type: mongoose.Schema.Types.ObjectId,
+    //ref: 'Address', //Address.name,
+    type: Object,
     required: true,
   })
-  @Type(() => Address)
-  address;
+  //@Type(() => Address)
+  address: Address;
 
   @Prop({
     type: Date,

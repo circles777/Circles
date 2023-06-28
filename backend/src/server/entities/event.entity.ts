@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { Address } from './address.entitiy';
+import { Address } from '../type/types';
 import { Type } from 'class-transformer';
 import { EventTag } from './eventTag.entity';
 import { Circle } from './circle.entity';
 import { UserBookedEvent } from './userBookedEvent';
+import { User } from './user.entity';
 
 export type EventDocument = Event & Document;
 
@@ -26,8 +27,16 @@ export class Event {
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: Circle.name, //Address.name,
+    ref: User.name, //Address.name,
     required: true,
+  })
+  @Type(() => User)
+  creator;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Circle.name, //Address.name,
+    //required: true,
   })
   @Type(() => Circle)
   circle;
@@ -51,12 +60,13 @@ export class Event {
   endedAt;
 
   @Prop({
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Address', //Address.name,
+    //type: mongoose.Schema.Types.ObjectId,
+    //ref: 'Address', //Address.name,
+    type: Object,
     required: true,
   })
-  @Type(() => Address)
-  address;
+  //@Type(() => Address)
+  address: Address;
 
   //定員
   @Prop({

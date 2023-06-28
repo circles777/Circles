@@ -5,7 +5,7 @@ import { Address, AddressSchema } from 'src/server/entities/address.entitiy';
 import { Tag, TagSchema } from 'src/server/entities/tag.entity';
 import { CircleController } from './circle.controller';
 import { CircleService } from './circle.service';
-import { Group, GroupSchema } from 'src/server/entities/group.entity';
+import { Group, GroupSchema } from 'src/server/entities/university.entity';
 import { Circle, CircleSchema } from 'src/server/entities/circle.entity';
 
 @Module({

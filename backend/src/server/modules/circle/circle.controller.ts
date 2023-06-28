@@ -12,7 +12,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CircleService } from './circle.service';
 import { Tag } from 'src/server/entities/tag.entity';
 import { Circle } from 'src/server/entities/circle.entity';
-import { Address } from 'src/server/entities/address.entitiy';
+import { Address } from '../../type/types';
 
 export type SaveCircleProps = Omit<Circle, '_id' | 'address'> &
   Omit<Address, '_id'>;

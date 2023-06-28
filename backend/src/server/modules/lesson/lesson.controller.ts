@@ -7,8 +7,8 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { Lesson } from 'src/server/entities/lesson.entity';
-import { LessonComment } from 'src/server/entities/lessonComment.entity';
+import { Lesson } from 'src/server/entities/forum.entity';
+import { LessonComment } from 'src/server/entities/forumComment.entity';
 import { SentenceCard } from 'src/server/entities/sentenceCard.entity';
 import { WordCard } from 'src/server/entities/wordCard.entity';
 import { RequestWithUser } from '../auth/auth.controller';

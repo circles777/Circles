@@ -1,11 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { WordCard } from './wordCard.entity';
 import { User } from './user.entity';
 import { Type } from 'class-transformer';
-import { SentenceCard } from './sentenceCard.entity';
 
-export type LessonDocument = Lesson & Document;
+export type ForumDocument = Forum & Document;
 
 @Schema({
   autoIndex: true,
@@ -14,7 +12,7 @@ export type LessonDocument = Lesson & Document;
   },
   timestamps: true,
 })
-export class Lesson {
+export class Forum {
   _id: string;
 
   @Prop({
@@ -28,16 +26,11 @@ export class Lesson {
     type: String,
     required: true,
   })
-  introduction;
+  content;
 
-  @Prop({
-    type: String,
-    required: true,
-  })
-  description;
-
-  wordCards?: WordCard[];
-  sentenceCards?: SentenceCard[];
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
+  @Type(() => User)
+  writer;
 }
 
-export const LessonSchema = SchemaFactory.createForClass(Lesson);
+export const ForumSchema = SchemaFactory.createForClass(Forum);

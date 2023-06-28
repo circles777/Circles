@@ -1,4 +1,4 @@
-class UserUrls {
-  static String userUrl = 'user';
-  static String saveUserUrl = '/${userUrl}/save-user';
-}
+import 'package:mobile/utils/url/index.dart';
+
+const String userUrl = 'user';
+final saveUserUrl = '$baseUrl/$userUrl/save-user';
