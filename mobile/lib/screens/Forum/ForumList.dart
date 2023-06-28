@@ -17,6 +17,7 @@ import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/Tag.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/components/forum/ForumCard.dart';
+import 'package:mobile/models/common/enums.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/screens/Forum/ForumDetail.dart';
 import 'package:mobile/utils/constants/constants.dart';
@@ -24,11 +25,12 @@ import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 
 class ForumList extends HookWidget {
-  const ForumList({super.key});
+  final ForumCategory category;
+  const ForumList({super.key, required this.category});
 
-  static Route<dynamic> route() {
+  static Route<dynamic> route({required ForumCategory category}) {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => ForumList(),
+      builder: (_) => ForumList(category: category),
       //settings: RouteSettings(arguments: someId),
     );
   }

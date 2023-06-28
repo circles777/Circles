@@ -1,5 +1,5 @@
 enum ForumCategory {
-  jobHunting('jobHunting'),
+  /*jobHunting('jobHunting'),
   part('part'),
   love('love'),
   sport('sport'),
@@ -7,7 +7,16 @@ enum ForumCategory {
   food('food'),
   entertainment('entertainment'),
   scaryStory('scaryStory'),
-  funnyStory('funnyStory');
+  funnyStory('funnyStory');*/
+  jobHunting('就活'),
+  part('バイト'),
+  love('恋愛'),
+  sport('スポーツ'),
+  game('ゲーム'),
+  food('食べ物'),
+  entertainment('エンタメ'),
+  scaryStory('怖い話'),
+  funnyStory('面白い話');
 
   const ForumCategory(this.displayName);
   final String displayName;
