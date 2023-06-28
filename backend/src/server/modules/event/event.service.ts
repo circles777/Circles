@@ -5,7 +5,7 @@ import { User } from 'src/server/entities/user.entity';
 import { SaveEventProps } from './event.controller';
 import { Address } from 'src/server/entities/address.entitiy';
 import { Circle } from 'src/server/entities/circle.entity';
-import { Group } from 'src/server/entities/group.entity';
+import { Group } from 'src/server/entities/university.entity';
 import { Event } from 'src/server/entities/event.entity';
 import { EventTag } from 'src/server/entities/eventTag.entity';
 import { UserBookedEvent } from 'src/server/entities/userBookedEvent';

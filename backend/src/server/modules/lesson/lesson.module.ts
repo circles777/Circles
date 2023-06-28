@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Lesson, LessonSchema } from 'src/server/entities/lesson.entity';
+import { Lesson, LessonSchema } from 'src/server/entities/forum.entity';
 import {
   SentenceCard,
   SentenceCardSchema,
@@ -8,7 +8,7 @@ import {
 import {
   UserFavoriteSentenceCard,
   UserFavoriteSentenceCardSchema,
-} from 'src/server/entities/userFavoriteSentence.entitiy';
+} from 'src/server/entities/userGoodForum.entitiy';
 import {
   UserFavoriteWordCard,
   UserFavoriteWordCardSchema,
@@ -19,7 +19,7 @@ import { LessonService } from './lesson.service';
 import {
   LessonComment,
   LessonCommentSchema,
-} from 'src/server/entities/lessonComment.entity';
+} from 'src/server/entities/forumComment.entity';
 import { User, UserSchema } from 'src/server/entities/user.entity';
 
 @Module({

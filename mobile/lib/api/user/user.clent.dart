@@ -11,7 +11,7 @@ import '../../models/user.model.dart';
 
 class UserClient {
   static Future<User?> saveUser(dynamic user) async {
-    final url = Uri.parse(BaseUrl.baseUrl + UserUrls.saveUserUrl);
+    final url = Uri.parse(saveUserUrl);
     try {
       final response = await http.post(url,
           body: jsonEncode(user), headers: HeaderForApi.jsonHeader);
@@ -27,7 +27,7 @@ class UserClient {
 
   static Future<User?> login(
       String email, String password, WidgetRef ref) async {
-    final url = Uri.parse(BaseUrl.baseUrl + AuthUrls.loginUrl);
+    final url = Uri.parse(baseUrl + AuthUrls.loginUrl);
     try {
       final response = await http.post(url,
           body: jsonEncode({

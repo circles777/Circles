@@ -20,8 +20,10 @@ class RowViewWithGap extends StatelessWidget {
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
       children: children.map((child) {
+        final index = children.indexWhere((element) => element == child);
         return Padding(
-          padding: EdgeInsets.only(right: gap),
+          padding:
+              EdgeInsets.only(right: (index + 1) == children.length ? 0 : gap),
           child: child,
         );
       }).toList(),

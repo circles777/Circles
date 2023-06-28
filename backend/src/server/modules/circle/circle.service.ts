@@ -5,7 +5,7 @@ import { User } from 'src/server/entities/user.entity';
 import { SaveCircleProps } from './circle.controller';
 import { Address } from 'src/server/entities/address.entitiy';
 import { Circle } from 'src/server/entities/circle.entity';
-import { Group } from 'src/server/entities/group.entity';
+import { Group } from 'src/server/entities/university.entity';
 import { Tag } from 'src/server/entities/tag.entity';
 
 @Injectable()

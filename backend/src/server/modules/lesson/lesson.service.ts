@@ -1,11 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Lesson } from 'src/server/entities/lesson.entity';
-import { LessonComment } from 'src/server/entities/lessonComment.entity';
+import { Lesson } from 'src/server/entities/forum.entity';
+import { LessonComment } from 'src/server/entities/forumComment.entity';
 import { SentenceCard } from 'src/server/entities/sentenceCard.entity';
 import { User, UserRole } from 'src/server/entities/user.entity';
-import { UserFavoriteSentenceCard } from 'src/server/entities/userFavoriteSentence.entitiy';
+import { UserFavoriteSentenceCard } from 'src/server/entities/userGoodForum.entitiy';
 import { UserFavoriteWordCard } from 'src/server/entities/userFavoriteWord.entitiy';
 import { WordCard } from 'src/server/entities/wordCard.entity';
 import { PasswordOmitUser } from '../auth/local.strategy';

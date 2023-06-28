@@ -25,12 +25,16 @@ class BaseLayout extends HookConsumerWidget with RouteAware {
       ref.read(headerProvider.notifier).checkAuth(context);
     }, [currentRoute]);*/
 
+    final double deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: AppBar(
-          toolbarHeight: 46,
-          title: Text(title),
-          backgroundColor: Color.fromARGB(166, 0, 167, 220)),
-      body: child,
-    );
+        appBar: AppBar(
+            toolbarHeight: 46,
+            title: Text(title),
+            backgroundColor: Color.fromARGB(166, 0, 167, 220)),
+        body: Container(
+          height: deviceHeight - 46.0 - 48.0 + 8,
+          child: ClipRect(child: child),
+        ));
   }
 }

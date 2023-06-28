@@ -2,9 +2,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { User } from './user.entity';
 import { Type } from 'class-transformer';
-import { SentenceCard } from './sentenceCard.entity';
+import { Forum } from './forum.entity';
 
-export type UserFavoriteSentenceDocument = UserFavoriteSentenceCard & Document;
+export type UserGoodForumDocument = UserGoodForum & Document;
 
 @Schema({
   autoIndex: true,
@@ -13,7 +13,7 @@ export type UserFavoriteSentenceDocument = UserFavoriteSentenceCard & Document;
   },
   timestamps: true,
 })
-export class UserFavoriteSentenceCard {
+export class UserGoodForum {
   _id: string;
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
@@ -25,13 +25,11 @@ export class UserFavoriteSentenceCard {
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: SentenceCard.name,
+    ref: Forum.name,
     required: true,
   })
-  @Type(() => SentenceCard)
-  sentence;
+  @Type(() => Forum)
+  forum;
 }
 
-export const UserFavoriteSentenceCardSchema = SchemaFactory.createForClass(
-  UserFavoriteSentenceCard,
-);
+export const UserGoodForumSchema = SchemaFactory.createForClass(UserGoodForum);

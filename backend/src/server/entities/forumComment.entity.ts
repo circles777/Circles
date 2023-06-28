@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { ObjectId } from 'mongoose';
-import { Lesson } from './lesson.entity';
+import { Forum } from './forum.entity';
 import { Type } from 'class-transformer';
 import { User } from './user.entity';
 
-export type LessonCommentDocument = LessonComment & Document;
+export type ForumCommentDocument = ForumComment & Document;
 
 @Schema({
   autoIndex: true,
@@ -13,7 +13,7 @@ export type LessonCommentDocument = LessonComment & Document;
   },
   timestamps: true,
 })
-export class LessonComment {
+export class ForumComment {
   _id: string;
 
   @Prop({
@@ -24,15 +24,15 @@ export class LessonComment {
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: Lesson.name,
+    ref: Forum.name,
     required: true,
   })
-  @Type(() => Lesson)
-  lesson;
+  @Type(() => Forum)
+  forum;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
   @Type(() => User)
   writer;
 }
 
-export const LessonCommentSchema = SchemaFactory.createForClass(LessonComment);
+export const ForumCommentSchema = SchemaFactory.createForClass(ForumComment);

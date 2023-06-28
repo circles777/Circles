@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Exclude, Type } from 'class-transformer';
 import mongoose from 'mongoose';
-import { WordCard, WordCardSchema } from './wordCard.entity';
-import { Address } from './address.entitiy';
+import { Address } from '../type/types';
 import { Tag } from './tag.entity';
+import { EventTag } from './eventTag.entity';
+import { University } from './university.entity';
 
 export type UserDocument = User & Document;
 
@@ -13,9 +14,9 @@ export enum UserRole {
 }
 
 export enum Gender {
-  Male = 'male',
-  Female = 'female',
-  Transgender = 'transgender',
+  Male = '男性',
+  Female = '女性',
+  Transgender = 'トランスジェンダー',
 }
 
 @Schema({
@@ -39,6 +40,18 @@ export class User {
     required: true,
   })
   lastName;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  firstNameKana;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  lastNameKana;
 
   @Prop({
     type: String,
@@ -77,12 +90,21 @@ export class User {
   birthDate;
 
   @Prop({
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Address', //Address.name,
+    //type: mongoose.Schema.Types.ObjectId,
+    //ref: 'Address', //Address.name,
+    type: Object,
     required: true,
   })
-  @Type(() => Address)
-  address;
+  //@Type(() => Address)
+  address: Address;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: University.name,
+    required: true,
+  })
+  @Type(() => University)
+  university;
 
   @Prop({
     type: String,
@@ -98,14 +120,21 @@ export class User {
   @Type(() => Tag)
   tags;
 
+  @Prop([
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: EventTag.name,
+    },
+  ])
+  @Type(() => EventTag)
+  eventTags;
+
   @Prop({
     type: String,
     require: true,
   })
   @Exclude()
   password;
-
-  fullName: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
@@ -115,9 +144,9 @@ UserSchema.virtual('fullName').get(function (this: UserDocument) {
 });
 
 //userが消されたら、関係しているwordcardを削除
-UserSchema.pre('deleteOne', async function (next) {
+/*UserSchema.pre('deleteOne', async function (next) {
   const doc = await this.model.findOne(this.getFilter());
   const model = mongoose.model(WordCard.name, WordCardSchema);
   await model.deleteMany({ author: doc.id });
   next();
-});
+});*/
