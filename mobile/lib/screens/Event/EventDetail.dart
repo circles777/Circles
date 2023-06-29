@@ -107,6 +107,14 @@ class EventDetail extends HookWidget {
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w400))
                         ]),
+                        ColumnViewWithGap(gap: 8, children: [
+                          Text('詳細:',
+                              style: TextStyle(
+                                  fontSize:14, fontWeight: FontWeight.w400)),
+                          Text('飲み会を開催します。興味をお持ちの方は、ぜひご参加ください。',
+                              style: TextStyle(
+                                  fontSize:14, fontWeight: FontWeight.w400))
+                        ]),
                         Text('タグ:',
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w400)),
@@ -145,25 +153,43 @@ class EventDetail extends HookWidget {
                           height: 16,
                         ),
                         Center(
-                          child: Container(
-                            width: 64,
-                            padding: EdgeInsets.only(
-                                top: 8, right: 12, bottom: 8, left: 12),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: Color.fromARGB(205, 237, 94, 250)),
-                            child: Text(
-                              '参加',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                          child:
+                          ColumnViewWithGap(gap: 8, children:[
+                            Container(
+                              child:
+                              RowViewWithGap(gap:8,children: <Widget>[
+                                Text("参加状況",
+                                   style:TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w600)),
+                                //ここに追加
+                                //参加人数を表示
+                                //
+                                //
+                                //
+                                Text('/78人',
+                                   style:TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w600)),
+                              ])),
+                             Container(
+                              width: 64,
+                              padding: EdgeInsets.only(
+                                  top: 8, right: 12, bottom: 8, left: 12),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Color.fromARGB(205, 237, 94, 250)),
+                              child: Text(
+                                '参加',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white),
                             ),
+                          )],
                           ),
                         )
                       ])
                     ])
-                  ],
+                   ],
                 ))
           ],
         ));
