@@ -12,10 +12,10 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CircleService } from './circle.service';
 import { Tag } from 'src/server/entities/tag.entity';
 import { Circle } from 'src/server/entities/circle.entity';
-import { Address } from '../../type/types';
 
-export type SaveCircleProps = Omit<Circle, '_id' | 'address'> &
-  Omit<Address, '_id'>;
+export type SaveCircleProps = Omit<Circle, '_id'>;
+
+export type SaveTagProps = Omit<Tag, '_id'>;
 
 @Controller('circle')
 export class CircleController {
@@ -58,5 +58,17 @@ export class CircleController {
     @Body() body: { id: string },
   ) {
     return await this.circleService.confirmCircle(body.id, req.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('/tag/save-tag')
+  async saveTag(@Req() req: RequestWithUser, @Body() body: SaveTagProps) {
+    return await this.circleService.saveTag(body);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('/tag/delete-tag')
+  async deleteTag(@Req() req: RequestWithUser, @Body() body: { id: string }) {
+    return await this.circleService.deleteTag(body.id, req.user);
   }
 }

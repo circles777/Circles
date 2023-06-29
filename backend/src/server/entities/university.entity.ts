@@ -39,7 +39,7 @@ export class University {
 
   @Prop({
     type: String,
-    required: true,
+    //required: true,
   })
   campus;
 

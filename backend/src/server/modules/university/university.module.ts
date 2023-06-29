@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/server/entities/user.entity';
 import { Tag, TagSchema } from 'src/server/entities/tag.entity';
-import { CircleController } from './circle.controller';
-import { CircleService } from './circle.service';
+import { UniversityController } from './university.controller';
+import { UniversityService } from './university.service';
 import {
   University,
   UniversitySchema,
@@ -19,7 +19,7 @@ import { Circle, CircleSchema } from 'src/server/entities/circle.entity';
       { name: User.name, schema: UserSchema },
     ]),
   ],
-  controllers: [CircleController],
-  providers: [CircleService],
+  controllers: [UniversityController],
+  providers: [UniversityService],
 })
 export class CircleModule {}
