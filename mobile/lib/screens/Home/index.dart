@@ -15,6 +15,7 @@ import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/Event/EventDetail.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
@@ -50,7 +51,8 @@ class Index extends HookWidget {
     final pages = [
       Home(),
       CircleList(),
-      EventList(),
+      //EventList(),
+      EventDetail(),
       ForumCategories(),
       Mypage()
     ];
