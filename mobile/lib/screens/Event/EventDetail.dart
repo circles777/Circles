@@ -29,8 +29,6 @@ class EventDetail extends HookWidget {
       //settings: RouteSettings(arguments: someId),
     );
   }
- 
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,7 @@ class EventDetail extends HookWidget {
     void onChangeUserNameInput(String text) {
       inputUserName.value = text;
     }
-    
+
     const List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
     final double deviceWidth = MediaQuery.of(context).size.width;
@@ -48,25 +46,25 @@ class EventDetail extends HookWidget {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 8,right: 8),
-              child: ListViewWithGap(
-                gap: 12,
-                children: [
-                  Text('飲み会',
-                      style: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w600)),
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                                color: Color.fromRGBO(166, 166, 166, 1),
-                                width: 1.0))),
-                  ),
-                  ColumnViewWithGap(gap: 8, children: [
-                    Text('イベント情報',
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w600)),
-                    ColumnViewWithGap(gap: 4, children: <Widget>[
+                padding: EdgeInsets.only(left: 8, right: 8, top: 8),
+                child: ListViewWithGap(
+                  gap: 8,
+                  children: [
+                    Text('飲み会',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600)),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Color.fromRGBO(166, 166, 166, 1),
+                                  width: 1.0))),
+                    ),
+                    ColumnViewWithGap(gap: 8, children: [
+                      Text('イベント情報',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600)),
+                      ColumnViewWithGap(gap: 4, children: <Widget>[
                         RowViewWithGap(gap: 8, children: [
                           Text('サークル名:',
                               style: TextStyle(
@@ -95,7 +93,7 @@ class EventDetail extends HookWidget {
                           Text('定員:',
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w400)),
-                          Text('1,000,000人',
+                          Text('78人',
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w400))
                         ]),
@@ -103,18 +101,17 @@ class EventDetail extends HookWidget {
                           Text('参加費:',
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w400)),
-                          Text('7,000,000,000 dollers',
+                          Text('7,000円',
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w400))
                         ]),
-                        ColumnViewWithGap(gap: 8, children: [
-                          Text('詳細:',
-                              style: TextStyle(
-                                  fontSize:14, fontWeight: FontWeight.w400)),
-                          Text('飲み会を開催します。興味をお持ちの方は、ぜひご参加ください。',
-                              style: TextStyle(
-                                  fontSize:14, fontWeight: FontWeight.w400))
-                        ]),
+                        Text('詳細:',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w400)),
+                        Text(
+                            '飲み会を通して親密になりながら私たちのサークルが行なっていることを知ってもらおうと思っています。ぜひご参加ください！',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w400)),
                         Text('タグ:',
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w400)),
@@ -149,28 +146,44 @@ class EventDetail extends HookWidget {
                                     Color.fromARGB(208, 68, 165, 255))
                           ],
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 16,
                         ),
-                        Center(
-                          child:
-                          ColumnViewWithGap(gap: 8, children:[
+                        ColumnViewWithGap(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          gap: 8,
+                          children: [
+                            RowViewWithGap(
+                                gap: 16,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text("参加状況",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500)),
+                                  //ここに追加
+                                  //参加人数を表示
+                                  //
+                                  //
+                                  //
+                                  RowViewWithGap(
+                                      gap: 0,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text('8',
+                                            style: TextStyle(
+                                                fontSize: 32,
+                                                fontWeight: FontWeight.w600,
+                                                color: Color.fromARGB(
+                                                    255, 255, 65, 227))),
+                                        Text('/78人',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600)),
+                                      ])
+                                ]),
                             Container(
-                              child:
-                              RowViewWithGap(gap:8,children: <Widget>[
-                                Text("参加状況",
-                                   style:TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w600)),
-                                //ここに追加
-                                //参加人数を表示
-                                //
-                                //
-                                //
-                                Text('/78人',
-                                   style:TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w600)),
-                              ])),
-                             Container(
                               width: 64,
                               padding: EdgeInsets.only(
                                   top: 8, right: 12, bottom: 8, left: 12),
@@ -183,13 +196,13 @@ class EventDetail extends HookWidget {
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white),
-                            ),
-                          )],
-                          ),
-                        )
+                              ),
+                            )
+                          ],
+                        ),
                       ])
                     ])
-                   ],
+                  ],
                 ))
           ],
         ));
