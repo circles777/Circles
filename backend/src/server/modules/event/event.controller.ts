@@ -11,10 +11,10 @@ import { RequestWithUser } from '../auth/auth.controller';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { EventService } from './event.service';
 import { Event } from 'src/server/entities/event.entity';
-import { Address } from 'src/server/entities/address.entitiy';
+import { EventTag } from 'src/server/entities/eventTag.entity';
 
-export type SaveEventProps = Omit<Event, '_id' | 'circle' | 'address'> &
-  Omit<Address, '_id'> & { circleID: string };
+export type SaveEventProps = Omit<Event, '_id'>;
+export type SaveEventTagProps = Omit<EventTag, '_id'>;
 
 @Controller('event')
 export class EventController {
@@ -38,15 +38,21 @@ export class EventController {
     @Req() req: RequestWithUser,
     @Body() body: { id: string },
   ) {
-    return await this.eventService.deleteEventOne(body.id);
+    return await this.eventService.deleteEventOne(body.id, req.user);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('get-event-one')
-  async getCircleOne(
+  @Get('get-event-one/:id')
+  async getCircleOne(@Req() req: RequestWithUser, @Param('id') id: string) {
+    return await this.eventService.getEventOne(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('delete-event-tag')
+  async deleteEventTag(
     @Req() req: RequestWithUser,
     @Body() body: { id: string },
   ) {
-    return await this.eventService.getEventOne(body.id);
+    return await this.eventService.deleteEventTag(body.id, req.user);
   }
 }

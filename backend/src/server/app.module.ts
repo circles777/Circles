@@ -19,6 +19,8 @@ import { FrontendMiddleware } from './middleware/frontend.middleware';
 import { ViewModule } from './modules/view/view.module';
 import { CircleModule } from './modules/circle/circle.module';
 import { EventModule } from './modules/event/event.module';
+import { ForumModule } from './modules/forum/forum.module';
+import { UniversityModule } from './modules/university/university.module';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { EventModule } from './modules/event/event.module';
     LessonModule,
     CircleModule,
     EventModule,
+    ForumModule,
+    UniversityModule,
     ViewModule, //@Get(*) でサイトをレンダリングしているので最後におく
   ],
   controllers: [AppController],

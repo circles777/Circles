@@ -1,11 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from 'src/server/entities/user.entity';
-import { SaveEventProps } from './event.controller';
-import { Address } from 'src/server/entities/address.entitiy';
+import { User, UserRole } from 'src/server/entities/user.entity';
+import { SaveEventProps, SaveEventTagProps } from './event.controller';
 import { Circle } from 'src/server/entities/circle.entity';
-import { Group } from 'src/server/entities/university.entity';
 import { Event } from 'src/server/entities/event.entity';
 import { EventTag } from 'src/server/entities/eventTag.entity';
 import { UserBookedEvent } from 'src/server/entities/userBookedEvent';
@@ -19,12 +17,6 @@ export class EventService {
     @InjectModel(Circle.name)
     private readonly circleModel: Model<Circle>,
 
-    @InjectModel(Group.name)
-    private readonly groupModel: Model<Group>,
-
-    @InjectModel(Address.name)
-    private readonly addressModel: Model<Address>,
-
     @InjectModel(EventTag.name)
     private readonly eventTagModel: Model<EventTag>,
 
@@ -36,19 +28,13 @@ export class EventService {
   ) {}
 
   async saveEvent(body: SaveEventProps, user: User): Promise<Event> {
-    const newAddress = new this.addressModel({
-      prefecture: body.prefecture,
-      municipalities: body.municipalities,
-      houseNumber: body.houseNumber,
-    });
-    const savedAddress = (await newAddress.save()).toObject();
     const newEvent = new this.eventModel({
       title: body.title,
-      circle: body.circleID,
+      circle: body.circle,
       recruitEndedAt: body.recruitEndedAt,
       startedAt: body.startedAt,
       endedAt: body.endedAt,
-      address: savedAddress,
+      address: body.address,
       capacity: body.capacity,
       participationFee: body.participationFee,
       detail: body.detail,
@@ -56,35 +42,25 @@ export class EventService {
     });
     const savedEvent = (
       await (
-        await (
-          await (await newEvent.save()).populate('group', '', this.groupModel)
-        ).populate('address', '', this.addressModel)
+        await newEvent.save()
       ).populate('eventTags', '', this.eventTagModel)
     ).toObject();
     return savedEvent;
   }
 
   async updateEvent(body: Event, user: User): Promise<Event> {
-    await body.address.updateOne({ _id: body.address._id }, body.address);
-    const address = (
-      await this.addressModel.findById(body.address._id)
-    ).toObject();
     await this.eventModel.updateOne({ _id: body._id }, body);
-    const updatedEvent = (await this.eventModel.findById(body._id)).toObject();
-    return {
-      ...updatedEvent,
-      address,
-      eventTags: body.eventTags,
-    };
+    const updatedEvent = (await this.eventModel.findById(body._id)).populate(
+      'eventTags',
+      '',
+      this.eventTagModel,
+    );
+    return (await updatedEvent).toObject();
   }
 
   async getEventOne(id: string): Promise<Event> {
     const event = (
-      await (
-        await (
-          await (await this.eventModel.findById(id)).populate('group')
-        ).populate('address')
-      ).populate('eventTags')
+      await (await this.eventModel.findById(id)).populate('eventTags')
     ).toObject();
     const userBookedEvents = await this.userBookedEventModel
       .find({ event: event })
@@ -93,9 +69,38 @@ export class EventService {
     return event;
   }
 
-  async deleteEventOne(id: string): Promise<Event> {
-    const deletedCircle = (await this.eventModel.findById(id)).toObject();
-    await this.eventModel.deleteOne(deletedCircle);
-    return deletedCircle;
+  async deleteEventOne(id: string, user: User): Promise<Event> {
+    const deletedEvent = await (
+      await this.eventModel.findById(id)
+    ).populate('creator', '', this.userModel);
+
+    const res = (await deletedEvent).toObject();
+    if (res.creator._id.eqauals(user._id) || user.role === UserRole.Author) {
+      await this.eventModel.deleteOne({ _id: deletedEvent._id });
+    } else {
+      throw new HttpException(
+        "You don't have the right to delete this event.",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return res;
+  }
+
+  async saveEventTag(body: SaveEventTagProps): Promise<EventTag> {
+    const newTag = await this.eventTagModel.create(body);
+    const savedTag = (await newTag.save()).toObject();
+    return savedTag;
+  }
+
+  async deleteEventTag(id: string, user: User): Promise<EventTag> {
+    if (user.role !== UserRole.Author) {
+      throw new HttpException(
+        "You don't have the right to delete this event tag.",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const deletedTag = (await this.eventTagModel.findById(id)).toObject();
+    await this.eventTagModel.deleteOne(deletedTag);
+    return deletedTag;
   }
 }
