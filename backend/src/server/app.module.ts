@@ -13,7 +13,6 @@ import { UserService } from './modules/user/user.service';
 import { UserModule } from './modules/user/user.module';
 import { CorsMiddleware } from './middleware/cors.middleware';
 import { AuthModule } from './modules/auth/auth.module';
-import { LessonModule } from './modules/lesson/lesson.module';
 import { join } from 'path';
 import { FrontendMiddleware } from './middleware/frontend.middleware';
 import { ViewModule } from './modules/view/view.module';
@@ -43,7 +42,6 @@ import { UniversityModule } from './modules/university/university.module';
     StripeModule,
     UserModule,
     AuthModule,
-    LessonModule,
     CircleModule,
     EventModule,
     ForumModule,
