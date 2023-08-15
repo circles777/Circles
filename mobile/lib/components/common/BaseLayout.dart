@@ -33,7 +33,7 @@ class BaseLayout extends HookConsumerWidget with RouteAware {
             title: Text(title),
             backgroundColor: Color.fromARGB(166, 0, 167, 220)),
         body: Container(
-          height: deviceHeight - 46.0 - 48.0 + 8,
+          height: deviceHeight - 46.0 - 48.0,
           child: ClipRect(child: child),
         ));
   }
