@@ -9,7 +9,7 @@ import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 
 import '../../models/common/enums.dart';
-import '../../screens/Forum/ForumList.dart';
+import '../../screens/Lesson/DepartmentList.dart';
 
 class DepartmentListCard extends StatelessWidget {
   final DepartmentList category;
