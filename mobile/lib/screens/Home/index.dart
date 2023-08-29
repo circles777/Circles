@@ -15,7 +15,9 @@ import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/Event/EventDetail.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
+import 'package:mobile/screens/Lesson/LessonDetail.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -49,8 +51,13 @@ class Index extends HookWidget {
   Widget build(BuildContext context) {
     final pages = [
       Home(),
-      CircleList(),
-      EventList(),
+      //CircleList(),
+      //EventList(),
+      LessonDetail(
+          date: DateTime.now(),
+          name: "基礎電子数学及び演習A",
+          tags: ["電子電気情報工学科", "機械工学科"]),
+      EventDetail(),
       ForumCategories(),
       Mypage()
     ];

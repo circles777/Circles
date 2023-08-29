@@ -12,6 +12,11 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
+import { Tag, TagSchema } from 'src/server/entities/tag.entity';
+import {
+  University,
+  UniversitySchema,
+} from 'src/server/entities/university.entity';
 
 @Module({
   imports: [
@@ -25,7 +30,11 @@ import { LocalStrategy } from './local.strategy';
       signOptions: { expiresIn: '30 days' },
     }),
     PassportModule,
-    MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]),
+    MongooseModule.forFeature([
+      { name: 'user', schema: UserSchema },
+      { name: Tag.name, schema: TagSchema },
+      { name: University.name, schema: UniversitySchema },
+    ]),
     //TypeOrmModule.forFeature([User]),
   ],
   controllers: [AuthController],
