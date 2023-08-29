@@ -45,7 +45,8 @@ class Mypage extends HookWidget {
                     size: 80,
                     image: AssetImage('public/mican.jpeg'),
                   ),
-                  ColumnViewWithGap(gap: 8, children: [
+                  ColumnViewWithGap(gap: 8, 
+                  children: [
                     Text('satou839',
                         style: TextStyle(
                             fontSize: 16,

@@ -23,7 +23,7 @@ enum ForumCategory {
   final String displayName;
 }
 
-enum Department{
+enum Departments{
   science1('理学部第一部'),
   engineering('工学部'),
   phscience('薬学部'),
@@ -31,12 +31,12 @@ enum Department{
   adengineering('先進工学部'),
   management('経営学部');
 
-  const Department(this.displayName);
+  const Departments(this.displayName);
   final String displayName; 
 }
 
 
-enum Faculty{
+enum Faculties{
   s('数学科'),
   os('応用数学科'),
   b('物理学科'),
@@ -73,7 +73,7 @@ enum Faculty{
   be('ビジネスエコノミクス学科'),
   idm('国際デザイン学科');
 
-  const Faculty(this.displayName);
+  const Faculties(this.displayName);
   final String displayName; 
 }
 

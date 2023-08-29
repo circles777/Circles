@@ -7,25 +7,25 @@ import 'package:intl/intl.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
+import 'package:mobile/screens/Lesson/DepartmentList.dart';
+import 'package:mobile/screens/Lesson/LessonDetail.dart';
 
 import '../../models/common/enums.dart';
-import 'package:mobile/screens/Lesson/FacultyList.dart';
-import 'package:mobile/screens/Lesson/DepartmentList.dart';
+import '../../screens/Lesson/DepartmentList.dart';
+import '../../screens/Lesson/FacultyList.dart';
 
-
-
-class DepartmentListCard extends StatelessWidget {
-  final Departments category;
+class FacultyListCard extends StatelessWidget {
+  final Faculties category;
   final Icon icon;
-  const DepartmentListCard(
+  const FacultyListCard(
       {super.key, required this.icon, required this.category});
 
   @override
   Widget build(BuildContext context) {
     final double deviceWidth = MediaQuery.of(context).size.width;
-    void pushFacuityList(DepartmentList cat) =>
+    void pushDepartmentList(LessonDetail cat) =>
         Navigator.of(context).push<dynamic>(
-          FacultyList.route(),
+          LessonDetail.route(category: cat),
         );
     return Container(
       decoration: const BoxDecoration(
@@ -36,7 +36,7 @@ class DepartmentListCard extends StatelessWidget {
       ))),
       padding: const EdgeInsets.only(bottom: 10),
       child: GestureDetector(
-          onTap: () => {},
+          onTap: () => pushLessonDetail(category),
           child: RowViewWithGap(gap: 32, children: [
             /*Icon(FontAwesomeIcons.userTie,
                 size: 40, color: Color.fromRGBO(103, 102, 102, 1)),*/
@@ -49,4 +49,6 @@ class DepartmentListCard extends StatelessWidget {
           ])),
     );
   }
+  
+  pushLessonDetail(Faculties category) {}
 }

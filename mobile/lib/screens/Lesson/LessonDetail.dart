@@ -18,7 +18,7 @@ class LessonDetail extends HookWidget {
   static Route<dynamic> route({
     required DateTime date,
     required String name,
-    required List<String> tags,
+    required List<String> tags, required LessonDetail category,
   }) {
     return MaterialPageRoute<dynamic>(
       builder: (_) => LessonDetail(date: date, name: name, tags: tags),

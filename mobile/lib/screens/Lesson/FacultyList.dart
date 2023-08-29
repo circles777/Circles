@@ -14,77 +14,95 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
-import 'package:mobile/components/Lesson/DepartmentListCard.dart';
 import 'package:mobile/models/common/enums.dart';
 import 'package:mobile/screens/Auth/Login.dart';
-import 'package:mobile/screens/Lesson/DepartmentList.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
-import 'package:mobile/screens/Lesson/FacultyList.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../components/Lesson/DepartmentListCard.dart';
 
-class DepartmentList extends HookWidget {
-  DepartmentList({super.key});
+import '../../components/Lesson/DepartmentListCard.dart';
+import '../../components/Lesson/FacultyListCard.dart';
+
+
+class FacultyList extends HookWidget {
+  FacultyList({super.key});
 
   static Route<dynamic> route() {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => DepartmentList(),
+      builder: (_) => FacultyList(),
       //settings: RouteSettings(arguments: someId),
     );
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
-    const List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    final double deviceHeight = MediaQuery.of(context).size.height;
     return BaseLayout(
-
-        title: '学部',
+        title: '掲示板カテゴリ',
         child: Padding(
             padding: EdgeInsets.all(16.0),
             child: ListViewWithGap(
               gap: 16,
               children: const [
                 ColumnViewWithGap(gap: 8, children: [
-                  //理学部第一部
-                  DepartmentListCard(
+                  //就活
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.userTie,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: Departments.science1,
+                    category: Faculties.ee,
                   ),
-                  //工学部
-                  DepartmentListCard(
+                  //バイト
+                  //就活
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.briefcase,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: Departments.engineering,
+                    category: Faculties.s,
                   ),
 
-                  //薬学部
-                  DepartmentListCard(
+                  //恋愛
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.heart,
                         size: 40, color: Color.fromRGBO(195, 82, 82, 1)),
-                    category: Departments.phscience,
+                    category: Faculties.os,
                   ),
-                  //創域理工学部
-                  DepartmentListCard(
+                  //スポーツ
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.dumbbell,
                         size: 40, color: Color.fromRGBO(0, 0, 0, 1)),
-                    category: Departments.scienceandtech,
+                    category: Faculties.b,
                   ),
-                  //先進工学部
-                  DepartmentListCard(
+                  //ゲーム
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.gamepad,
                         size: 40, color: Color.fromRGBO(154, 44, 227, 1)),
-                    category: Departments.adengineering,
+                    category: Faculties.k,
                   ),
 
-                  //経営学部
-                  DepartmentListCard(
+                  //食べ物
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.pizzaSlice,
                         size: 40, color: Color.fromRGBO(180, 46, 13, 1)),
-                    category: Departments.management,
+                    category: Faculties.ok,
+                  ),
+                  //エンタメ
+                  FacultyListCard(
+                    icon: Icon(FontAwesomeIcons.tv,
+                        size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
+                    category: Faculties.c,
+                  ),
+                  //怖い話
+                  FacultyListCard(
+                    icon: Icon(FontAwesomeIcons.ghost,
+                        size: 40, color: Color.fromARGB(255, 97, 132, 215)),
+                    category: Faculties.a,
+                  ),
+                  //面白い話
+                  FacultyListCard(
+                    icon: Icon(FontAwesomeIcons.peopleRobbery,
+                        size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
+                    category: Faculties.e,
                   ),
                 ])
               ],
