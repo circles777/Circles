@@ -40,7 +40,7 @@ class LandingPage extends StatelessWidget {
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.blue)),
-                        child: const Text('Login')),
+                        child: const Text('ログイン')),
                     const SizedBox(
                       height: 16,
                     ),
@@ -53,7 +53,7 @@ class LandingPage extends StatelessWidget {
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.blue)),
-                        child: const Text('Create New')),
+                        child: const Text('新規登録')),
                     ElevatedButton(
                         onPressed: () => {
                               Navigator.of(context).push<dynamic>(
@@ -63,7 +63,7 @@ class LandingPage extends StatelessWidget {
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.blue)),
-                        child: const Text('Home')),
+                        child: const Text('ホーム')),
                   ]),
             )));
   }
