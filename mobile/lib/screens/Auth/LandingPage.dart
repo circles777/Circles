@@ -5,6 +5,7 @@ import 'package:mobile/screens/Auth/CreateNew.dart';
 import 'package:mobile/screens/Home/Home.dart';
 import 'package:mobile/screens/Home/index.dart';
 import 'package:mobile/screens/auth/Login.dart';
+import 'package:mobile/screens/Auth/CreateNewUser.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -47,7 +48,7 @@ class LandingPage extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () => {
                               Navigator.of(context).push<dynamic>(
-                                CreateNew.route(),
+                                CreateNewUser.route(),
                               )
                             },
                         style: ButtonStyle(
