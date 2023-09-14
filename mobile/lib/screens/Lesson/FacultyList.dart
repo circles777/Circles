@@ -21,17 +21,21 @@ import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../components/forum/ForumCategoryCard.dart';
+import '../../components/Lesson/DepartmentListCard.dart';
+import '../../components/Lesson/FacultyListCard.dart';
 
-class ForumCategories extends HookWidget {
-  ForumCategories({super.key});
+
+class FacultyList extends HookWidget {
+  FacultyList({super.key});
 
   static Route<dynamic> route() {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => ForumCategories(),
+      builder: (_) => FacultyList(),
       //settings: RouteSettings(arguments: someId),
     );
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -44,61 +48,61 @@ class ForumCategories extends HookWidget {
               children: const [
                 ColumnViewWithGap(gap: 8, children: [
                   //就活
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.userTie,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.part,
+                    category: Faculties.ee,
                   ),
                   //バイト
                   //就活
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.briefcase,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.part,
+                    category: Faculties.s,
                   ),
 
                   //恋愛
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.heart,
                         size: 40, color: Color.fromRGBO(195, 82, 82, 1)),
-                    category: ForumCategory.love,
+                    category: Faculties.os,
                   ),
                   //スポーツ
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.dumbbell,
                         size: 40, color: Color.fromRGBO(0, 0, 0, 1)),
-                    category: ForumCategory.sport,
+                    category: Faculties.b,
                   ),
                   //ゲーム
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.gamepad,
                         size: 40, color: Color.fromRGBO(154, 44, 227, 1)),
-                    category: ForumCategory.game,
+                    category: Faculties.k,
                   ),
 
                   //食べ物
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.pizzaSlice,
                         size: 40, color: Color.fromRGBO(180, 46, 13, 1)),
-                    category: ForumCategory.food,
+                    category: Faculties.ok,
                   ),
                   //エンタメ
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.tv,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.entertainment,
+                    category: Faculties.c,
                   ),
                   //怖い話
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.ghost,
                         size: 40, color: Color.fromARGB(255, 97, 132, 215)),
-                    category: ForumCategory.scaryStory,
+                    category: Faculties.a,
                   ),
                   //面白い話
-                  ForumCategoryCard(
+                  FacultyListCard(
                     icon: Icon(FontAwesomeIcons.peopleRobbery,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.funnyStory,
+                    category: Faculties.e,
                   ),
                 ])
               ],

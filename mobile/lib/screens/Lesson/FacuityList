@@ -47,7 +47,7 @@ class ForumCategories extends HookWidget {
                   ForumCategoryCard(
                     icon: Icon(FontAwesomeIcons.userTie,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.part,
+                    category: ForumCategory.jobHunting,
                   ),
                   //バイト
                   //就活

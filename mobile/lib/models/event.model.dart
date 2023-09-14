@@ -49,7 +49,7 @@ class Event {
         capacity: json["capacity"],
         participationFee: json["participationFee"],
         detail: json["detail"],
-        eventTags: 
+        eventTags: json["detail"],
         );
     return event;
   }

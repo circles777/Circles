@@ -17,9 +17,64 @@ enum ForumCategory {
   entertainment('エンタメ'),
   scaryStory('怖い話'),
   funnyStory('面白い話');
-
+  
+  
   const ForumCategory(this.displayName);
   final String displayName;
+}
+
+enum Departments{
+  science1('理学部第一部'),
+  engineering('工学部'),
+  phscience('薬学部'),
+  scienceandtech('創域理工学部'),
+  adengineering('先進工学部'),
+  management('経営学部');
+
+  const Departments(this.displayName);
+  final String displayName; 
+}
+
+
+enum Faculties{
+  s('数学科'),
+  os('応用数学科'),
+  b('物理学科'),
+  k('化学科'),
+  ok('応用科学科'),
+
+  c('工業化学科'),
+  a('建築学科'),
+  e('電気工学科'),
+  i('情報工学科'),
+  m('機械工学科'),
+
+  yp('薬学科'),
+  ym('生命創薬科学科'),
+
+  ma('数理科学科'),
+  ph('先端物理学科'),
+  is0('情報計算科学科'),   //isは使用不可のため
+  bs('生命生物化学科'),
+  ar('建築学科'),
+  ca('先端科学科'),
+  ee('電気電子情報工学科'),
+  ia('経営システム工学科'),
+  me('機械航空宇宙工学科'), 
+  cv('社会基盤工学科'),
+
+  ae('電子システム工学科'),
+  am('マテリアル創成工学科'),
+  ab('生命システム工学科'),
+  ap('物理工学科'),               //Department of Applied Physics
+  fd('機能デザイン工学科'),       //Department of Medical and Robotic Engineering Designだが、機能デザインがFunction Designのためfd
+  
+  ms('経営学科'),
+  be('ビジネスエコノミクス学科'),
+  idm('国際デザイン学科');
+
+  const Faculties(this.displayName);
+  final String displayName; 
 }
 
 enum UniversityDictionary {
