@@ -47,6 +47,10 @@ dependencies:
   persistent_bottom_nav_bar_v2: any
   font_awesome_flutter: ^10.4.0
   intl: ^0.17.0
+  flutter_form_builder: ^7.7.0
+  form_builder_validators: ^8.4.0
+  flutter_localizations: # 多言語対応するため
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
