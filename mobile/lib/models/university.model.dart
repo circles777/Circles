@@ -16,13 +16,13 @@ class University {
   });
 
   factory University.fromJson(Map<String, dynamic> json) {
-    final user = University(
+    final res = University(
       id: json["_id"],
       university: UniversityDictionary.values.byName(json["university"]),
       campus: json['campus'],
       address: Address.fromJson(json['address']),
     );
-    return user;
+    return res;
   }
 
   Map<String, dynamic> toJson() {

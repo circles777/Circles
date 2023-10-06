@@ -41,18 +41,15 @@ class CreateNewUser extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inputUserName = useState<String>('');
-    final firstName = useState<String>('');
-    final lastName = useState<String>('');
-    final firstNameKana = useState<String>('');
-    final lastNameKana = useState<String>('');
-    final address = useState<String>('');
-    final birthDate = useState<DateTime>(DateTime(2010, 1, 1));
-    final gender = useState<Gender?>(Gender.Male);
     //final university = useState<University>()
     /*void onChangeUserFirstName(String text) {
       inputUserFirstName.value = text;
     }*/
+    void checkValidateAndSubmit() async {
+      if (_formKey.currentState?.saveAndValidate() == true) {
+        print(_formKey.currentState);
+      }
+    }
 
     final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -115,7 +112,7 @@ class CreateNewUser extends HookWidget {
                             FormBuilderValidators.required(),
                             FormBuilderValidators.minLength(6),
                             FormBuilderValidators.maxLength(12),
-                            FormBuilderValidators.match(r'/^[a-zA-Z0-9]+$/',
+                            FormBuilderValidators.match(r'^[a-zA-Z0-9]*$',
                                 errorText: 'アルファベットと数字で入力してください'),
                           ]))),
                     ])),
@@ -161,6 +158,8 @@ class CreateNewUser extends HookWidget {
                           validator: (FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
                             FormBuilderValidators.email(),
+                            FormBuilderValidators.match(r'^[^ぁ-んァ-ヶ亜-熙]*$',
+                                errorText: '日本語を入力しないでください')
                           ])))
                     ])),
                 SizedBox(
@@ -206,7 +205,8 @@ class CreateNewUser extends HookWidget {
                           ),
                           validator: (FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
-                            FormBuilderValidators.match(r'[ぁ-んァ-ヶ亜-熙a-zA-Z]+',
+                            FormBuilderValidators.match(
+                                r'^[^"#$%&()*+-.,\/:;<=>?@[\]^_`{|}~。、？!]*$',
                                 errorText: '特殊記号やスペースは入力しないでください'),
                           ]))),
                     ])),
@@ -219,45 +219,44 @@ class CreateNewUser extends HookWidget {
                               fontWeight: FontWeight.w600,
                               color: Color.fromRGBO(255, 255, 255, 1))),
                       FormBuilderTextField(
-                        name: 'firstName',
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 166, 166, 166),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            height: 1.2),
-                        //controller: _textEditingController,
-                        decoration: InputDecoration(
-                          //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
-                          isDense: true,
-                          isCollapsed: true,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          filled: true,
-                          fillColor: Color.fromRGBO(255, 255, 255, 1),
-                          labelText: '',
-
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 166, 166,
-                                    166)), // Set enabled border color here
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                          name: 'firstName',
+                          maxLines: 1,
+                          style: TextStyle(
                               color: Color.fromARGB(255, 166, 166, 166),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              height: 1.2),
+                          //controller: _textEditingController,
+                          decoration: InputDecoration(
+                            //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                            isDense: true,
+                            isCollapsed: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            filled: true,
+                            fillColor: Color.fromRGBO(255, 255, 255, 1),
+                            labelText: '',
+
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 166, 166,
+                                      166)), // Set enabled border color here
                             ),
-                            borderRadius: BorderRadius.circular(
-                                16.0), // Set the border radius here
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 166, 166, 166),
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  16.0), // Set the border radius here
+                            ),
                           ),
-                        ),
-                        /*validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },*/
-                      ),
+                          validator: (FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                            FormBuilderValidators.match(
+                                r'^[^"#$%&()*+-.,\/:;<=>?@[\]^_`{|}~。、？!]*$',
+                                errorText: '特殊記号やスペースは入力しないでください'),
+                          ]))),
                     ])),
                 SizedBox(
                     width: deviceWidth * 0.8,
@@ -268,45 +267,43 @@ class CreateNewUser extends HookWidget {
                               fontWeight: FontWeight.w600,
                               color: Color.fromRGBO(255, 255, 255, 1))),
                       FormBuilderTextField(
-                        name: 'lastNameKana',
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 166, 166, 166),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            height: 1.2),
-                        //controller: _textEditingController,
-                        decoration: InputDecoration(
-                          //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
-                          isDense: true,
-                          isCollapsed: true,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          filled: true,
-                          fillColor: Color.fromRGBO(255, 255, 255, 1),
-                          labelText: '',
-
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 166, 166,
-                                    166)), // Set enabled border color here
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                          name: 'lastNameKana',
+                          maxLines: 1,
+                          style: TextStyle(
                               color: Color.fromARGB(255, 166, 166, 166),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              height: 1.2),
+                          //controller: _textEditingController,
+                          decoration: InputDecoration(
+                            //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                            isDense: true,
+                            isCollapsed: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            filled: true,
+                            fillColor: Color.fromRGBO(255, 255, 255, 1),
+                            labelText: '',
+
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 166, 166,
+                                      166)), // Set enabled border color here
                             ),
-                            borderRadius: BorderRadius.circular(
-                                16.0), // Set the border radius here
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 166, 166, 166),
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  16.0), // Set the border radius here
+                            ),
                           ),
-                        ),
-                        /*validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },*/
-                      ),
+                          validator: (FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                            FormBuilderValidators.match(r'^[ァ-ヶ]*$',
+                                errorText: 'カタカナで入力してください'),
+                          ]))),
                     ])),
                 SizedBox(
                     width: deviceWidth * 0.8,
@@ -317,45 +314,43 @@ class CreateNewUser extends HookWidget {
                               fontWeight: FontWeight.w600,
                               color: Color.fromRGBO(255, 255, 255, 1))),
                       FormBuilderTextField(
-                        name: 'firstNameKana',
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 166, 166, 166),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            height: 1.2),
-                        //controller: _textEditingController,
-                        decoration: InputDecoration(
-                          //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
-                          isDense: true,
-                          isCollapsed: true,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          filled: true,
-                          fillColor: Color.fromRGBO(255, 255, 255, 1),
-                          labelText: '',
-
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 166, 166,
-                                    166)), // Set enabled border color here
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                          name: 'firstNameKana',
+                          maxLines: 1,
+                          style: TextStyle(
                               color: Color.fromARGB(255, 166, 166, 166),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              height: 1.2),
+                          //controller: _textEditingController,
+                          decoration: InputDecoration(
+                            //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                            isDense: true,
+                            isCollapsed: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            filled: true,
+                            fillColor: Color.fromRGBO(255, 255, 255, 1),
+                            labelText: '',
+
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 166, 166,
+                                      166)), // Set enabled border color here
                             ),
-                            borderRadius: BorderRadius.circular(
-                                16.0), // Set the border radius here
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 166, 166, 166),
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  16.0), // Set the border radius here
+                            ),
                           ),
-                        ),
-                        /*validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },*/
-                      ),
+                          validator: (FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                            FormBuilderValidators.match(r'^[ァ-ヶ]*$',
+                                errorText: 'カタカナで入力してください'),
+                          ]))),
                     ])),
                 SizedBox(
                     width: deviceWidth * 0.8,
@@ -366,45 +361,41 @@ class CreateNewUser extends HookWidget {
                               fontWeight: FontWeight.w600,
                               color: Color.fromRGBO(255, 255, 255, 1))),
                       FormBuilderTextField(
-                        name: 'address',
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 166, 166, 166),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            height: 1.2),
-                        //controller: _textEditingController,
-                        decoration: InputDecoration(
-                          //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
-                          isDense: true,
-                          isCollapsed: true,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          filled: true,
-                          fillColor: Color.fromRGBO(255, 255, 255, 1),
-                          labelText: '',
-
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 166, 166,
-                                    166)), // Set enabled border color here
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                          name: 'address',
+                          maxLines: 1,
+                          style: TextStyle(
                               color: Color.fromARGB(255, 166, 166, 166),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              height: 1.2),
+                          //controller: _textEditingController,
+                          decoration: InputDecoration(
+                            //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                            isDense: true,
+                            isCollapsed: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            filled: true,
+                            fillColor: Color.fromRGBO(255, 255, 255, 1),
+                            labelText: '',
+
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 166, 166,
+                                      166)), // Set enabled border color here
                             ),
-                            borderRadius: BorderRadius.circular(
-                                16.0), // Set the border radius here
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 166, 166, 166),
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  16.0), // Set the border radius here
+                            ),
                           ),
-                        ),
-                        /*validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },*/
-                      ),
+                          validator: (FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                          ]))),
                     ])),
                 SizedBox(
                   width: deviceWidth * 0.4,
@@ -414,9 +405,7 @@ class CreateNewUser extends HookWidget {
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Color.fromRGBO(255, 255, 255, 1))),
-                    SizedBox(
-                      height: 39,
-                      child: /*RowViewWithGap(gap: 8, children: [
+                    /*RowViewWithGap(gap: 8, children: [
                         FormBuilderDropdown(
                           //4
                           name: 'birthYear',
@@ -520,39 +509,43 @@ class CreateNewUser extends HookWidget {
                           ),
                         )
                       ])*/
-                          FormBuilderDateTimePicker(
-                        name: 'birthDays',
-                        inputType: InputType.date,
-                        initialDatePickerMode: DatePickerMode.year,
-                        format: DateFormat('yyyy/MM/dd'),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromRGBO(255, 255, 255, 1),
-                          labelText: '',
-                          contentPadding: const EdgeInsets.symmetric(
-                              //vertical: 0,
-                              horizontal: 8),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 166, 166,
-                                    166)), // Set enabled border color here
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(255, 166, 166, 166),
-                            ),
-                            borderRadius: BorderRadius.circular(
-                                16.0), // Set the border radius here
-                          ),
+                    FormBuilderDateTimePicker(
+                      name: 'birthDays',
+                      inputType: InputType.date,
+                      initialDatePickerMode: DatePickerMode.year,
+                      format: DateFormat('yyyy/MM/dd'),
+                      decoration: InputDecoration(
+                        //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                        isDense: true,
+                        isCollapsed: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        filled: true,
+                        fillColor: const Color.fromRGBO(255, 255, 255, 1),
+                        labelText: '',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 166, 166,
+                                  166)), // Set enabled border color here
                         ),
-                        style: TextStyle(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
                             color: Color.fromARGB(255, 166, 166, 166),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            height: 1.2),
+                          ),
+                          borderRadius: BorderRadius.circular(
+                              16.0), // Set the border radius here
+                        ),
                       ),
-                    )
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 166, 166, 166),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          height: 1.2),
+                      validator: (FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                      ])),
+                    ),
                   ]),
                 ),
                 SizedBox(
@@ -610,9 +603,9 @@ class CreateNewUser extends HookWidget {
                             value: Gender.Transgender,
                           ),
                         ],
-                        onChanged: (Gender? value) {
-                          gender.value = value;
-                        },
+                        validator: (FormBuilderValidators.compose([
+                          FormBuilderValidators.required(),
+                        ])),
                         //value: gender.value
                       ),
                     ])),
@@ -626,15 +619,8 @@ class CreateNewUser extends HookWidget {
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: Color.fromRGBO(255, 255, 255, 1))),
-                      FormBuilderTextField(
+                      FormBuilderDropdown(
                         name: 'university',
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 166, 166, 166),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            height: 1.2),
-                        //controller: _textEditingController,
                         decoration: InputDecoration(
                           //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
                           isDense: true,
@@ -642,7 +628,7 @@ class CreateNewUser extends HookWidget {
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
                           filled: true,
-                          fillColor: Color.fromRGBO(255, 255, 255, 1),
+                          fillColor: const Color.fromRGBO(255, 255, 255, 1),
                           labelText: '',
 
                           enabledBorder: OutlineInputBorder(
@@ -659,19 +645,29 @@ class CreateNewUser extends HookWidget {
                                 16.0), // Set the border radius here
                           ),
                         ),
-                        /*validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },*/
-                        // onChanged: (String value) {},
+
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 166, 166, 166),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            height: 1.2),
+                        items: [
+                          //5
+                          DropdownMenuItem(
+                            child: Text('東京理科大学'),
+                            value: Gender.Male,
+                          ),
+                        ],
+                        //onChanged: () {},
+                        /*validator: (FormBuilderValidators.compose([
+                          FormBuilderValidators.required(),
+                        ])),*/
+                        //value: gender.value
                       ),
                     ])),
                 Center(
                     child: GestureDetector(
-                  onTap: () =>
-                      {_formKey.currentState?.validate(), print('yeyyy')},
+                  onTap: () => {checkValidateAndSubmit()},
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.0),
