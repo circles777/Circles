@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 //import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
@@ -22,11 +23,17 @@ import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 
 class CreateNewUser extends HookWidget {
-  CreateNewUser({super.key});
+  final String email;
+  final String password;
+  CreateNewUser({super.key, required this.email, required this.password});
 
-  static Route<dynamic> route() {
+  static Route<dynamic> route(
+      {required String email, required String password}) {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => CreateNewUser(),
+      builder: (_) => CreateNewUser(
+        email: email,
+        password: password,
+      ),
       //settings: RouteSettings(arguments: someId),
     );
   }
@@ -116,52 +123,7 @@ class CreateNewUser extends HookWidget {
                                 errorText: 'アルファベットと数字で入力してください'),
                           ]))),
                     ])),
-                SizedBox(
-                    width: deviceWidth * 0.8,
-                    child: ColumnViewWithGap(gap: 2, children: [
-                      const Text('メールアドレス',
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromRGBO(255, 255, 255, 1))),
-                      FormBuilderTextField(
-                          name: 'email',
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 166, 166, 166),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              height: 1.2),
-                          decoration: InputDecoration(
-                            //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
-                            isDense: true,
-                            isCollapsed: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
-                            filled: true,
-                            fillColor: Color.fromRGBO(255, 255, 255, 1),
-                            labelText: '',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 166, 166,
-                                      166)), // Set enabled border color here
-                            ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 166, 166, 166),
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                  16.0), // Set the border radius here
-                            ),
-                          ),
-                          validator: (FormBuilderValidators.compose([
-                            FormBuilderValidators.required(),
-                            FormBuilderValidators.email(),
-                            FormBuilderValidators.match(r'^[^ぁ-んァ-ヶ亜-熙]*$',
-                                errorText: '日本語を入力しないでください')
-                          ])))
-                    ])),
+
                 SizedBox(
                     width: deviceWidth * 0.8,
                     child: ColumnViewWithGap(gap: 2, children: [
