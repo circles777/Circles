@@ -37,6 +37,7 @@ export class UserService {
       await newUniversity.save();
       newUniversity = newUniversity.toObject();
     }
+    props.user.birthDate = new Date(props.user.birthDate); //flutterからString型で帰ってくるためここでDate型に変換
     const newUser = await this.userModel.create(props.user);
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);

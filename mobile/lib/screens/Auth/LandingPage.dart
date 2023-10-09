@@ -1,7 +1,8 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:mobile/screens/Auth/CreateNew.dart';
+import 'package:mobile/screens/Auth/CreateNewUser.dart';
+import 'package:mobile/screens/Auth/SignUp.dart';
 import 'package:mobile/screens/Home/Home.dart';
 import 'package:mobile/screens/Home/index.dart';
 import 'package:mobile/screens/auth/Login.dart';
@@ -46,14 +47,13 @@ class LandingPage extends StatelessWidget {
                     ),
                     ElevatedButton(
                         onPressed: () => {
-                              Navigator.of(context).push<dynamic>(
-                                CreateNew.route(),
-                              )
+                              Navigator.of(context)
+                                  .push<dynamic>(SignUp.route())
                             },
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.blue)),
-                        child: const Text('新規登録')),
+                        child: const Text('サインアップ')),
                     ElevatedButton(
                         onPressed: () => {
                               Navigator.of(context).push<dynamic>(
