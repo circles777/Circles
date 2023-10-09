@@ -22,7 +22,10 @@ async function bootstrap() {
   }*/
   if (configuration().NODE_ENV === 'development') {
     app.enableCors({
-      origin: ['http://localhost:3000', 'http://localhost:8080'],
+      origin: '*' /*[
+        'http://localhost:3000',
+        'http://localhost:8080',
+      ]*/,
       //allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
       allowedHeaders: [
         'Origin',
