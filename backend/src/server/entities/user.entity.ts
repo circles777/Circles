@@ -101,7 +101,7 @@ export class User {
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
     ref: University.name,
-    required: true,
+    //required: true,  //テストのため一時的にコメントアウト
   })
   @Type(() => University)
   university;

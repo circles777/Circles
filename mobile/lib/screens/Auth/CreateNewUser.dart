@@ -8,6 +8,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile/api/user/useAPIPostCreateUser.dart';
 import 'package:mobile/api/user/user.clent.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/BaseLayout.dart';
@@ -54,7 +55,21 @@ class CreateNewUser extends HookWidget {
     }*/
     void checkValidateAndSubmit() async {
       if (_formKey.currentState?.saveAndValidate() == true) {
-        print(_formKey.currentState);
+        //print(_formKey.currentState?.value);
+        createUser({
+          'user': {
+            ..._formKey.currentState!.value,
+            'email': email,
+            'password': password,
+            'address': {
+              'prefecture': _formKey.currentState!.fields['prefecture']!.value,
+              'municipalities':
+                  _formKey.currentState!.fields['municipalities']!.value,
+              'houseNumber':
+                  _formKey.currentState!.fields['houseNumber']!.value,
+            }
+          }
+        });
       }
     }
 
@@ -322,15 +337,10 @@ class CreateNewUser extends HookWidget {
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: Color.fromRGBO(255, 255, 255, 1))),
-                      FormBuilderTextField(
-                          name: 'address',
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 166, 166, 166),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              height: 1.2),
-                          //controller: _textEditingController,
+                      SizedBox(
+                        width: deviceWidth * 0.4,
+                        child: FormBuilderDropdown(
+                          name: 'prefecture',
                           decoration: InputDecoration(
                             //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
                             isDense: true,
@@ -338,8 +348,13 @@ class CreateNewUser extends HookWidget {
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 10),
                             filled: true,
-                            fillColor: Color.fromRGBO(255, 255, 255, 1),
-                            labelText: '',
+                            fillColor: const Color.fromRGBO(255, 255, 255, 1),
+                            hintText: '都道府県',
+                            hintStyle: const TextStyle(
+                                color: Color.fromARGB(122, 166, 166, 166),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                height: 1.2),
 
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16.0),
@@ -355,10 +370,111 @@ class CreateNewUser extends HookWidget {
                                   16.0), // Set the border radius here
                             ),
                           ),
+
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 166, 166, 166),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              height: 1.2),
+                          items: Prefecture.values.map((p) {
+                            return DropdownMenuItem(
+                              child: Text(p.displayName),
+                              value: p.displayName,
+                            );
+                          }).toList(),
                           validator: (FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
-                          ]))),
+                          ])),
+                          //value: gender.value
+                        ),
+                      ),
                     ])),
+                SizedBox(
+                  width: deviceWidth * 0.8,
+                  child: FormBuilderTextField(
+                      name: 'municipalities',
+                      maxLines: 1,
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 166, 166, 166),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          height: 1.2),
+                      //controller: _textEditingController,
+                      decoration: InputDecoration(
+                        //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                        isDense: true,
+                        isCollapsed: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        filled: true,
+                        fillColor: Color.fromRGBO(255, 255, 255, 1),
+                        hintText: '市区町村',
+                        hintStyle: const TextStyle(
+                            color: Color.fromARGB(122, 166, 166, 166),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            height: 1.2),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 166, 166,
+                                  166)), // Set enabled border color here
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 166, 166, 166),
+                          ),
+                          borderRadius: BorderRadius.circular(
+                              16.0), // Set the border radius here
+                        ),
+                      ),
+                      validator: (FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                      ]))),
+                ),
+                SizedBox(
+                    width: deviceWidth * 0.8,
+                    child: FormBuilderTextField(
+                        name: 'houseNumber',
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 166, 166, 166),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            height: 1.2),
+                        //controller: _textEditingController,
+                        decoration: InputDecoration(
+                          //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                          isDense: true,
+                          isCollapsed: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 255, 255, 1),
+                          hintText: '部屋番号',
+                          hintStyle: const TextStyle(
+                              color: Color.fromARGB(122, 166, 166, 166),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              height: 1.2),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 166, 166,
+                                    166)), // Set enabled border color here
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 166, 166, 166),
+                            ),
+                            borderRadius: BorderRadius.circular(
+                                16.0), // Set the border radius here
+                          ),
+                        ),
+                        validator: (FormBuilderValidators.compose([
+                          FormBuilderValidators.match(r'^[0-9]*$',
+                              errorText: '数字で入力してください'),
+                        ])))),
                 SizedBox(
                   width: deviceWidth * 0.4,
                   child: ColumnViewWithGap(gap: 2, children: [
@@ -472,42 +588,45 @@ class CreateNewUser extends HookWidget {
                         )
                       ])*/
                     FormBuilderDateTimePicker(
-                      name: 'birthDays',
-                      inputType: InputType.date,
-                      initialDatePickerMode: DatePickerMode.year,
-                      format: DateFormat('yyyy/MM/dd'),
-                      decoration: InputDecoration(
-                        //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
-                        isDense: true,
-                        isCollapsed: true,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        filled: true,
-                        fillColor: const Color.fromRGBO(255, 255, 255, 1),
-                        labelText: '',
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 166, 166,
-                                  166)), // Set enabled border color here
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 166, 166, 166),
+                        name: 'birthDate',
+                        inputType: InputType.date,
+                        initialDatePickerMode: DatePickerMode.year,
+                        format: DateFormat('yyyy/MM/dd'),
+                        decoration: InputDecoration(
+                          //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                          isDense: true,
+                          isCollapsed: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          filled: true,
+                          fillColor: const Color.fromRGBO(255, 255, 255, 1),
+                          labelText: '',
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 166, 166,
+                                    166)), // Set enabled border color here
                           ),
-                          borderRadius: BorderRadius.circular(
-                              16.0), // Set the border radius here
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 166, 166, 166),
+                            ),
+                            borderRadius: BorderRadius.circular(
+                                16.0), // Set the border radius here
+                          ),
                         ),
-                      ),
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 166, 166, 166),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          height: 1.2),
-                      validator: (FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                      ])),
-                    ),
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 166, 166, 166),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            height: 1.2),
+                        validator: (FormBuilderValidators.compose([
+                          FormBuilderValidators.required(),
+                        ])),
+                        valueTransformer: (value) {
+                          return DateFormat("yyyy-MM-ddTHH:mm:ss")
+                              .format(value!);
+                        })
                   ]),
                 ),
                 SizedBox(
@@ -554,15 +673,15 @@ class CreateNewUser extends HookWidget {
                           //5
                           DropdownMenuItem(
                             child: Text(Gender.Male.displayName),
-                            value: Gender.Male,
+                            value: Gender.Male.displayName,
                           ),
                           DropdownMenuItem(
                             child: Text(Gender.Female.displayName),
-                            value: Gender.Female,
+                            value: Gender.Female.displayName,
                           ),
                           DropdownMenuItem(
                             child: Text(Gender.Transgender.displayName),
-                            value: Gender.Transgender,
+                            value: Gender.Transgender.displayName,
                           ),
                         ],
                         validator: (FormBuilderValidators.compose([
