@@ -21,7 +21,7 @@ class User {
   final Gender gender;
   final DateTime birthDate;
   final Address address;
-  final University university;
+  final University? university; //テストのために一時的に必須ではなくしてる
   final String? introduction;
   final List<Tag> tags;
   final List<EventTag> eventTags;
@@ -64,13 +64,18 @@ class User {
         email: json["email"],
         role: UserRole.values.byName(json['role']),
         gender: Gender.values.byName(json['gender']),
-        birthDate: json['birthDate'],
+        birthDate: DateTime.parse(json['birthDate']),
         address: Address.fromJson(json['address']),
-        university: University.fromJson(json['university']),
+        university: json['university'] != null
+            ? University.fromJson(json['university'])
+            : null,
         introduction: json['introduction'],
-        tags: jsonDecode(json['tags']).map((t) => t.fromJson()).toList(),
-        eventTags:
-            jsonDecode(json['eventTags']).map((t) => t.fromJson()).toList(),
+        tags: (json['tags'] as List<dynamic>).isEmpty == false
+            ? json['tags'].map((t) => Tag.fromJson(t)).toList()
+            : [],
+        eventTags: (json['eventTags'] as List<dynamic>).isEmpty == false
+            ? json['eventTags'].map((t) => EventTag.fromJson(t)).toList()
+            : [],
         password: json['password']);
     return user;
   }
@@ -88,7 +93,7 @@ class User {
       "gender": gender.displayName,
       "birthDate": birthDate,
       "address": address.toJson(),
-      "university": university.toJson(),
+      "university": university?.toJson(),
       "introduction": introduction,
       "tags": tags.map((Tag t) => t.toJson()).toList(),
       "eventTags": eventTags.map((e) => e.toJson()).toList(),

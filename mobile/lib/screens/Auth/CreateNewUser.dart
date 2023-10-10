@@ -378,7 +378,7 @@ class CreateNewUser extends HookWidget {
                               height: 1.2),
                           items: Prefecture.values.map((p) {
                             return DropdownMenuItem(
-                              child: Text(p.displayName),
+                              child: Text(p.toJP()),
                               value: p.displayName,
                             );
                           }).toList(),
@@ -669,21 +669,10 @@ class CreateNewUser extends HookWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             height: 1.2),
-                        items: [
-                          //5
-                          DropdownMenuItem(
-                            child: Text(Gender.Male.displayName),
-                            value: Gender.Male.displayName,
-                          ),
-                          DropdownMenuItem(
-                            child: Text(Gender.Female.displayName),
-                            value: Gender.Female.displayName,
-                          ),
-                          DropdownMenuItem(
-                            child: Text(Gender.Transgender.displayName),
-                            value: Gender.Transgender.displayName,
-                          ),
-                        ],
+                        items: Gender.values.map((v) {
+                          return DropdownMenuItem(
+                              child: Text(v.toJP()), value: v.displayName);
+                        }).toList(),
                         validator: (FormBuilderValidators.compose([
                           FormBuilderValidators.required(),
                         ])),
@@ -734,10 +723,7 @@ class CreateNewUser extends HookWidget {
                             height: 1.2),
                         items: [
                           //5
-                          DropdownMenuItem(
-                            child: Text('東京理科大学'),
-                            value: Gender.Male,
-                          ),
+                          DropdownMenuItem(child: Text('東京理科大学'), value: ''),
                         ],
                         //onChanged: () {},
                         /*validator: (FormBuilderValidators.compose([
