@@ -14,9 +14,9 @@ export enum UserRole {
 }
 
 export enum Gender {
-  Male = '男性',
-  Female = '女性',
-  Transgender = 'トランスジェンダー',
+  Male = 'male',
+  Female = 'female',
+  Transgender = 'transgender',
 }
 
 @Schema({

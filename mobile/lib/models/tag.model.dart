@@ -10,11 +10,11 @@ class Tag {
   });
 
   factory Tag.fromJson(Map<String, dynamic> json) {
-    final address = Tag(
+    final tag = Tag(
       id: json["_id"],
       name: json['name'],
     );
-    return address;
+    return tag;
   }
 
   Map<String, dynamic> toJson() {
