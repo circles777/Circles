@@ -67,7 +67,22 @@ class CreateNewUser extends HookWidget {
                   _formKey.currentState!.fields['municipalities']!.value,
               'houseNumber':
                   _formKey.currentState!.fields['houseNumber']!.value,
+              'addition': _formKey.currentState!.fields['addition']!.value,
+            },
+          },
+          'university': {
+            '_id': '652619b4d6028846125ab5a3',
+            'university': '東京理科大学',
+            'campus': '野田キャンパス',
+            'address': {
+              'prefecture': 'chiba',
+              'municipalities': '野田市山崎',
+              'houseNumber': '2641'
             }
+          }
+        }).then((user) {
+          if (user?.id != null) {
+            Navigator.of(context).push<dynamic>(Login.route());
           }
         });
       }
@@ -451,7 +466,7 @@ class CreateNewUser extends HookWidget {
                               vertical: 10, horizontal: 10),
                           filled: true,
                           fillColor: Color.fromRGBO(255, 255, 255, 1),
-                          hintText: '部屋番号',
+                          hintText: '家屋番号 (例:12-3-4)',
                           hintStyle: const TextStyle(
                               color: Color.fromARGB(122, 166, 166, 166),
                               fontSize: 16,
@@ -472,9 +487,49 @@ class CreateNewUser extends HookWidget {
                           ),
                         ),
                         validator: (FormBuilderValidators.compose([
-                          FormBuilderValidators.match(r'^[0-9]*$',
-                              errorText: '数字で入力してください'),
+                          FormBuilderValidators.match(r'^[0-9-]*$',
+                              errorText: '数字と半角バーで入力してください'),
                         ])))),
+                SizedBox(
+                    width: deviceWidth * 0.8,
+                    child: FormBuilderTextField(
+                        name: 'addition',
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 166, 166, 166),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            height: 1.2),
+                        //controller: _textEditingController,
+                        decoration: InputDecoration(
+                          //isDense, isCollapsedをtrueにしないとcontentPaddingのverticalは反映されない
+                          isDense: true,
+                          isCollapsed: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 255, 255, 1),
+                          hintText: '追加情報',
+                          hintStyle: const TextStyle(
+                              color: Color.fromARGB(122, 166, 166, 166),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              height: 1.2),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 166, 166,
+                                    166)), // Set enabled border color here
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 166, 166, 166),
+                            ),
+                            borderRadius: BorderRadius.circular(
+                                16.0), // Set the border radius here
+                          ),
+                        ),
+                        validator: (FormBuilderValidators.compose([])))),
                 SizedBox(
                   width: deviceWidth * 0.4,
                   child: ColumnViewWithGap(gap: 2, children: [

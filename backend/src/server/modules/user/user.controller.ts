@@ -18,7 +18,6 @@ export interface CreateUserProps {
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
   @Post('save-user')
   async saveUser(@Body() body: CreateUserProps) {
     return await this.userService.saveUser(body);

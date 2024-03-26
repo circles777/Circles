@@ -23,7 +23,7 @@ export class UserService {
   async saveUser(props: CreateUserProps) {
     const { email, password } = props.user;
     const existsUser = await this.userModel.findOne({ email }).exec();
-    //console.log(existsUser);
+    console.log(existsUser);
     if (existsUser) {
       console.log('already exists');
       throw new HttpException(
@@ -43,7 +43,13 @@ export class UserService {
     const passwordHash = await bcrypt.hash(password, salt);
     newUser.password = passwordHash;
     newUser.university = newUniversity || props.university;
-    return await newUser.save();
+    const res = (await newUser.save()).populate(
+      'university',
+      '',
+      this.universityModel,
+    );
+    console.log(res);
+    return res;
   }
 
   async getUserById(id: string) {

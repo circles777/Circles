@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/api/user/user.clent.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/BaseLayout.dart';
@@ -17,8 +18,9 @@ import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
+import 'package:mobile/utils/url/header.dart';
 
-class Home extends HookWidget {
+class Home extends ConsumerWidget {
   Home({super.key});
 
   static Route<dynamic> route() {
@@ -37,13 +39,7 @@ class Home extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    final inputUserName = useState<String>('');
-    void onChangeUserNameInput(String text) {
-      inputUserName.value = text;
-    }
-
+  Widget build(BuildContext context, WidgetRef ref) {
     const List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
     final double deviceWidth = MediaQuery.of(context).size.width;

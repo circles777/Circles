@@ -47,7 +47,9 @@ class Circle {
       foundedDate: json["foundedDate"],
       contactNumber: json["contactNumber"],
       numberOfMembers: json["numberOfMembers"],
-      tags: json["tags"].map((j) => Tag.fromJson(j)).toList(),
+      tags: (json['tags'] as List<dynamic>).isEmpty == false
+          ? json['tags'].map((t) => Tag.fromJson(t)).toList()
+          : [],
       confirmed: json["confirmed"],
       isAvailable: json["isAvailable"],
     );

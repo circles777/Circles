@@ -11,7 +11,7 @@ import '../../screens/Auth/Login.dart';
 class HeaderForApi extends StateNotifier<String> {
   HeaderForApi() : super(''); // stateにjwtTokenを保存
   static Map<String, String> jsonHeader = {"Content-Type": "application/json"};
-  late Map<String, String> jwtJsonHeader = {
+  late Map<String, String> _jwtJsonHeader = {
     "Content-Type": "application/json",
     "Authorization": 'Bearer $state',
   };
@@ -29,12 +29,20 @@ class HeaderForApi extends StateNotifier<String> {
     state = '';
   }
 
+  Future jwtJsonHeader() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    final token = localStorage.getString('userToken') ?? '';
+    return {
+      "Content-Type": "application/json",
+      "Authorization": 'Bearer $token',
+    };
+  }
+
   checkAuth(BuildContext context) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     if (state == '' || state == null) {
-      Navigator.of(context).push<dynamic>(
-        Login.route(),
-      );
+      Navigator.of(context)
+          .pushAndRemoveUntil<dynamic>(Login.route(), ((route) => false));
     }
   }
 }

@@ -29,7 +29,10 @@ export class CircleController {
 
   @UseGuards(JwtAuthGuard)
   @Post('update-circle')
-  async updateCircle(@Req() req: RequestWithUser, @Body() body: Circle) {
+  async updateCircle(
+    @Req() req: RequestWithUser,
+    @Body() body: Circle,
+  ): Promise<Circle> {
     return await this.circleService.updateCircle(body, req.user);
   }
 
@@ -43,12 +46,18 @@ export class CircleController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('get-circle-one')
+  @Get('get-circle-one/:id')
   async getCircleOne(
     //@Req() req: RequestWithUser,
-    @Body() body: { id: string },
+    @Param('id') id: string,
   ) {
-    return await this.circleService.getCircleOne(body.id);
+    return await this.circleService.getCircleOne(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('get-circles')
+  async getCircles(): Promise<Array<Circle>> {
+    return await this.circleService.getCircles();
   }
 
   @UseGuards(JwtAuthGuard)

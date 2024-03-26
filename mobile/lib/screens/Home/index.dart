@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/api/user/user.clent.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/BaseLayout.dart';
@@ -17,11 +18,14 @@ import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/screens/Event/EventDetail.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
+import 'package:mobile/screens/Forum/NewForumForm.dart';
 import 'package:mobile/screens/Lesson/LessonDetail.dart';
+import 'package:mobile/screens/Lesson/LessonList.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
+import '../../utils/url/header.dart';
 import '../Circle/CircleDetail.dart';
 import '../Circle/CircleList.dart';
 import '../Event/EventList.dart';
@@ -29,7 +33,7 @@ import '../User/Mypage.dart';
 import 'Home.dart';
 import '../Forum/Forum_Categories.dart';
 
-class Index extends HookWidget {
+class Index extends ConsumerWidget {
   Index({super.key});
 
   static Route<dynamic> route() {
@@ -48,15 +52,18 @@ class Index extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(headerProvider.notifier).checkAuth(context); //ログイン状態かを確認
     final pages = [
       Home(),
       //CircleList(),
       //EventList(),
-      LessonDetail(
+      //LessonList(),
+      NewForumForm(),
+      /*LessonDetail(
           date: DateTime.now(),
           name: "基礎電子数学及び演習A",
-          tags: ["電子電気情報工学科", "機械工学科"]),
+          tags: ["電子電気情報工学科", "機械工学科"]),*/
       EventDetail(),
       ForumCategories(),
       Mypage()
