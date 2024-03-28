@@ -21,6 +21,7 @@ import 'package:mobile/screens/Forum/ForumList.dart';
 import 'package:mobile/screens/Forum/NewForumForm.dart';
 import 'package:mobile/screens/Lesson/LessonDetail.dart';
 import 'package:mobile/screens/Lesson/LessonList.dart';
+import 'package:mobile/screens/Search/SearchEventHome.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -53,20 +54,21 @@ class Index extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(headerProvider.notifier).checkAuth(context); //ログイン状態かを確認
+    ref.watch(headerProvider.notifier).checkAuth(context); //ログイン状態かを確認
     final pages = [
-      Home(),
       //CircleList(),
       //EventList(),
       //LessonList(),
-      NewForumForm(),
+      //NewForumForm(),
       /*LessonDetail(
           date: DateTime.now(),
           name: "基礎電子数学及び演習A",
           tags: ["電子電気情報工学科", "機械工学科"]),*/
+      Home(),
       EventDetail(),
+      SearchEventHome(),
       ForumCategories(),
-      Mypage()
+      //Mypage()
     ];
 
     Future<dynamic> pushCircleDetail() => Navigator.of(context).push<dynamic>(
@@ -79,21 +81,21 @@ class Index extends ConsumerWidget {
     return PersistentTabView(context,
         screens: pages,
         navBarHeight: 48,
-        backgroundColor: Color.fromARGB(166, 0, 167, 220),
+        backgroundColor: Colors.white,
         navBarStyle: NavBarStyle.simple,
         items: [
           PersistentBottomNavBarItem(
               icon: Icon(CupertinoIcons.home),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
+              inactiveColorPrimary: Colors.black),
           PersistentBottomNavBarItem(
               icon: Icon(Icons.groups),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
+              inactiveColorPrimary: Colors.black),
           PersistentBottomNavBarItem(
-              icon: Icon(Icons.group_add),
+              icon: Icon(CupertinoIcons.square_favorites_alt),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
+              inactiveColorPrimary: Colors.black),
           /*PersistentBottomNavBarItem(
               icon: Icon(CupertinoIcons.mail),
               activeColorPrimary: Colors.red,
@@ -101,11 +103,11 @@ class Index extends ConsumerWidget {
           PersistentBottomNavBarItem(
               icon: Icon(Icons.forum),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
-          PersistentBottomNavBarItem(
+              inactiveColorPrimary: Colors.black),
+          /*PersistentBottomNavBarItem(
               icon: Icon(CupertinoIcons.person),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
+              inactiveColorPrimary: Colors.black),*/
         ]);
   }
 }

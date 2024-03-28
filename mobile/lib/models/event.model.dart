@@ -6,7 +6,7 @@ import 'package:mobile/models/eventTag.model.dart';
 import 'package:mobile/models/user.model.dart';
 import 'package:mobile/models/userBookedEvent.model.dart';
 
-class Event {
+class EventModel {
   final String id;
   final String title;
   final User creator;
@@ -21,7 +21,7 @@ class Event {
   final List<EventTag>? eventTags;
   final List<UserBookedEvent>? userBookedEvents;
 
-  Event(
+  EventModel(
       {required this.id,
       required this.title,
       required this.creator,
@@ -36,8 +36,8 @@ class Event {
       this.eventTags,
       this.userBookedEvents});
 
-  factory Event.fromJson(Map<String, dynamic> json) {
-    final event = Event(
+  factory EventModel.fromJson(Map<String, dynamic> json) {
+    final event = EventModel(
         id: json["_id"],
         title: json['title'],
         creator: User.fromJson(json['user']),
@@ -57,6 +57,16 @@ class Event {
     return {
       "_id": id,
       'title': title,
+      "creator": creator.toJson(),
+      "circle": circle?.toJson(),
+      "recruitEndedAt": recruitEndedAt,
+      "startedAt": startedAt,
+      "endedAt": endedAt,
+      "address": address.toJson(),
+      "capacity": capacity,
+      "participationFee": participationFee,
+      "detail": detail,
+      "eventTags": eventTags?.map((t) => t.toJson()).toList()
     };
   }
 }
