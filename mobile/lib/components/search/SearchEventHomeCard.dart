@@ -9,6 +9,7 @@ import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 
 import '../../models/event.model.dart';
+import '../../screens/Search/SearchEventDetail.dart';
 
 class SearchEventHomeCard extends StatelessWidget {
   final EventModel event;
@@ -20,7 +21,10 @@ class SearchEventHomeCard extends StatelessWidget {
     String start_format = DateFormat('MM/dd hh:mm〜').format(event.startedAt);
     final double deviceWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap ??
+          () => Navigator.of(context).push<dynamic>(
+                SearchEventDetail.route(event: event),
+              ),
       child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -36,7 +40,7 @@ class SearchEventHomeCard extends StatelessWidget {
             gap: 4,
             children: [
               Image.asset(
-                'public/circle1.jpg',
+                event.photoUrl,
                 width: 200,
                 height: 140,
                 fit: BoxFit

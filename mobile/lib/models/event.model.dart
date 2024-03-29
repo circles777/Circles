@@ -10,6 +10,7 @@ class EventModel {
   final String id;
   final String title;
   final User creator;
+  final String photoUrl;
   final Circle? circle;
   final DateTime recruitEndedAt;
   final DateTime startedAt;
@@ -25,6 +26,7 @@ class EventModel {
       {required this.id,
       required this.title,
       required this.creator,
+      required this.photoUrl,
       this.circle,
       required this.recruitEndedAt,
       required this.startedAt,
@@ -41,6 +43,7 @@ class EventModel {
         id: json["_id"],
         title: json['title'],
         creator: User.fromJson(json['user']),
+        photoUrl: json['photoUrl'],
         circle: Circle.fromJson(json['circle']),
         recruitEndedAt: json["recruitEndedAt"],
         startedAt: json["startedAt"],
@@ -49,7 +52,15 @@ class EventModel {
         capacity: json["capacity"],
         participationFee: json["participationFee"],
         detail: json["detail"],
-        eventTags: json['eventTags'].map((t) => EventTag.fromJson(t)).toList());
+        eventTags: (json['eventTags'] as List<dynamic>).isEmpty == false
+            ? json['eventTags'].map((t) => EventTag.fromJson(t)).toList()
+            : [],
+        userBookedEvents:
+            (json['userBookedEvents'] as List<dynamic>).isEmpty == false
+                ? json['userBookedEvents']
+                    .map((u) => UserBookedEvent.fromJson(u))
+                    .toList()
+                : []);
     return event;
   }
 
@@ -58,6 +69,7 @@ class EventModel {
       "_id": id,
       'title': title,
       "creator": creator.toJson(),
+      "photoUrl": photoUrl,
       "circle": circle?.toJson(),
       "recruitEndedAt": recruitEndedAt,
       "startedAt": startedAt,

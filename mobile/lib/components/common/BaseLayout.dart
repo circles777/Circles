@@ -9,12 +9,10 @@ import 'package:mobile/utils/url/header.dart';
 class BaseLayout extends HookConsumerWidget with RouteAware {
   final String title;
   final Widget child;
+  final AppBar? appBar;
 
-  const BaseLayout({
-    super.key,
-    required this.title,
-    required this.child,
-  });
+  const BaseLayout(
+      {super.key, required this.title, required this.child, this.appBar});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,10 +26,11 @@ class BaseLayout extends HookConsumerWidget with RouteAware {
     final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        appBar: AppBar(
-            toolbarHeight: 46,
-            title: Text(title),
-            backgroundColor: Colors.white),
+        appBar: appBar ??
+            AppBar(
+                toolbarHeight: 46,
+                title: Text(title),
+                backgroundColor: Colors.white),
         backgroundColor: Color.fromARGB(255, 247, 247, 247),
         body: Container(
           height: deviceHeight - 46.0 - 48.0,

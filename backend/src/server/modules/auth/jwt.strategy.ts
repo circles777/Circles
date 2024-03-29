@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       // Authorization bearerからトークンを読み込む関数を返す
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // 有効期間を無視するかどうか
-      ignoreExpiration: false,
+      ignoreExpiration: 3600,
       // envファイルから秘密鍵を渡す
       secretOrKey: configuration().jwt.secret || '93824',
     });

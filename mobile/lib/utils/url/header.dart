@@ -3,6 +3,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile/api/auth/useAPIPostAuthenticate.dart';
 import 'package:mobile/screens/Auth/CreateNew.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,11 +39,20 @@ class HeaderForApi extends StateNotifier<String> {
     };
   }
 
-  checkAuth(BuildContext context) async {
+  checkAuth(BuildContext context, WidgetRef ref) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
+    state = localStorage.getString('userToken') ?? '';
+    //print('local: ${localStorage}');
     if (state == '' || state == null) {
       Navigator.of(context)
           .pushAndRemoveUntil<dynamic>(Login.route(), ((route) => false));
+    } else {
+      () async {
+        await authenticate(ref).catchError((e) {
+          Navigator.of(context)
+              .pushAndRemoveUntil<dynamic>(Login.route(), ((route) => false));
+        });
+      };
     }
   }
 }

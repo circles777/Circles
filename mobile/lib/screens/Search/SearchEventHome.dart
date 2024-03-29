@@ -22,6 +22,8 @@ import 'package:mobile/models/event.model.dart';
 import 'package:mobile/models/user.model.dart';
 import 'package:mobile/providers/user.provider.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/Search/SearchEventDetail.dart';
+import 'package:mobile/screens/Search/SearchEventList.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:mobile/utils/url/header.dart';
@@ -67,7 +69,9 @@ class SearchEventHome extends ConsumerWidget {
                 Padding(
                     padding: EdgeInsets.only(right: 24),
                     child: GestureDetector(
-                      onTap: () => {}, // ToDO: すべて表示をタップした時の動作を追加
+                      onTap: () => Navigator.of(context).push<dynamic>(
+                        SearchEventList.route(),
+                      ), // ToDO: すべて表示をタップした時の動作を追加
                       child: Text('すべて表示',
                           textAlign: TextAlign.start,
                           style: TextStyle(
@@ -84,7 +88,9 @@ class SearchEventHome extends ConsumerWidget {
                   gap: 8,
                   horizontal: true,
                   children: nums.map((key) {
-                    return SearchEventHomeCard(event: mockEvent);
+                    return SearchEventHomeCard(
+                      event: mockEvent11,
+                    );
                   }).toList(),
                 )),
             Padding(
@@ -113,7 +119,9 @@ class SearchEventHome extends ConsumerWidget {
                 Padding(
                     padding: EdgeInsets.only(right: 24),
                     child: GestureDetector(
-                      onTap: () => {}, // ToDO: すべて表示をタップした時の動作を追加
+                      onTap: () => Navigator.of(context).push<dynamic>(
+                        SearchEventList.route(),
+                      ),
                       child: Text('すべて表示',
                           textAlign: TextAlign.start,
                           style: TextStyle(
@@ -130,7 +138,9 @@ class SearchEventHome extends ConsumerWidget {
                   gap: 8,
                   horizontal: true,
                   children: nums.map((key) {
-                    return SearchEventHomeCard(event: mockEvent);
+                    return SearchEventHomeCard(
+                      event: mockEvent11,
+                    );
                   }).toList(),
                 )),
             Padding(
@@ -159,7 +169,9 @@ class SearchEventHome extends ConsumerWidget {
                 Padding(
                     padding: EdgeInsets.only(right: 24),
                     child: GestureDetector(
-                      onTap: () => {}, // ToDO: すべて表示をタップした時の動作を追加
+                      onTap: () => Navigator.of(context).push<dynamic>(
+                        SearchEventList.route(),
+                      ),
                       child: Text('すべて表示',
                           textAlign: TextAlign.start,
                           style: TextStyle(
@@ -176,7 +188,7 @@ class SearchEventHome extends ConsumerWidget {
                   gap: 8,
                   horizontal: true,
                   children: nums.map((key) {
-                    return SearchEventHomeCard(event: mockEvent);
+                    return SearchEventHomeCard(event: mockEvent11);
                   }).toList(),
                 )),
             Padding(
