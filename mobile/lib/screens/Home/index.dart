@@ -15,12 +15,15 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
+import 'package:mobile/mocks/mocks.dart';
+import 'package:mobile/providers/user.provider.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/screens/Event/EventDetail.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
 import 'package:mobile/screens/Forum/NewForumForm.dart';
 import 'package:mobile/screens/Lesson/LessonDetail.dart';
 import 'package:mobile/screens/Lesson/LessonList.dart';
+import 'package:mobile/screens/Profile/MyProfile.dart';
 import 'package:mobile/screens/Search/SearchEventHome.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
@@ -65,7 +68,8 @@ class Index extends ConsumerWidget {
           name: "基礎電子数学及び演習A",
           tags: ["電子電気情報工学科", "機械工学科"]),*/
       Home(),
-      EventDetail(),
+      //EventDetail(),
+      MyProfile(user: ref.read(userProvider.notifier).state ?? mockUser),
       SearchEventHome(),
       ForumCategories(),
       //Mypage()

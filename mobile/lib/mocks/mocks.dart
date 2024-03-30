@@ -14,13 +14,13 @@ final mockAddress = Address(
     prefecture: Prefecture.chiba,
     municipalities: '八千代市富田町',
     houseNumber: '8-9-38');
-final mockUniversity = University(
+/*final mockUniversity = University(
     //id: '873',
     university: UniversityDictionary.tus,
     faculty: '創域理工学部',
     department: '電気電子情報工学科',
     campus: '野田キャンパス',
-    address: mockAddress);
+    address: mockAddress);*/
 
 final mockTag = Tag(id: '274', name: 'テニス');
 final mockTag2 = Tag(id: '2748', name: '野球');
