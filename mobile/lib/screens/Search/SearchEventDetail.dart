@@ -243,7 +243,7 @@ class SearchEventDetail extends ConsumerWidget {
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w700)),
                       Text(
-                        event.creator.university!.university.displayName,
+                        event.creator.university.toJP(),
                         style: TextStyle(
                             fontSize: 12, fontWeight: FontWeight.w700),
                       )

@@ -31,23 +31,23 @@ export class UserService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    let newUniversity;
+    /*let newUniversity;
     if (props.university && !props.university._id) {
       newUniversity = await this.universityModel.create(props.university);
       await newUniversity.save();
       newUniversity = newUniversity.toObject();
-    }
+    }*/
     props.user.birthDate = new Date(props.user.birthDate); //flutterからString型で帰ってくるためここでDate型に変換
     const newUser = await this.userModel.create(props.user);
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
     newUser.password = passwordHash;
-    newUser.university = newUniversity || props.university;
-    const res = (await newUser.save()).populate(
+    //newUser.university = newUniversity || props.university;
+    const res = await newUser.save(); /*.populate(
       'university',
       '',
       this.universityModel,
-    );
+    );*/
     console.log(res);
     return res;
   }

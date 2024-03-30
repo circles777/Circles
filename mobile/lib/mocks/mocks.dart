@@ -1,7 +1,9 @@
 import 'package:mobile/models/common/enums.dart';
 import 'package:mobile/models/eventTag.model.dart';
+import 'package:mobile/models/square.modal.dart';
 import 'package:mobile/models/university.model.dart';
 import 'package:mobile/models/userBookedEvent.model.dart';
+import 'package:mobile/models/userJoinedSquare.model.dart';
 
 import '../models/common/address.model.dart';
 import '../models/event.model.dart';
@@ -13,8 +15,10 @@ final mockAddress = Address(
     municipalities: '八千代市富田町',
     houseNumber: '8-9-38');
 final mockUniversity = University(
-    id: '873',
+    //id: '873',
     university: UniversityDictionary.tus,
+    faculty: '創域理工学部',
+    department: '電気電子情報工学科',
     campus: '野田キャンパス',
     address: mockAddress);
 
@@ -37,7 +41,11 @@ final mockUser = User(
     gender: Gender.male,
     birthDate: DateTime(2020, 10, 2, 12, 10),
     address: mockAddress,
-    university: mockUniversity,
+    //university: mockUniversity,
+    university: UniversityDictionary.sophia,
+    faculty: '理工学部',
+    department: '機械工学科',
+    grade: 4,
     introduction: 'よろしく',
     tags: [mockTag, mockTag2],
     eventTags: [mockEventTag, mockEventTag2]);
@@ -90,3 +98,19 @@ final mockEvent11 = EventModel(
     detail:
         '私たちは日本各地でキャンピングをしている自然が大好きなキャンプ愛好家たちが集まったサークルです。このサークルが設立されて8年になりますが、これまで関東近辺もちろんのこと、東北、四国、九州、北海道と日本全国でキャンプをしてきました。 キャンプする際にはみんなが楽しめるような数多くのレクリエーションがあるので、ぜひ体験で説明会に来てみてください!!',
     userBookedEvents: List.generate(5, (i) => mockUserBookedEvent).toList());
+
+final mockSquare = Square(
+    id: '2494',
+    name: 'コンサル志望集会！',
+    photoUrl: 'public/consul.jpeg',
+    detail: '各大学のコンサル志望の方々で情報交換をし合うための場所です！さまざまな対面イベントもあるのでぜひ！');
+
+final mockUserJoinedSquare =
+    UserJoinedSquare(id: '4822', user: mockUser, square: mockSquare);
+
+final mockSquare11 = Square(
+    id: '24943',
+    name: 'コンサル志望集会！',
+    photoUrl: 'public/consul.jpeg',
+    detail: '各大学のコンサル志望の方々で情報交換をし合うための場所です！さまざまな対面イベントもあるのでぜひ！',
+    userJoinedSquares: List.generate(17, (index) => mockUserJoinedSquare));
