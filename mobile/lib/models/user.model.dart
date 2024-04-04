@@ -17,11 +17,16 @@ class User {
   final String lastNameKana;
   final String username;
   final String email;
+  final String? photoUrl;
   final UserRole role;
   final Gender gender;
   final DateTime birthDate;
   final Address address;
-  final University? university; //テストのために一時的に必須ではなくしてる
+  //final University? university; //テストのために一時的に必須ではなくしてる
+  final UniversityDictionary university;
+  final String faculty;
+  final String department;
+  final int grade;
   final String? introduction;
   final List<Tag> tags;
   final List<EventTag> eventTags;
@@ -35,11 +40,15 @@ class User {
       required this.lastNameKana,
       required this.username,
       required this.email,
+      this.photoUrl,
       required this.role,
       required this.gender,
       required this.birthDate,
       required this.address,
       required this.university,
+      required this.faculty,
+      required this.department,
+      required this.grade,
       required this.introduction,
       required this.tags,
       required this.eventTags,
@@ -62,13 +71,18 @@ class User {
         lastNameKana: json['lastNameKana'],
         username: json['username'],
         email: json["email"],
+        photoUrl: json['photoUrl'],
         role: UserRole.values.byName(json['role']),
         gender: Gender.values.byName(json['gender']),
         birthDate: DateTime.parse(json['birthDate']),
         address: Address.fromJson(json['address']),
-        university: json['university'] != null
+        /*university: json['university'] != null
             ? University.fromJson(json['university'])
-            : null,
+            : null,*/
+        university: UniversityDictionary.values.byName(json["university"]),
+        faculty: json['faculty'],
+        department: json['department'],
+        grade: json['grade'],
         introduction: json['introduction'],
         tags: (json['tags'] as List<dynamic>).isEmpty == false
             ? json['tags'].map((t) => Tag.fromJson(t)).toList()
@@ -89,11 +103,15 @@ class User {
       'lastNameKana': lastNameKana,
       'username': username,
       "email": email,
+      "photoUrl": photoUrl,
       "role": role.displayName,
       "gender": gender.displayName,
       "birthDate": birthDate,
       "address": address.toJson(),
-      "university": university?.toJson(),
+      "university": university.displayName,
+      "faculty": faculty,
+      "department": department,
+      "grade": grade,
       "introduction": introduction,
       "tags": tags.map((Tag t) => t.toJson()).toList(),
       "eventTags": eventTags.map((e) => e.toJson()).toList(),

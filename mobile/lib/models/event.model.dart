@@ -6,10 +6,11 @@ import 'package:mobile/models/eventTag.model.dart';
 import 'package:mobile/models/user.model.dart';
 import 'package:mobile/models/userBookedEvent.model.dart';
 
-class Event {
+class EventModel {
   final String id;
   final String title;
   final User creator;
+  final String photoUrl;
   final Circle? circle;
   final DateTime recruitEndedAt;
   final DateTime startedAt;
@@ -21,10 +22,11 @@ class Event {
   final List<EventTag>? eventTags;
   final List<UserBookedEvent>? userBookedEvents;
 
-  Event(
+  EventModel(
       {required this.id,
       required this.title,
       required this.creator,
+      required this.photoUrl,
       this.circle,
       required this.recruitEndedAt,
       required this.startedAt,
@@ -36,11 +38,12 @@ class Event {
       this.eventTags,
       this.userBookedEvents});
 
-  factory Event.fromJson(Map<String, dynamic> json) {
-    final event = Event(
+  factory EventModel.fromJson(Map<String, dynamic> json) {
+    final event = EventModel(
         id: json["_id"],
         title: json['title'],
         creator: User.fromJson(json['user']),
+        photoUrl: json['photoUrl'],
         circle: Circle.fromJson(json['circle']),
         recruitEndedAt: json["recruitEndedAt"],
         startedAt: json["startedAt"],
@@ -49,7 +52,15 @@ class Event {
         capacity: json["capacity"],
         participationFee: json["participationFee"],
         detail: json["detail"],
-        eventTags: json['eventTags'].map((t) => EventTag.fromJson(t)).toList());
+        eventTags: (json['eventTags'] as List<dynamic>).isEmpty == false
+            ? json['eventTags'].map((t) => EventTag.fromJson(t)).toList()
+            : [],
+        userBookedEvents:
+            (json['userBookedEvents'] as List<dynamic>).isEmpty == false
+                ? json['userBookedEvents']
+                    .map((u) => UserBookedEvent.fromJson(u))
+                    .toList()
+                : []);
     return event;
   }
 
@@ -57,6 +68,17 @@ class Event {
     return {
       "_id": id,
       'title': title,
+      "creator": creator.toJson(),
+      "photoUrl": photoUrl,
+      "circle": circle?.toJson(),
+      "recruitEndedAt": recruitEndedAt,
+      "startedAt": startedAt,
+      "endedAt": endedAt,
+      "address": address.toJson(),
+      "capacity": capacity,
+      "participationFee": participationFee,
+      "detail": detail,
+      "eventTags": eventTags?.map((t) => t.toJson()).toList()
     };
   }
 }

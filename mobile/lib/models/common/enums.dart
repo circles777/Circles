@@ -23,16 +23,37 @@ enum ForumCategory {
 }
 
 enum UniversityDictionary {
-  tus('東京理科大学'),
-  ut('東京大学'),
-  ku('京都大学'),
-  tt('東京工業大学'),
-  sophia('上智大学'),
-  waseda('早稲田大学'),
-  keio('慶應大学');
+  tus('tus'),
+  ut('ut'),
+  ku('ku'),
+  tt('tt'),
+  sophia('sophia'),
+  waseda('waseda'),
+  keio('keio');
 
   const UniversityDictionary(this.displayName);
   final String displayName;
+
+  String toJP() {
+    switch (this) {
+      case UniversityDictionary.tus:
+        return '東京理科大学';
+      case UniversityDictionary.ut:
+        return '東京大学';
+      case UniversityDictionary.ku:
+        return '京都大学';
+      case UniversityDictionary.tt:
+        return '東京工業大学';
+      case UniversityDictionary.sophia:
+        return '上智大学';
+      case UniversityDictionary.waseda:
+        return '早稲田大学';
+      case UniversityDictionary.keio:
+        return '慶應大学';
+      default:
+        return '';
+    }
+  }
 }
 
 enum Prefecture {

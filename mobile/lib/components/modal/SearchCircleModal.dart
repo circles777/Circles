@@ -18,14 +18,18 @@ class SearchCircleModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-  //title: const Text('タイトル'),
-  contentPadding: EdgeInsets.all(16),
-  children: <Widget>[
-    ColumnViewWithGap(gap: 16, children: <Widget>[
-      RowViewWithGap(gap: 8, children: <Widget>[
-        Text('場所:',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),)
-      ])
-    ])
-  ],
-);
+      //title: const Text('タイトル'),
+      contentPadding: EdgeInsets.all(16),
+      children: <Widget>[
+        ColumnViewWithGap(gap: 16, children: <Widget>[
+          RowViewWithGap(gap: 8, children: <Widget>[
+            Text(
+              '場所:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            )
+          ])
+        ])
+      ],
+    );
+  }
 }

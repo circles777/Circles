@@ -4,21 +4,22 @@ import 'package:mobile/models/common/enums.dart';
 class Address {
   final Prefecture prefecture;
   final String municipalities;
-  final String? houseNumber;
+  final String houseNumber;
+  final String? addition;
 
-  Address({
-    required this.prefecture,
-    required this.municipalities,
-    this.houseNumber,
-  });
+  Address(
+      {required this.prefecture,
+      required this.municipalities,
+      required this.houseNumber,
+      this.addition});
 
   factory Address.fromJson(Map<String, dynamic> json) {
     final address = Address(
-      prefecture:
-          Prefecture.values.byName(json['prefecture']), //json["prefecture"],
-      municipalities: json['municipalities'],
-      houseNumber: json['houseNumber'],
-    );
+        prefecture:
+            Prefecture.values.byName(json['prefecture']), //json["prefecture"],
+        municipalities: json['municipalities'],
+        houseNumber: json['houseNumber'],
+        addition: json['addtion']);
     return address;
   }
 
@@ -27,6 +28,7 @@ class Address {
       "prefecture": prefecture.displayName,
       'municipalities': municipalities,
       'houseNumber': houseNumber,
+      'addition': addition
     };
   }
 }

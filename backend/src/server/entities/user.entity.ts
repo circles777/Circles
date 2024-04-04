@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import { Address } from '../type/types';
 import { Tag } from './tag.entity';
 import { EventTag } from './eventTag.entity';
-import { University } from './university.entity';
+import { University, UniversityDictionary } from './university.entity';
 
 export type UserDocument = User & Document;
 
@@ -98,13 +98,45 @@ export class User {
   //@Type(() => Address)
   address: Address;
 
-  @Prop({
+  //一旦ボツ
+  /*@Prop({
     type: mongoose.Schema.Types.ObjectId,
     ref: University.name,
     //required: true,  //テストのため一時的にコメントアウト
   })
   @Type(() => University)
+  university;*/
+
+  @Prop({
+    type: String,
+    enum: UniversityDictionary,
+    required: true,
+  })
   university;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  faculty; //学部
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  department; //学科
+
+  @Prop({
+    type: Number,
+    required: true,
+  })
+  grade;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  photoUrl;
 
   @Prop({
     type: String,

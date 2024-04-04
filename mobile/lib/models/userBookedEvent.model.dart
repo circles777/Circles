@@ -6,7 +6,7 @@ import 'package:mobile/models/user.model.dart';
 class UserBookedEvent {
   final String id;
   final User user;
-  final Event event;
+  final EventModel event;
 
   UserBookedEvent({required this.id, required this.user, required this.event});
 
@@ -14,7 +14,7 @@ class UserBookedEvent {
     final book = UserBookedEvent(
         id: json["_id"],
         user: User.fromJson(json['user']),
-        event: Event.fromJson(json["event"]));
+        event: EventModel.fromJson(json["event"]));
     return book;
   }
 

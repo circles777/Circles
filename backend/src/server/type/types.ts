@@ -52,4 +52,5 @@ export interface Address {
   prefecture: Prefecture;
   municipalities: string;
   houseNumber: string;
+  addition?: string; //アパートの部屋番号など
 }

@@ -59,13 +59,26 @@ export class CircleService {
     ).toObject();*/
     await this.circleModel.updateOne({ _id: body._id }, body);
     const updatedCircle = (
-      await this.circleModel.findById(body._id)
+      await (
+        await (
+          await this.circleModel.findById(body._id)
+        ).populate('university', '', this.universityModel)
+      ).populate('tags', '', this.tagModel)
     ).toObject();
-    return {
-      ...updatedCircle,
-      university: body.university,
-      tags: body.tags,
-    };
+    return updatedCircle;
+  }
+
+  async getCircles(): Promise<Array<Circle>> {
+    const circles = await this.circleModel.find();
+    const res = await Promise.all(
+      circles.map(async (c) => {
+        const r = await (
+          await c.populate('university', '', this.universityModel)
+        ).populate('tags', '', this.tagModel);
+        return r;
+      }),
+    );
+    return res;
   }
 
   async getCircleOne(id: string): Promise<Circle> {
@@ -73,8 +86,8 @@ export class CircleService {
       await (
         await (
           await (await this.circleModel.findById(id)).populate('university')
-        ).populate('address')
-      ).populate('tags')
+        ).populate('university', '', this.universityModel)
+      ).populate('tags', '', this.tagModel)
     ).toObject();
   }
 

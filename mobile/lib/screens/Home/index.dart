@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/api/user/user.clent.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/BaseLayout.dart';
@@ -14,14 +15,21 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
+import 'package:mobile/mocks/mocks.dart';
+import 'package:mobile/providers/user.provider.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/screens/Event/EventDetail.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
+import 'package:mobile/screens/Forum/NewForumForm.dart';
 import 'package:mobile/screens/Lesson/LessonDetail.dart';
+import 'package:mobile/screens/Lesson/LessonList.dart';
+import 'package:mobile/screens/Profile/MyProfile.dart';
+import 'package:mobile/screens/Search/SearchEventHome.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
+import '../../utils/url/header.dart';
 import '../Circle/CircleDetail.dart';
 import '../Circle/CircleList.dart';
 import '../Event/EventList.dart';
@@ -29,7 +37,7 @@ import '../User/Mypage.dart';
 import 'Home.dart';
 import '../Forum/Forum_Categories.dart';
 
-class Index extends HookWidget {
+class Index extends ConsumerWidget {
   Index({super.key});
 
   static Route<dynamic> route() {
@@ -48,18 +56,23 @@ class Index extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(headerProvider.notifier).checkAuth(context, ref); //ログイン状態かを確認
     final pages = [
-      Home(),
       //CircleList(),
       //EventList(),
-      LessonDetail(
+      //LessonList(),
+      //NewForumForm(),
+      /*LessonDetail(
           date: DateTime.now(),
           name: "基礎電子数学及び演習A",
-          tags: ["電子電気情報工学科", "機械工学科"]),
-      EventDetail(),
+          tags: ["電子電気情報工学科", "機械工学科"]),*/
+      Home(),
+      //EventDetail(),
+      MyProfile(user: ref.read(userProvider.notifier).state ?? mockUser),
+      SearchEventHome(),
       ForumCategories(),
-      Mypage()
+      //Mypage()
     ];
 
     Future<dynamic> pushCircleDetail() => Navigator.of(context).push<dynamic>(
@@ -72,21 +85,21 @@ class Index extends HookWidget {
     return PersistentTabView(context,
         screens: pages,
         navBarHeight: 48,
-        backgroundColor: Color.fromARGB(166, 0, 167, 220),
+        backgroundColor: Colors.white,
         navBarStyle: NavBarStyle.simple,
         items: [
           PersistentBottomNavBarItem(
               icon: Icon(CupertinoIcons.home),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
+              inactiveColorPrimary: Colors.black),
           PersistentBottomNavBarItem(
               icon: Icon(Icons.groups),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
+              inactiveColorPrimary: Colors.black),
           PersistentBottomNavBarItem(
-              icon: Icon(Icons.group_add),
+              icon: Icon(CupertinoIcons.square_favorites_alt),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
+              inactiveColorPrimary: Colors.black),
           /*PersistentBottomNavBarItem(
               icon: Icon(CupertinoIcons.mail),
               activeColorPrimary: Colors.red,
@@ -94,11 +107,11 @@ class Index extends HookWidget {
           PersistentBottomNavBarItem(
               icon: Icon(Icons.forum),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
-          PersistentBottomNavBarItem(
+              inactiveColorPrimary: Colors.black),
+          /*PersistentBottomNavBarItem(
               icon: Icon(CupertinoIcons.person),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),
+              inactiveColorPrimary: Colors.black),*/
         ]);
   }
 }
