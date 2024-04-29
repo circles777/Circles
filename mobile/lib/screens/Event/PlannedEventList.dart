@@ -12,37 +12,31 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
+import 'package:mobile/components/event/EventListCard.dart';
+import 'package:mobile/mocks/mocks.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 
-class EventList extends HookWidget {
-  EventList({super.key});
+class PlannedEventList extends HookWidget {
+  PlannedEventList({super.key});
 
   static Route<dynamic> route() {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => EventList(),
+      builder: (_) => PlannedEventList(),
       //settings: RouteSettings(arguments: someId),
     );
   }
 
-@override
- Widget build(BuildContext context) {
-
-  return BaseLayout(
-      title: '友達募集',
-      child: ColumnViewWithGap(gap: 8, children: [
-          // おすすめサークル
-          ColumnViewWithGap(gap: 8, children: [
-
- ]
- ) 
- ]
-
-  )
-  );
- }
-
-
-
+  @override
+  Widget build(BuildContext context) {
+    return BaseLayout(
+        title: '企画したイベント',
+        child: ListViewWithGap(
+          horizontal: false,
+          gap: 4,
+          children:
+              List.generate(8, (index) => EventListCard(event: mockEvent11)),
+        ));
+  }
 }
