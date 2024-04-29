@@ -115,4 +115,4 @@ final mockSquare11 = Square(
     detail: '各大学のコンサル志望の方々で情報交換をし合うための場所です！さまざまな対面イベントもあるのでぜひ！',
     userJoinedSquares: List.generate(17, (index) => mockUserJoinedSquare));
 
-final testString = 'これはテストです';
+final testString = 'これはテストです2';
