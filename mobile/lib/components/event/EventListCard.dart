@@ -88,6 +88,7 @@ class EventListCard extends StatelessWidget {
                               width: 150,
                               child: Wrap(
                                 spacing: 4,
+                                runSpacing: 4,
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
@@ -145,14 +146,15 @@ class EventListCard extends StatelessWidget {
                       bottom: 8,
                       right: 8,
                       child: RowViewWithGap(
-                        gap: 8,
+                        gap: 5,
                         children: [
                           Icon(CupertinoIcons.heart,
                               size: 25,
                               color: Color.fromARGB(255, 255, 159, 159)),
                           Text('7',
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 123, 140, 153)))
+                                  color: Color.fromARGB(255, 123, 140, 153),
+                                  fontSize: 16))
                         ],
                       ))
                 ],
