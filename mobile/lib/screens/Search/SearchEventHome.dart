@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/api/user/user.clent.dart';
@@ -52,266 +53,278 @@ class SearchEventHome extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     final double deviceWidth = MediaQuery.of(context).size.width;
-    return BaseLayout(
-        title: 'ホーム',
-        child: ListViewWithGap(horizontal: false, gap: 8, children: [
-          // おすすめサークル
-          ColumnViewWithGap(gap: 8, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(left: 8),
-                    child: Text('おすすめ',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.w600))),
-                Padding(
-                    padding: EdgeInsets.only(right: 24),
-                    child: GestureDetector(
-                      onTap: () => Navigator.of(context).push<dynamic>(
-                        SearchEventList.route(),
-                      ), // ToDO: すべて表示をタップした時の動作を追加
-                      child: Text('すべて表示',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Color.fromARGB(255, 61, 153, 239))),
-                    )),
-              ],
-            ),
-            Container(
-                height: 240,
-                padding: EdgeInsets.only(left: 0),
-                child: ListViewWithGap(
-                  gap: 8,
-                  horizontal: true,
-                  children: nums.map((key) {
-                    return SearchEventHomeCard(
-                      event: mockEvent11,
-                    );
-                  }).toList(),
-                )),
-            Padding(
-              padding: EdgeInsets.only(left: 8, right: 8),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: Color.fromRGBO(
-                      166, 166, 166, 1), //Color.fromRGBO(96, 125, 139, 1),
-                  width: 1.0,
-                ))),
-              ),
-            )
-          ]),
-          ColumnViewWithGap(gap: 8, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(left: 8),
-                    child: Text('人気',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.w600))),
-                Padding(
-                    padding: EdgeInsets.only(right: 24),
-                    child: GestureDetector(
-                      onTap: () => Navigator.of(context).push<dynamic>(
-                        SearchEventList.route(),
-                      ),
-                      child: Text('すべて表示',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Color.fromARGB(255, 61, 153, 239))),
-                    )),
-              ],
-            ),
-            Container(
-                height: 240,
-                padding: EdgeInsets.only(left: 0),
-                child: ListViewWithGap(
-                  gap: 8,
-                  horizontal: true,
-                  children: nums.map((key) {
-                    return SearchEventHomeCard(
-                      event: mockEvent11,
-                    );
-                  }).toList(),
-                )),
-            Padding(
-              padding: EdgeInsets.only(left: 8, right: 8),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: Color.fromRGBO(
-                      166, 166, 166, 1), //Color.fromRGBO(96, 125, 139, 1),
-                  width: 1.0,
-                ))),
-              ),
-            )
-          ]),
-          ColumnViewWithGap(gap: 8, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(left: 8),
-                    child: Text('同じ学科',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.w600))),
-                Padding(
-                    padding: EdgeInsets.only(right: 24),
-                    child: GestureDetector(
-                      onTap: () => Navigator.of(context).push<dynamic>(
-                        SearchEventList.route(),
-                      ),
-                      child: Text('すべて表示',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Color.fromARGB(255, 61, 153, 239))),
-                    )),
-              ],
-            ),
-            Container(
-                height: 240,
-                padding: EdgeInsets.only(left: 0),
-                child: ListViewWithGap(
-                  gap: 8,
-                  horizontal: true,
-                  children: nums.map((key) {
-                    return SearchEventHomeCard(event: mockEvent11);
-                  }).toList(),
-                )),
-            Padding(
-              padding: EdgeInsets.only(left: 8, right: 8),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: Color.fromRGBO(
-                      166, 166, 166, 1), //Color.fromRGBO(96, 125, 139, 1),
-                  width: 1.0,
-                ))),
-              ),
-            )
-          ]),
+    return Scaffold(
+        body: CustomScrollView(slivers: [
+      SliverAppBar(
+        title:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Container(
-              height: 500,
-              padding: EdgeInsets.only(left: 8, right: 8),
-              child: GridView.count(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  childAspectRatio: 1.8,
+              width: 360,
+              height: 35,
+              child: TextField(
+                  decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 0),
+                hintText: '検索',
+                hintStyle: TextStyle(
+                    fontSize: 16, color: Color.fromRGBO(175, 175, 175, 1)),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide.none),
+                fillColor: Color.fromRGBO(238, 238, 238, 1),
+                filled: true,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: const Color.fromRGBO(175, 175, 175, 1),
+                  size: 24,
+                ),
+              ))),
+          Icon(Icons.add, size: 30, color: Colors.black),
+        ]),
+        floating: false,
+        flexibleSpace: FlexibleSpaceBar(
+          background: Container(
+            color: Colors.white, //スクロール中のアップバーの色
+          ),
+        ),
+      ),
+      SliverList(
+          delegate: SliverChildListDelegate([
+        Container(
+            color: Color.fromRGBO(240, 241, 243, 1),
+            child: ColumnViewWithGap(gap: 8, children: [
+              // おすすめイベント
+              ColumnViewWithGap(gap: 8, children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
-                      onTap: () => {},
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                                opacity: 0.5,
-                                image:
-                                    AssetImage('public/category/sports.jpeg'),
-                                fit: BoxFit.cover)),
-                        child: Text(
-                          'スポーツ',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                        onTap: () => {},
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                  opacity: 0.5,
-                                  image:
-                                      AssetImage('public/category/food.jpeg'),
-                                  fit: BoxFit.cover)),
-                          child: Text(
-                            'グルメ',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          ),
+                    Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child: Text('おすすめのイベント',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600))),
+                    Padding(
+                        padding: EdgeInsets.only(right: 24),
+                        child: GestureDetector(
+                          onTap: () => Navigator.of(context).push<dynamic>(
+                            SearchEventList.route(),
+                          ), // ToDO: すべて表示をタップした時の動作を追加
+                          child: Text('すべて表示',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color.fromRGBO(61, 154, 239, 1))),
                         )),
-                    GestureDetector(
-                      onTap: () => {},
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                                opacity: 0.5,
-                                image: AssetImage('public/category/music.jpeg'),
-                                fit: BoxFit.cover)),
-                        child: Text(
-                          '音楽/フェス',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                  ],
+                ),
+                Container(
+                    height: 270,
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: ListViewWithGap(
+                      gap: 8,
+                      horizontal: true,
+                      children: nums.map((key) {
+                        return SearchEventHomeCard(
+                          event: mockEvent11,
+                        );
+                      }).toList(),
+                    )),
+              ]),
+              ColumnViewWithGap(gap: 8, children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child: Text('同大学のイベント',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600))),
+                    Padding(
+                        padding: EdgeInsets.only(right: 24),
+                        child: GestureDetector(
+                          onTap: () => Navigator.of(context).push<dynamic>(
+                            SearchEventList.route(),
+                          ),
+                          child: Text('すべて表示',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color.fromRGBO(61, 154, 239, 1))),
+                        )),
+                  ],
+                ),
+                Container(
+                  height: 270,
+                  padding: EdgeInsets.only(left: 8),
+                  child: ListViewWithGap(
+                    gap: 8,
+                    horizontal: true,
+                    children: nums.map((key) {
+                      return SearchEventHomeCard(
+                        event: mockEvent11,
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ]),
+              ColumnViewWithGap(gap: 8, children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child: Text('近くのイベント',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600))),
+                    Padding(
+                        padding: EdgeInsets.only(right: 24),
+                        child: GestureDetector(
+                          onTap: () => Navigator.of(context).push<dynamic>(
+                            SearchEventList.route(),
+                          ),
+                          child: Text('すべて表示',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color.fromRGBO(61, 154, 239, 1))),
+                        )),
+                  ],
+                ),
+                Container(
+                    height: 270,
+                    padding: EdgeInsets.only(left: 8),
+                    child: ListViewWithGap(
+                      gap: 8,
+                      horizontal: true,
+                      children: nums.map((key) {
+                        return SearchEventHomeCard(event: mockEvent11);
+                      }).toList(),
+                    )),
+              ]),
+              Container(
+                  height: 500,
+                  padding: EdgeInsets.only(left: 8, right: 8),
+                  child: GridView.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 1.8,
+                      children: [
+                        GestureDetector(
+                          onTap: () => {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                    opacity: 0.5,
+                                    image: AssetImage(
+                                        'public/category/sports.jpeg'),
+                                    fit: BoxFit.cover)),
+                            child: Text(
+                              'スポーツ',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => {},
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                                opacity: 0.5,
-                                image: AssetImage('public/category/drink.jpeg'),
-                                fit: BoxFit.cover)),
-                        child: Text(
-                          '飲み会',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        GestureDetector(
+                            onTap: () => {},
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                      opacity: 0.5,
+                                      image: AssetImage(
+                                          'public/category/food.jpeg'),
+                                      fit: BoxFit.cover)),
+                              child: Text(
+                                'グルメ',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                            )),
+                        GestureDetector(
+                          onTap: () => {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                    opacity: 0.5,
+                                    image: AssetImage(
+                                        'public/category/music.jpeg'),
+                                    fit: BoxFit.cover)),
+                            child: Text(
+                              '音楽/フェス',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => {},
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                                opacity: 0.5,
-                                image: AssetImage('public/category/art.jpeg'),
-                                fit: BoxFit.cover)),
-                        child: Text(
-                          'アート',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        GestureDetector(
+                          onTap: () => {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                    opacity: 0.5,
+                                    image: AssetImage(
+                                        'public/category/drink.jpeg'),
+                                    fit: BoxFit.cover)),
+                            child: Text(
+                              '飲み会',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => {},
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                                opacity: 0.5,
-                                image:
-                                    AssetImage('public/category/science.jpeg'),
-                                fit: BoxFit.cover)),
-                        child: Text(
-                          'サイエンス',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        GestureDetector(
+                          onTap: () => {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                    opacity: 0.5,
+                                    image:
+                                        AssetImage('public/category/art.jpeg'),
+                                    fit: BoxFit.cover)),
+                            child: Text(
+                              'アート',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ]))
-        ]));
+                        GestureDetector(
+                          onTap: () => {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                    opacity: 0.5,
+                                    image: AssetImage(
+                                        'public/category/science.jpeg'),
+                                    fit: BoxFit.cover)),
+                            child: Text(
+                              'サイエンス',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ]))
+            ]))
+      ]))
+    ]));
   }
 }

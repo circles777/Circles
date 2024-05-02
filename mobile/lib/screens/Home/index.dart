@@ -57,7 +57,7 @@ class Index extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(headerProvider.notifier).checkAuth(context, ref); //ログイン状態かを確認
+    //ref.watch(headerProvider.notifier).checkAuth(context, ref); //ログイン状態かを確認
     final pages = [
       //CircleList(),
       //EventList(),

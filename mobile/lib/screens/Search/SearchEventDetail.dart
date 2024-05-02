@@ -60,244 +60,247 @@ class SearchEventDetail extends ConsumerWidget {
         DateFormat('yyyy/MM/dd hh:mm〜').format(event.startedAt);
     final double deviceWidth = MediaQuery.of(context).size.width;
     return BaseLayout(
-        title: '',
-        appBar: AppBar(toolbarHeight: 0),
-        child: ListViewWithGap(horizontal: false, gap: 8, children: [
-          Stack(
-            children: [
-              AspectRatio(
-                  aspectRatio: 1.6,
-                  child: Image.asset(event.photoUrl, fit: BoxFit.cover)),
-              Positioned(
-                  top: 8,
-                  left: 8,
-                  child: GestureDetector(
-                    onTap: () => {},
-                    child: Opacity(
-                      opacity: 0.3,
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.black),
-                        child: Icon(Icons.arrow_back,
-                            size: 20, color: Colors.white),
-                      ),
-                    ),
-                  )),
-              Positioned(
-                  top: 8,
-                  right: 8,
-                  child: GestureDetector(
-                    onTap: () => {},
-                    child: Opacity(
-                      opacity: 0.3,
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.black),
-                        child: Icon(Icons.more_horiz,
-                            size: 20, color: Colors.white),
-                      ),
-                    ),
-                  )),
-              Positioned(
-                  top: 8,
-                  right: 46,
-                  child: GestureDetector(
-                    onTap: () => {},
-                    child: Opacity(
-                      opacity: 0.3,
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.black),
-                        child: Icon(Icons.file_download,
-                            size: 20, color: Colors.white),
-                      ),
-                    ),
-                  )),
-              Positioned(
-                  top: 8,
-                  right: 84,
-                  child: GestureDetector(
-                    onTap: () => {},
-                    child: Opacity(
-                      opacity: 0.3,
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.black),
-                        child: Icon(Icons.bookmark_border_outlined,
-                            size: 20, color: Colors.white),
-                      ),
-                    ),
-                  ))
-            ],
-          ),
+        title: ('イベント'),
+        child: ListViewWithGap(horizontal: false, gap: 0, children: [
+          AspectRatio(
+              aspectRatio: 1.6,
+              child: Image.asset(event.photoUrl, fit: BoxFit.cover)),
           Container(
-            margin: EdgeInsets.only(left: 8, right: 8),
+            margin: EdgeInsets.only(left: 0, right: 0),
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(0),
             ),
-            child: ColumnViewWithGap(
-              gap: 8,
-              children: [
-                Text(event.title,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w700)),
-                RowViewWithGap(
-                  gap: 8,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Icon(IconData(0xf193, fontFamily: 'MaterialIcons'),
-                        size: 16, color: Colors.black),
-                    Text(
-                        '${event.address.prefecture.toJP()} ${event.address.municipalities} ${event.address.houseNumber}',
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500))
-                  ],
-                ),
-                RowViewWithGap(
-                  gap: 8,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Icon(IconData(0xef11, fontFamily: 'MaterialIcons'),
-                        size: 16, color: Colors.black),
-                    Text(start_format,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500))
-                  ],
-                ),
+            child: ColumnViewWithGap(gap: 8, children: [
+              Text(event.title,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromRGBO(7, 74, 131, 1))),
+              RowViewWithGap(
+                gap: 8,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(IconData(0xf193, fontFamily: 'MaterialIcons'),
+                      size: 18, color: Colors.black),
+                  Text(
+                      '${event.address.prefecture.toJP()} ${event.address.municipalities} ${event.address.houseNumber}',
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w500))
+                ],
+              ),
+              RowViewWithGap(
+                gap: 8,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(IconData(0xef11, fontFamily: 'MaterialIcons'),
+                      size: 18, color: Colors.black),
+                  Text(start_format,
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w500))
+                ],
+              ),
+              RowViewWithGap(gap: 22, children: [
                 RowViewWithGap(
                   gap: 8,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Icon(IconData(0xe491, fontFamily: 'MaterialIcons'),
-                        size: 16, color: Colors.black),
+                        size: 18, color: Colors.black),
                     Text(
                         '${event.userBookedEvents?.length ?? 0}/${event.capacity}人',
                         style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500))
+                            fontSize: 14, fontWeight: FontWeight.w500))
                   ],
                 ),
-              ],
-            ),
+                RowViewWithGap(gap: 5, children: [
+                  GestureDetector(
+                    onTap: () => {},
+                    child: const Icon(Icons.favorite_border,
+                        size: 18, color: Color.fromRGBO(248, 6, 6, 1)),
+                  ),
+                  const Text(
+                    '7', //ToDo: お気に入りの数を実装
+                    style: TextStyle(
+                        fontSize: 14, color: Color.fromRGBO(87, 87, 87, 1)),
+                  )
+                ])
+              ]),
+              //タグ
+              Container(
+                width: deviceWidth,
+                child: Wrap(spacing: 10, runSpacing: 5, children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(233, 233, 233, 1),
+                      borderRadius: BorderRadius.circular(24),
+                      /*border: Border.all(
+                            color: Color.fromRGBO(123, 140, 153, 1),
+                            width: 1)*/
+                    ),
+                    padding:
+                        EdgeInsets.only(left: 8, top: 2, right: 8, bottom: 2),
+                    child: Text('東京理科大学',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Color.fromRGBO(61, 154, 239, 1))),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(233, 233, 233, 1),
+                      borderRadius: BorderRadius.circular(24),
+                      /*border: Border.all(
+                            color: Color.fromARGB(255, 123, 140, 153),
+                            width: 1)*/
+                    ),
+                    padding:
+                        EdgeInsets.only(left: 8, top: 2, right: 8, bottom: 2),
+                    child: Text('テニス',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Color.fromRGBO(61, 154, 239, 1))),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(233, 233, 233, 1),
+                      borderRadius: BorderRadius.circular(24),
+                      /*border: Border.all(
+                            color: Color.fromARGB(255, 123, 140, 153),
+                            width: 1*/
+                    ),
+                    padding:
+                        EdgeInsets.only(left: 8, top: 2, right: 8, bottom: 2),
+                    child: Text('スポーツ',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Color.fromRGBO(61, 154, 239, 1))),
+                  )
+                ]),
+              )
+            ]),
           ),
           Container(
               width: deviceWidth - 16,
-              margin: EdgeInsets.only(left: 8, right: 8),
+              margin: EdgeInsets.only(left: 0, right: 0),
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(0),
               ),
               child: ColumnViewWithGap(
                 gap: 8,
                 children: [
-                  Text('紹介',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
                   Text(event.detail,
                       maxLines: 8,
                       overflow: TextOverflow.ellipsis,
                       style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                   GestureDetector(
                     onTap: () => {},
                     child: Text('もっと読む',
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(255, 34, 182, 245))),
+                            color: Color.fromRGBO(61, 154, 239, 1))),
                   )
                 ],
               )),
           Container(
               width: deviceWidth - 16,
-              margin: EdgeInsets.only(left: 8, right: 8),
+              margin: EdgeInsets.only(left: 0, right: 0),
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(0),
               ),
-              child: ColumnViewWithGap(
-                gap: 8,
-                children: [
-                  const Text('ホスト',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-                  RowViewWithGap(gap: 8, children: [
-                    Avater(
-                        size: 40,
-                        image: AssetImage(
-                            event.creator.photoUrl ?? 'public/mican.jpeg')),
-                    ColumnViewWithGap(gap: 4, children: [
-                      Text(
-                          '${event.creator.lastName} ${event.creator.firstName}',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w700)),
-                      Text(
-                        event.creator.university.toJP(),
+              child: ColumnViewWithGap(gap: 8, children: [
+                const Text('主催者(1)',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                RowViewWithGap(gap: 8, children: [
+                  Avater(
+                      size: 40,
+                      image: AssetImage(
+                          event.creator.photoUrl ?? 'public/mican.jpeg')),
+                  ColumnViewWithGap(gap: 4, children: [
+                    Text('${event.creator.lastName} ${event.creator.firstName}',
                         style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w700),
-                      )
-                    ])
-                  ]),
-                  const Text('参加者',
+                            fontSize: 12, fontWeight: FontWeight.w700)),
+                    Text(
+                      event.creator.university.toJP(),
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-                  Stack(
-                      //alignment: AlignmentDirectional.centerStart,
-                      //fit: StackFit.loose,
-                      children: event.userBookedEvents?.asMap().entries.map(
-                            (u) {
-                              if (u.key <= 2) {
-                                return Align(
-                                    alignment: Alignment(
-                                        -1 + (35 / deviceWidth) * 2 * u.key,
-                                        0), // 横軸は-1~1の範囲で決まる(左はそれを考慮して計算)
-                                    child: Avater(
-                                        size: 40,
-                                        image: AssetImage(
-                                            u.value.user.photoUrl ??
-                                                'public/mican.jpeg')));
-                              } else if (u.key == 3) {
-                                return Align(
-                                    alignment: Alignment(
-                                        -1 + (35 / deviceWidth) * 2 * u.key,
-                                        0), // 横軸は-1~1の範囲で決まる(左はそれを考慮して計算)
-                                    child: Container(
-                                      height: 40,
-                                      width: 40,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Color.fromARGB(
-                                              255, 217, 217, 217)),
-                                      child: Text(
-                                        '+${(event.userBookedEvents?.length ?? 3) - 3}',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ));
-                              } else {
-                                return Container(
-                                  height: 0,
-                                  width: 0,
-                                );
-                              }
-                            },
-                          ).toList() ??
-                          [])
-                ],
-              ))
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+                    )
+                  ])
+                ]),
+                const Text('参加者(5)',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                Stack(
+                    //alignment: AlignmentDirectional.centerStart,
+                    //fit: StackFit.loose,
+                    children: event.userBookedEvents?.asMap().entries.map(
+                          (u) {
+                            if (u.key <= 2) {
+                              return Align(
+                                  alignment: Alignment(
+                                      -1 + (35 / deviceWidth) * 2 * u.key,
+                                      0), // 横軸は-1~1の範囲で決まる(左はそれを考慮して計算)
+                                  child: Avater(
+                                      size: 40,
+                                      image: AssetImage(u.value.user.photoUrl ??
+                                          'public/mican.jpeg')));
+                            } else if (u.key == 3) {
+                              return Align(
+                                  alignment: Alignment(
+                                      -1 + (35 / deviceWidth) * 2 * u.key,
+                                      0), // 横軸は-1~1の範囲で決まる(左はそれを考慮して計算)
+                                  child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color:
+                                            Color.fromARGB(255, 217, 217, 217)),
+                                    child: Text(
+                                      '+${(event.userBookedEvents?.length ?? 3) - 3}',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ));
+                            } else {
+                              return Container(
+                                height: 0,
+                                width: 0,
+                              );
+                            }
+                          },
+                        ).toList() ??
+                        []),
+                //関連するイベント
+                Text(
+                  "関連するイベント",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Container(
+                    height: 270,
+                    padding: EdgeInsets.only(left: 0),
+                    child: ListViewWithGap(
+                      gap: 8,
+                      horizontal: true,
+                      children: nums.map((key) {
+                        return SearchEventHomeCard(
+                          event: mockEvent11,
+                        );
+                      }).toList(),
+                    ))
+              ])),
         ]));
   }
 }
