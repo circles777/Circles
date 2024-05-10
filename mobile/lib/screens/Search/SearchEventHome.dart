@@ -23,6 +23,9 @@ import 'package:mobile/models/event.model.dart';
 import 'package:mobile/models/user.model.dart';
 import 'package:mobile/providers/user.provider.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/CreateEvent/CreateEventCondition.dart';
+import 'package:mobile/screens/CreateEvent/CreateEventProfile.dart';
+import 'package:mobile/screens/CreateEvent/CreateEventLocation.dart';
 import 'package:mobile/screens/Search/SearchEventDetail.dart';
 import 'package:mobile/screens/Search/SearchEventList.dart';
 import 'package:mobile/utils/helpers/alert.dart';
@@ -59,7 +62,7 @@ class SearchEventHome extends ConsumerWidget {
         title:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Container(
-              width: 360,
+              width: deviceWidth-80,
               height: 35,
               child: TextField(
                   decoration: InputDecoration(
@@ -78,9 +81,19 @@ class SearchEventHome extends ConsumerWidget {
                   size: 24,
                 ),
               ))),
-          Icon(Icons.add, size: 30, color: Colors.black),
+              //イベント作成
+          IconButton(
+            icon: Icon(Icons.add),
+            iconSize: 30,
+            color: Colors.black,
+            onPressed: (){
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CreateEventCondition()),
+              );
+            },
+          ),
         ]),
-        floating: false,
+        floating: true,
         flexibleSpace: FlexibleSpaceBar(
           background: Container(
             color: Colors.white, //スクロール中のアップバーの色
