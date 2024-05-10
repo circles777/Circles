@@ -15,6 +15,7 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
+import 'package:mobile/components/event/EventDialog.dart';
 import 'package:mobile/components/event/EventListCard.dart';
 import 'package:mobile/components/search/SearchEventListCard.dart';
 import 'package:mobile/components/search/SearchEventSort.dart';
@@ -29,6 +30,7 @@ import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:mobile/utils/url/header.dart';
 
+import '../../components/event/EventTagDialog.dart';
 import '../../components/search/SearchEventHomeCard.dart';
 import 'SearchEventDetail.dart';
 
@@ -70,16 +72,16 @@ class SearchEventList extends HookWidget {
         floating: true, //スクロールしたら非表示にする
         flexibleSpace: FlexibleSpaceBar(
           background: Container(
-            color: Colors.white,//スクロール中のアップバーの色
+            color: Colors.white, //スクロール中のアップバーの色
           ),
-        ), 
+        ),
         backgroundColor: Colors.white,
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(30),
             child: SizedBox(
               height: 40,
               child: Container(
-                padding: EdgeInsets.only(left: 14, bottom: 5),
+                padding: EdgeInsets.only(left: 14, right: 14, bottom: 5),
                 child: ListViewWithGap(horizontal: true, gap: 8, children: [
                   Icon(
                     Icons.format_list_bulleted,
@@ -87,26 +89,82 @@ class SearchEventList extends HookWidget {
                     size: 24,
                   ),
                   SearchEventSort(
-                      name: "並び替え",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1)),
+                    name: "並び替え",
+                    backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                    onTap: () async {
+                      final String? selectedText = await showDialog<String>(
+                          context: context,
+                          builder: (_) {
+                            return EventDialog();
+                          });
+                    },
+                  ),
                   SearchEventSort(
                       name: "開催地域",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1)),
+                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                      onTap: () async {
+                      final String? selectedText = await showDialog<String>(
+                          context: context,
+                          builder: (_) {
+                            return EventDialog();
+                          });
+                    },
+                      ),
                   SearchEventSort(
                       name: "大学",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1)),
+                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                      onTap: () async {
+                      final String? selectedText = await showDialog<String>(
+                          context: context,
+                          builder: (_) {
+                            return EventDialog();
+                          });
+                    },
+                    ),
                   SearchEventSort(
                       name: "キャンパス",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1)),
+                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                      onTap: () async {
+                      final String? selectedText = await showDialog<String>(
+                          context: context,
+                          builder: (_) {
+                            return EventDialog();
+                          });
+                    },
+                      ),
                   SearchEventSort(
                       name: "日時",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1)),
+                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                      onTap: () async {
+                      final String? selectedText = await showDialog<String>(
+                          context: context,
+                          builder: (_) {
+                            return EventDialog();
+                          });
+                    },
+                    ),
                   SearchEventSort(
                       name: "開催方法",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1)),
+                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                      onTap: () async {
+                      final String? selectedText = await showDialog<String>(
+                          context: context,
+                          builder: (_) {
+                            return EventDialog();
+                          });
+                    },
+                    ),
                   SearchEventSort(
-                      name: "タグ",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1)),
+                    name: "タグ",
+                    backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                    onTap: () async {
+                      final String? selectedText = await showDialog<String>(
+                          context: context,
+                          builder: (_) {
+                            return EventTagDialog();
+                          });
+                    },
+                  ),
                 ]),
               ),
             )),
