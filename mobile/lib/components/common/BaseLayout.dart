@@ -10,9 +10,14 @@ class BaseLayout extends HookConsumerWidget with RouteAware {
   final String title;
   final Widget child;
   final AppBar? appBar;
+  final Color? backgroundColor;
 
   const BaseLayout(
-      {super.key, required this.title, required this.child, this.appBar});
+      {super.key,
+      required this.title,
+      required this.child,
+      this.appBar,
+      this.backgroundColor});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +36,7 @@ class BaseLayout extends HookConsumerWidget with RouteAware {
                 toolbarHeight: 46,
                 title: Text(title),
                 backgroundColor: Colors.white),
-        backgroundColor: Color.fromARGB(255, 247, 247, 247),
+        backgroundColor: backgroundColor ?? Color.fromARGB(255, 247, 247, 247),
         body: Container(
           height: deviceHeight - 48.0 - (appBar == null ? 46.0 : 0),
           child: ClipRect(child: child),

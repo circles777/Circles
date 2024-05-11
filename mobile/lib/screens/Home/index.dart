@@ -19,23 +19,23 @@ import 'package:mobile/mocks/mocks.dart';
 import 'package:mobile/providers/user.provider.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/screens/Event/EventDetail.dart';
+import 'package:mobile/screens/Event/JoinedEventList.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
 import 'package:mobile/screens/Forum/NewForumForm.dart';
 import 'package:mobile/screens/Lesson/LessonDetail.dart';
 import 'package:mobile/screens/Lesson/LessonList.dart';
 import 'package:mobile/screens/Profile/MyProfile.dart';
+import 'package:mobile/screens/Profile/MyTagSelection.dart';
 import 'package:mobile/screens/Search/SearchEventHome.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-
 import '../../utils/url/header.dart';
 import '../Circle/CircleDetail.dart';
 import '../Circle/CircleList.dart';
-import '../Event/JoinedEventList.dart';
 import '../User/Mypage.dart';
-import 'Home.dart';
 import '../Forum/Forum_Categories.dart';
+import 'Home.dart';
 
 class Index extends ConsumerWidget {
   Index({super.key});
@@ -71,7 +71,8 @@ class Index extends ConsumerWidget {
       //EventDetail(),
       MyProfile(user: ref.read(userProvider.notifier).state ?? mockUser),
       SearchEventHome(),
-      JoinedEventList()
+      //JoinedEventList()
+      MyTagSelection()
       //Mypage()
     ];
 
