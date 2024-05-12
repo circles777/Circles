@@ -38,7 +38,7 @@ class UserClient {
           }), // jsonHeaderでjson形式を指定しているため、json形式にする必要あり
           headers: HeaderForApi.jsonHeader);
       final dynamic body = jsonDecode(response.body);
-      ref.read(headerProvider.notifier).setToken(body['access_token']);
+      await ref.read(headerProvider.notifier).setToken(body['access_token']);
       //print(body['tags'].runtimeType);
       final User user = User.fromJson(body);
       ref.read(userProvider.notifier).setUser(user);

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/ColumnWithGap.dart';
