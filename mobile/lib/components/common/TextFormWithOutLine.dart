@@ -1,12 +1,10 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class TextFormWithOutLine extends StatelessWidget {
   final String hintText;
   final Function? onChanged;
   final String? validationText;
-  final FunctionStringCallback? validator;
+  final Function? validator;
   const TextFormWithOutLine(
       {super.key,
       required this.hintText,
