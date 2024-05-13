@@ -30,13 +30,13 @@ final mockEventTag2 = EventTag(id: '3628', name: 'ビジコン');
 
 final mockUser = User(
     id: '83d',
-    firstName: '和樹',
-    lastName: '田中',
-    firstNameKana: 'カズキ',
-    lastNameKana: 'タナカ',
+    firstName: 'ネオ',
+    lastName: 'ぽんちゃむ',
+    firstNameKana: 'ネオ',
+    lastNameKana: 'ポンチャム',
     username: 'camerom',
     email: 'test@example.com',
-    photoUrl: 'public/mican.jpeg',
+    photoUrl: 'public/momo.jpeg',
     role: UserRole.visitor,
     gender: Gender.male,
     birthDate: DateTime(2020, 10, 2, 12, 10),
@@ -46,9 +46,11 @@ final mockUser = User(
     faculty: '理工学部',
     department: '機械工学科',
     grade: 4,
-    introduction: 'よろしく',
+    introduction: '趣味でテニスを始めてみました！バイトはおおたかの森で塾講をやっています！',
     tags: [mockTag, mockTag2],
-    eventTags: [mockEventTag, mockEventTag2]);
+    eventTags: [mockEventTag, mockEventTag2],
+    sanka: '4',
+    kikaku: '2');
 
 final mockEvent = EventModel(
   id: '892',
