@@ -31,6 +31,8 @@ class User {
   final List<Tag> tags;
   final List<EventTag> eventTags;
   final String? password;
+  final String sanka;
+  final String kikaku;
 
   User(
       {required this.id,
@@ -52,7 +54,9 @@ class User {
       required this.introduction,
       required this.tags,
       required this.eventTags,
-      this.password});
+      this.password,
+      required this.sanka,
+      required this.kikaku});
 
   // Getterを利用してクラスのプライベート変数を参照できるようにする
   /*int get id => _id;
@@ -90,7 +94,9 @@ class User {
         eventTags: (json['eventTags'] as List<dynamic>).isEmpty == false
             ? json['eventTags'].map((t) => EventTag.fromJson(t)).toList()
             : [],
-        password: json['password']);
+        password: json['password'],
+        sanka: json['kikaku'],
+        kikaku: json['kikaku']);
     return user;
   }
 
@@ -115,7 +121,9 @@ class User {
       "introduction": introduction,
       "tags": tags.map((Tag t) => t.toJson()).toList(),
       "eventTags": eventTags.map((e) => e.toJson()).toList(),
-      "password": password
+      "password": password,
+      "sanka": kikaku,
+      "kikaku": kikaku
     };
   }
 }
