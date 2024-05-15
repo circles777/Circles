@@ -1,6 +1,5 @@
 // ignore_for_file: empty_constructor_bodies
 import 'dart:convert';
-import 'dart:js_util';
 
 import 'package:mobile/models/common/enums.dart';
 import 'package:mobile/models/tag.model.dart';
