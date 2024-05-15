@@ -25,103 +25,126 @@ class EventCard extends StatelessWidget {
           () => Navigator.of(context).push<dynamic>(
                 SearchEventDetail.route(event: event),
               ),
-      child: Container(
-          width: 220,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          padding: const EdgeInsets.all(16),
-          child: ColumnViewWithGap(
-            gap: 8,
-            children: [
-              Text(event.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w800)),
-              Text(event.detail,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500)),
-              RowViewWithGap(
-                gap: 4,
-                crossAxisAlignment: CrossAxisAlignment.center,
+
+      child:Container(
+        decoration: BoxDecoration(
+    color: Colors.white, // 背景色を白に設定
+    borderRadius: BorderRadius.circular(16), // 角の半径を24に設定
+  ),   
+      child:Stack(
                 children: [
-                  const Icon(IconData(0xef11, fontFamily: 'MaterialIcons'),
-                      size: 16, color: Colors.black),
-                  Text(start_format,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w500))
-                ],
-              ),
-              RowViewWithGap(
-                gap: 4,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(IconData(0xe491, fontFamily: 'MaterialIcons'),
-                      size: 16, color: Colors.black),
-                  Text(
-                      '${event.userBookedEvents?.length ?? 0}/${event.capacity}人',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w500))
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RowViewWithGap(gap: 8, children: [
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 8, right: 8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(32),
-                          color: Color.fromARGB(255, 108, 127, 144)),
-                      child: const Text(
-                        '2年', //ToDo: タグor広場と差し替え
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(16, 8, 8, 8), 
+                    child: ColumnViewWithGap(
+                      gap: 8,
+                      children: [
+                        Text(event.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w700)),
+                        ColumnViewWithGap(gap: 4, children: [
+                          RowViewWithGap(gap: 8, children: [
+                            Icon(Icons.calendar_today,
+                                size: 14, color: Colors.black),
+                            Text(start_format)
+                          ]),
+                          RowViewWithGap(gap: 8, children: [
+                            Icon(Icons.person, size: 14, color: Colors.black),
+                            Text(
+                                '${event.userBookedEvents?.length ?? 0}/${event.capacity} 人')
+                          ]),
+                          RowViewWithGap(gap: 8, children: [
+                            Icon(Icons.map, size: 14, color: Colors.black),
+                            Container(
+                              width: 170,
+                              child: Text(
+                                '${event.address.prefecture.toJP()} ${event.address.municipalities} ${event.address.houseNumber}',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            // ToDo: 下のタブグリッドの中身は今後仕様を考えていく中でmocksにも実装
+                          ]),
+                          Container(
+                              width: 150,
+                              child: Wrap(
+                                spacing: 4,
+                                runSpacing: 4,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(24),
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 123, 140, 153),
+                                            width: 1)),
+                                    padding: EdgeInsets.only(
+                                        left: 8, top: 2, right: 8, bottom: 2),
+                                    child: Text('EE',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Color.fromARGB(
+                                                255, 123, 140, 153))),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(24),
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 123, 140, 153),
+                                            width: 1)),
+                                    padding: EdgeInsets.only(
+                                        left: 8, top: 2, right: 8, bottom: 2),
+                                    child: Text('クラシック',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Color.fromARGB(
+                                                255, 123, 140, 153))),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(24),
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 123, 140, 153),
+                                            width: 1)),
+                                    padding: EdgeInsets.only(
+                                        left: 8, top: 2, right: 8, bottom: 2),
+                                    child: Text('音楽',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Color.fromARGB(
+                                                255, 123, 140, 153))),
+                                  )
+                                ],
+                              ))
+                        ])
+                      ],
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 8, right: 8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(32),
-                          color: Color.fromARGB(255, 108, 127, 144)),
-                      child: const Text(
-                        '電電', //ToDo: タグor広場と差し替え
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      ),
-                    )
-                  ]),
-                  RowViewWithGap(gap: 4, children: [
-                    GestureDetector(
-                      onTap: () => {},
-                      child: const Icon(Icons.favorite_border,
-                          size: 28, color: Color.fromARGB(255, 255, 159, 159)),
-                    ),
-                    const Text(
-                      '7', //ToDo: お気に入りの数を実装
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 142, 142, 142)),
-                    )
-                  ])
+                  ),
+                  //ToDo: グッドボタンの数などの仕様
+                  Positioned(
+                      bottom: 8,
+                      right: 8,
+                      child: RowViewWithGap(
+                        gap: 5,
+                        children: [
+                          Icon(CupertinoIcons.heart,
+                              size: 25,
+                              color: Color.fromARGB(255, 255, 159, 159)),
+                          Text('7',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 123, 140, 153),
+                                  fontSize: 16))
+                        ],
+                      ))
                 ],
-              )
-            ],
-          )),
+              ) ),
+
+
+
+
     );
   }
 }

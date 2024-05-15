@@ -34,7 +34,7 @@ class JoinedEventList extends HookWidget {
         title: '参加したイベント',
         child: ListViewWithGap(
           horizontal: false,
-          gap: 4,
+          gap: 0,
           children:
               List.generate(8, (index) => EventListCard(event: mockEvent11)),
         ));

@@ -25,66 +25,111 @@ class SearchEventHomeCard extends StatelessWidget {
           () => Navigator.of(context).push<dynamic>(
                 SearchEventDetail.route(event: event),
               ),
-      child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(
-              color: const Color.fromARGB(
-                  255, 166, 166, 166), //Color.fromRGBO(96, 125, 139, 1),
-              width: 1.0,
-            ),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          padding: const EdgeInsets.all(8),
+              
+      child: Stack(children: [
+      Container(
+        width: 200,  
+        decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(10.0)),   
+          padding: const EdgeInsets.all(0),
           child: ColumnViewWithGap(
-            gap: 4,
+            gap: 5,
             children: [
-              Image.asset(
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0), 
+                  ),              
+              child:Image.asset(
                 event.photoUrl,
                 width: 200,
                 height: 140,
                 fit: BoxFit
                     .cover, // Adjust how the image should be fitted into the container
-              ),
+              )),      
+              Container(padding:EdgeInsets.only(left:10.0 , right: 10.0),
+              child:ColumnViewWithGap(
+            gap: 0,
+            children: [        
               Text(event.title,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w500)),
-              RowViewWithGap(gap: 4, children: [
+                      fontSize: 16, fontWeight: FontWeight.w600)),
+              
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Icon(IconData(0xef11, fontFamily: 'MaterialIcons'),
-                        size: 12, color: Colors.black),
+                        size: 15, color: Colors.black),
                     Text(start_format,
                         style: const TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w500))
+                            fontSize: 13, fontWeight: FontWeight.w500))
                   ],
                 ),
-                Row(
+               Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Icon(IconData(0xe491, fontFamily: 'MaterialIcons'),
-                        size: 12, color: Colors.black),
+                        size: 15, color: Colors.black),
                     Text(
                         '${event.userBookedEvents?.length ?? 0}/${event.capacity}人',
                         style: const TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w500))
+                            fontSize: 13, fontWeight: FontWeight.w500))
                   ],
-                )
-              ]),
+                ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Icon(IconData(0xf193, fontFamily: 'MaterialIcons'),
-                      size: 12, color: Colors.black),
-                  Text(
+                      size: 15, color: Colors.black),
+                      SizedBox(
+                        width: 150,
+                  child:Text(
                       '${event.address.prefecture.toJP()} ${event.address.municipalities} ${event.address.houseNumber}',
                       style: const TextStyle(
-                          fontSize: 12, fontWeight: FontWeight.w500))
+                          fontSize: 13, fontWeight: FontWeight.w500),
+                          overflow: TextOverflow.ellipsis,
+                          ))
                 ],
-              )
-            ],
-          )),
+              ),
+                Container(
+                                    decoration: BoxDecoration(
+                                        color: Color.fromRGBO(108, 127, 144, 1),
+                                        borderRadius: BorderRadius.circular(24),
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 123, 140, 153),
+                                            width: 1)),
+                                    padding: EdgeInsets.only(
+                                        left: 5, top: 0, right: 5, bottom: 2),
+                                    child: Text('音楽',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color.fromRGBO(255, 255, 255, 1))),
+                                  ),   
+              ])                       
+          ),
+        
+          ]),
+          ),
+          Positioned(
+                      bottom: 5,
+                      right: 8,
+                      child: RowViewWithGap(
+                        gap: 5,
+                        children: [
+                          Icon(CupertinoIcons.heart,
+                              size: 27,
+                              color: Color.fromARGB(255, 255, 159, 159)),
+                          Text('7',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 123, 140, 153),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500))
+                        ],
+                      ))
+      ])
     );
   }
 }
