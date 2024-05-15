@@ -24,7 +24,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../Circle/CircleDetail.dart';
 import '../Circle/CircleList.dart';
-import '../Event/EventList.dart';
+import '../Event/joinedEventList.dart';
 import '../User/Mypage.dart';
 import 'Home.dart';
 import '../Forum/Forum_Categories.dart';
