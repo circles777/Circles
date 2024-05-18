@@ -29,6 +29,8 @@ import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:mobile/utils/url/header.dart';
+import 'package:flutter/material.dart';
+import 'package:mobile/screens/Profile/MyProfileEditor.dart';
 
 import '../../components/common/SquareCard.dart';
 import '../../components/search/SearchEventHomeCard.dart';
@@ -78,35 +80,15 @@ class MyProfile extends ConsumerWidget {
                     ),
                   ),
                 ),
-              ),
-
-                   
+              ),                   
+          
               Positioned(
                   top: 8,
-                  left: 8,
+                  right: 16,
                   child: GestureDetector(
                     onTap: () => {},
                     child: Opacity(
-                      opacity: 0.3,
-                      child: Container(
-                        height: 32,
-                        width: 32,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.black),
-                        child: Icon(Icons.close, size: 24, color: Colors.white),
-                      ),
-                    ),
-                  )),
-
-             
-
-              Positioned(
-                  top: 8,
-                  right: 8,
-                  child: GestureDetector(
-                    onTap: () => {},
-                    child: Opacity(
-                      opacity: 0.3,
+                      opacity: 0.4,
                       child: Container(
                         height: 32,
                         width: 32,
@@ -117,13 +99,20 @@ class MyProfile extends ConsumerWidget {
                       ),
                     ),
                   )),
+
+
               Positioned(
                   top: 8,
-                  right: 48,
+                  right: 58,
                   child: GestureDetector(
-                    onTap: () => {},
+                    onTap: () => {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyProfileEditor(user: mockUser)),
+                    )
+                    },
                     child: Opacity(
-                      opacity: 0.3,
+                      opacity: 0.4,
                       child: Container(
                         height: 32,
                         width: 32,
@@ -134,6 +123,8 @@ class MyProfile extends ConsumerWidget {
                       ),
                     ),
                   )),
+
+
               Positioned(
                   bottom: 16, //Stackの第一子要素から相対的に
                   left: 20,
@@ -143,7 +134,7 @@ class MyProfile extends ConsumerWidget {
                       '${user.lastName} ${user.firstName}',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 32,
+                          fontSize: 28,
                           fontWeight: FontWeight.w800),
                     ),
                   )),
