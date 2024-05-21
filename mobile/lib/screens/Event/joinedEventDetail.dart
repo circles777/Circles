@@ -1,49 +1,26 @@
-// ignore_for_file: prefer_const_constructors
+import 'dart:html';
 
-import 'dart:convert';
-import 'dart:developer';
-//import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile/api/user/user.clent.dart';
 import 'package:mobile/components/common/Avater.dart';
-import 'package:mobile/components/common/BaseLayout.dart';
 import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
-import 'package:mobile/components/common/SimpleEventCard.dart';
-import 'package:mobile/components/common/TextFormWithOutLine.dart';
-import 'package:mobile/components/search/SearchEventListCard.dart';
+import 'package:mobile/components/search/SearchEventHomeCard.dart';
 import 'package:mobile/mocks/mocks.dart';
-import 'package:mobile/models/common/address.model.dart';
-import 'package:mobile/models/common/enums.dart';
 import 'package:mobile/models/event.model.dart';
-import 'package:mobile/models/user.model.dart';
-import 'package:mobile/providers/user.provider.dart';
-import 'package:mobile/screens/Auth/Login.dart';
-import 'package:mobile/utils/helpers/alert.dart';
-import 'package:mobile/utils/helpers/successDialog.dart';
-import 'package:mobile/utils/url/header.dart';
 
-import '../../components/search/SearchEventHomeCard.dart';
-
-class SearchEventDetail extends ConsumerWidget {
+class joinedEventDetail extends ConsumerWidget {
   final EventModel event;
-
-  SearchEventDetail({super.key, required this.event});
+  joinedEventDetail({super.key, required this.event});
 
   static Route<dynamic> route({required EventModel event}) {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => SearchEventDetail(
-        event: event,
-      ),
+      builder: (_) => joinedEventDetail(event: event),
       //settings: RouteSettings(arguments: someId),
     );
-  }
+  } 
 
   final _formKey = GlobalKey<FormState>();
   String? passwordValidator(String text) {
@@ -302,29 +279,6 @@ class SearchEventDetail extends ConsumerWidget {
                   ))
             ])),
       ]),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: true,
-        showUnselectedLabels: false,
-        selectedFontSize: 10,
-        selectedLabelStyle: TextStyle(color: Color.fromRGBO(118, 118, 118, 1)),
-        selectedItemColor: Color.fromRGBO(118, 118, 118, 1),
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border), label: "お気に入り"),
-          BottomNavigationBarItem(
-              icon: Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20),color: Color.fromRGBO(52, 170, 255, 1),),
-                padding:
-                    EdgeInsets.only(left: 40, right: 40, top: 15, bottom: 15),
-                child: Text(
-                  "イベントに参加する",
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
-              ),
-              label: ""),
-        ],
-      ),
     );
   }
 }

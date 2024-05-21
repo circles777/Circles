@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
+import 'package:mobile/mocks/mocks.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../models/event.model.dart';
 import '../../screens/Search/SearchEventDetail.dart';
@@ -21,10 +23,11 @@ class EventListCard extends StatelessWidget {
     String start_format = DateFormat('MM/dd hh:mm〜').format(event.startedAt);
     final double deviceWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: onTap ??
-          () => Navigator.of(context).push<dynamic>(
-                SearchEventDetail.route(event: event),
-              ),
+      onTap: ()=> pushNewScreen<dynamic>(
+                    context,
+                    screen: SearchEventDetail(event: mockEvent11,),
+                    withNavBar: false,
+                  ),
       child: Container(
           width: deviceWidth,
           decoration: BoxDecoration(

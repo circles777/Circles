@@ -10,6 +10,7 @@ import 'package:mobile/api/user/user.clent.dart';
 import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
+import 'package:mobile/components/event/EventDialog.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
@@ -78,7 +79,15 @@ class CreateEventCondition extends ConsumerWidget {
                         child: ColumnViewWithGap(
                       gap: 0,
                       children: [
-                        Container(
+                        GestureDetector(
+                          onTap: () async {
+                      final String? selectedText = await showDialog<String>(
+                          context: context,
+                          builder: (_) {
+                            return EventDialog(title: "参加許可");
+                          });
+                    },
+                       child: Container(
                           decoration: const BoxDecoration(
                               border: Border(
                                   top: BorderSide(
@@ -116,7 +125,7 @@ class CreateEventCondition extends ConsumerWidget {
                                       color: Color.fromRGBO(7, 74, 132, 1),
                                     )
                                   ])),
-                        ),
+                        )),
                         Container(
                           decoration: const BoxDecoration(
                               border: Border(
@@ -317,11 +326,32 @@ class CreateEventCondition extends ConsumerWidget {
                   ])
                 ],
               ))),
-      /*bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home),label:"W"),
-          BottomNavigationBarItem(icon: Icon(Icons.home),label:"wd"),
-          ])*/
+    //ボトムバー
+    bottomNavigationBar: BottomAppBar(
+          color: const Color.fromRGBO(255, 255, 255, 1),
+          surfaceTintColor: Colors.white,
+          padding: EdgeInsets.all(0),
+          child: Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      top: BorderSide(
+                          color: Color.fromRGBO(220, 220, 220, 1), width: 1))),
+              child: Padding(
+                  padding:
+                      EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10),
+                  child: GestureDetector(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color.fromRGBO(52, 170, 255, 1),
+                      ),
+                      child: Center(
+                          child: Text(
+                        "作成する",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      )),
+                    ),
+                  )))),
     );
   }
 }
