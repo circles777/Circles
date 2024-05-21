@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile/components/common/ColumnWithGap.dart';
 
 class EventDialog extends StatelessWidget {
-  
+  final String title;
+  const EventDialog({super.key, required this.title,});
+
   @override
   Widget build(BuildContext context) {
     final double deviceWidth = MediaQuery.of(context).size.width;
@@ -19,7 +21,7 @@ class EventDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)),
             )),
         Text(
-          '並び替え',
+          title,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         )
       ]),

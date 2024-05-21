@@ -31,6 +31,7 @@ import 'package:mobile/screens/Search/SearchEventList.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:mobile/utils/url/header.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../components/search/SearchEventHomeCard.dart';
 
@@ -62,7 +63,7 @@ class SearchEventHome extends ConsumerWidget {
         title:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Container(
-              width: deviceWidth-80,
+              width: deviceWidth - 80,
               height: 35,
               child: TextField(
                   decoration: InputDecoration(
@@ -81,17 +82,16 @@ class SearchEventHome extends ConsumerWidget {
                   size: 24,
                 ),
               ))),
-              //イベント作成
+          //イベント作成
           IconButton(
-            icon: Icon(Icons.add),
-            iconSize: 30,
-            color: Colors.black,
-            onPressed: (){
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateEventCondition()),
-              );
-            },
-          ),
+              icon: Icon(Icons.add),
+              iconSize: 30,
+              color: Colors.black,
+              onPressed: () => pushNewScreen<dynamic>(
+                    context,
+                    screen: CreateEventLocation(),
+                    withNavBar: false,
+                  )),
         ]),
         floating: true,
         flexibleSpace: FlexibleSpaceBar(

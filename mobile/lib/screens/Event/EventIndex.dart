@@ -19,7 +19,9 @@ import 'package:mobile/mocks/mocks.dart';
 import 'package:mobile/providers/user.provider.dart';
 import 'package:mobile/screens/Auth/Login.dart';
 import 'package:mobile/screens/Event/EventDetail.dart';
-import 'package:mobile/screens/Event/Eventindex.dart';
+import 'package:mobile/screens/Event/EventEdit.dart';
+import 'package:mobile/screens/Event/EventJoinRequest.dart';
+import 'package:mobile/screens/Event/EventNotification.dart';
 import 'package:mobile/screens/Event/JoinedEventList.dart';
 import 'package:mobile/screens/Event/joinedEventDetail.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
@@ -37,14 +39,13 @@ import '../Circle/CircleDetail.dart';
 import '../Circle/CircleList.dart';
 import '../User/Mypage.dart';
 import '../Forum/Forum_Categories.dart';
-import 'Home.dart';
 
-class Index extends ConsumerWidget {
-  Index({super.key});
+class EventIndex extends ConsumerWidget {
+  EventIndex({super.key});
 
   static Route<dynamic> route() {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => Index(),
+      builder: (_) => EventIndex(),
       //settings: RouteSettings(arguments: someId),
     );
   }
@@ -61,21 +62,12 @@ class Index extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //ref.watch(headerProvider.notifier).checkAuth(context, ref); //ログイン状態かを確認
     final pages = [
-      //CircleList(),
-      //EventList(),
-      //LessonList(),
-      //NewForumForm(),
-      /*LessonDetail(
-          date: DateTime.now(),
-          name: "基礎電子数学及び演習A",
-          tags: ["電子電気情報工学科", "機械工学科"]),*/
-      Home(),
+      joinedEventDetail(event: mockEvent11),
+      EventJoinRequest(),
       //EventDetail(),
-      MyProfile(user: ref.read(userProvider.notifier).state ?? mockUser),
       SearchEventHome(),
-      EventIndex(),
-      //joinedEventDetail(event: mockEvent11),
-      //JoinedEventList()
+      EventNotification(),
+      EventEdit(event: mockEvent11),
       //MyTagSelection()
       //Mypage()
     ];
@@ -94,29 +86,35 @@ class Index extends ConsumerWidget {
         navBarStyle: NavBarStyle.simple,
         items: [
           PersistentBottomNavBarItem(
-              icon: Icon(CupertinoIcons.home),
+              icon: Icon(Icons.group),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.black),
+              inactiveColorPrimary: Colors.black,
+              title: "イベント",
+              textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w100)),
           PersistentBottomNavBarItem(
-              icon: Icon(Icons.groups),
+              icon: Icon(Icons.comment),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.black),
+              inactiveColorPrimary: Colors.black,
+              title: "チャット",
+              textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w100)),
           PersistentBottomNavBarItem(
-              icon: Icon(CupertinoIcons.square_favorites_alt),
+              icon: Icon(Icons.mode_edit),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.black),
-          /*PersistentBottomNavBarItem(
-              icon: Icon(CupertinoIcons.mail),
-              activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.white),*/
+              inactiveColorPrimary: Colors.black,
+              title: "投稿",
+              textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w100)),
           PersistentBottomNavBarItem(
-              icon: Icon(Icons.forum),
+              icon: Icon(Icons.notifications),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.black),
-          /*PersistentBottomNavBarItem(
-              icon: Icon(CupertinoIcons.person),
+              inactiveColorPrimary: Colors.black,
+              title: "通知",
+              textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w100)),
+          PersistentBottomNavBarItem(
+              icon: Icon(Icons.settings),
               activeColorPrimary: Colors.red,
-              inactiveColorPrimary: Colors.black),*/
+              inactiveColorPrimary: Colors.black,
+              title: "設定",
+              textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w100)),
         ]);
   }
 }

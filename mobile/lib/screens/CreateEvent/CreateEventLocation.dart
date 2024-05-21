@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +12,17 @@ import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/CreateEvent/CreateEventTag.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class CreateEventLocation extends ConsumerWidget {
-  CreateEventLocation ({super.key});
+  CreateEventLocation({super.key});
 
   static Route<dynamic> route() {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => CreateEventLocation (),
+      builder: (_) => CreateEventLocation(),
       //settings: RouteSettings(arguments: someId),
     );
   }
@@ -119,11 +121,33 @@ class CreateEventLocation extends ConsumerWidget {
                   ])
                 ],
               ))),
-      /*bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home),label:"W"),
-          BottomNavigationBarItem(icon: Icon(Icons.home),label:"wd"),
-          ])*/
+              //ボトムバー
+      bottomNavigationBar: BottomAppBar(
+          color: const Color.fromRGBO(255, 255, 255, 1),
+          surfaceTintColor: Colors.white,
+          padding: EdgeInsets.all(0),
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border(
+                    top: BorderSide(color: Color.fromRGBO(220, 220, 220, 1),width: 1))),
+            child: Padding(padding: EdgeInsets.only(left:40, right: 40, top: 10, bottom: 10),
+            child:GestureDetector(
+              onTap: () {
+                Navigator.push(context, 
+                MaterialPageRoute(builder: (context)=>CreateNewEventTag()));
+              },
+            child:Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Color.fromRGBO(52, 170, 255, 1),
+              ),
+              child: Center(
+                  child: Text(
+                "次へ",
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              )),
+            ),
+          )))),
     );
   }
 }

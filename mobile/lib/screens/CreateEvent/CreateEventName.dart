@@ -11,6 +11,7 @@ import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/CreateEvent/CreateEventProfile.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -103,6 +104,38 @@ class CreateNewEventName extends ConsumerWidget {
                     ])
                   ],
                 ))),
+//ボトムバー
+                bottomNavigationBar: BottomAppBar(
+          color: const Color.fromRGBO(255, 255, 255, 1),
+          surfaceTintColor: Colors.white,
+          padding: EdgeInsets.all(0),
+          child: Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      top: BorderSide(
+                          color: Color.fromRGBO(220, 220, 220, 1), width: 1))),
+              child: Padding(
+                  padding:
+                      EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateEventProfile()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color.fromRGBO(52, 170, 255, 1),
+                      ),
+                      child: Center(
+                          child: Text(
+                        "次へ",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      )),
+                    ),
+                  )))),
         );
   }
 }

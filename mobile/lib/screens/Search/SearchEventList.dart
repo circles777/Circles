@@ -17,12 +17,14 @@ import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
 import 'package:mobile/components/event/EventDialog.dart';
 import 'package:mobile/components/event/EventListCard.dart';
+import 'package:mobile/components/event/EventSort.dart';
 import 'package:mobile/components/search/SearchEventListCard.dart';
 import 'package:mobile/components/search/SearchEventSort.dart';
 import 'package:mobile/mocks/mocks.dart';
 import 'package:mobile/models/common/address.model.dart';
 import 'package:mobile/models/common/enums.dart';
 import 'package:mobile/models/event.model.dart';
+import 'package:mobile/models/university.model.dart';
 import 'package:mobile/models/user.model.dart';
 import 'package:mobile/providers/user.provider.dart';
 import 'package:mobile/screens/Auth/Login.dart';
@@ -91,78 +93,78 @@ class SearchEventList extends HookWidget {
                   SearchEventSort(
                     name: "並び替え",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                    onTap: () async {
-                      final String? selectedText = await showDialog<String>(
-                          context: context,
-                          builder: (_) {
-                            return EventDialog();
-                          });
+                    onTap: () {
+                      EventSort(title: "並び替え", context, actions: [
+                        ActionItem(text: "人気順"),
+                        ActionItem(text: "おすすめ順"),
+                        ActionItem(text: "新着順"),
+                      ]);
                     },
                   ),
                   SearchEventSort(
-                      name: "開催地域",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                      onTap: () async {
-                      final String? selectedText = await showDialog<String>(
-                          context: context,
-                          builder: (_) {
-                            return EventDialog();
-                          });
+                    name: "開催地域",
+                    backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                    onTap: () {
+                      EventSort(title: "開催地域", context, actions: [
+                        ActionItem(text: Prefecture.hokkaido.toJP(),),
+                        ActionItem(text: Prefecture.aomori.toJP(),),
+                        ActionItem(text: Prefecture.iwate.toJP(),),
+                      ]);
                     },
-                      ),
+                  ),
                   SearchEventSort(
-                      name: "大学",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                      onTap: () async {
-                      final String? selectedText = await showDialog<String>(
-                          context: context,
-                          builder: (_) {
-                            return EventDialog();
-                          });
+                    name: "大学",
+                    backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                    onTap: () async {
+                      EventSort(title: "大学", context, actions: [
+                        ActionItem(text: UniversityDictionary.sophia.toJP()),
+                        ActionItem(text: UniversityDictionary.tus.toJP()),
+                        ActionItem(text: UniversityDictionary.waseda.toJP()),
+                      ]);
                     },
-                    ),
+                  ),
                   SearchEventSort(
-                      name: "キャンパス",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                      onTap: () async {
-                      final String? selectedText = await showDialog<String>(
-                          context: context,
-                          builder: (_) {
-                            return EventDialog();
-                          });
+                    name: "キャンパス",
+                    backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                    onTap: () {
+                      EventSort(title: "キャンパス", context, actions: [
+                        ActionItem(text: ""),
+                        ActionItem(text: ""),
+                        ActionItem(text: ""),
+                      ]);
                     },
-                      ),
+                  ),
                   SearchEventSort(
-                      name: "日時",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                      onTap: () async {
-                      final String? selectedText = await showDialog<String>(
-                          context: context,
-                          builder: (_) {
-                            return EventDialog();
-                          });
+                    name: "日時",
+                    backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                    onTap: () {
+                      EventSort(title: "日時", context, actions: [
+                        ActionItem(text: ""),
+                        ActionItem(text: ""),
+                        ActionItem(text:"日時を選択"),
+                      ]);
                     },
-                    ),
+                  ),
                   SearchEventSort(
-                      name: "開催方法",
-                      backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                      onTap: () async {
-                      final String? selectedText = await showDialog<String>(
-                          context: context,
-                          builder: (_) {
-                            return EventDialog();
-                          });
+                    name: "開催方法",
+                    backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+                    onTap: () {
+                      EventSort(title: "開催方法", context, actions: [
+                        ActionItem(text: "対面・オンライン"),
+                        ActionItem(text: "対面"),
+                        ActionItem(text: "オンライン"),
+                      ]);
                     },
-                    ),
+                  ),
                   SearchEventSort(
                     name: "タグ",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                    onTap: () async {
-                      final String? selectedText = await showDialog<String>(
-                          context: context,
-                          builder: (_) {
-                            return EventTagDialog();
-                          });
+                    onTap: () {
+                      EventSort(title: "タグ", context, actions: [
+                        ActionItem(text: Prefecture.hokkaido.toJP(),),
+                        ActionItem(text: Prefecture.aomori.toJP(),),
+                        ActionItem(text: Prefecture.iwate.toJP(),),
+                      ]);
                     },
                   ),
                 ]),
