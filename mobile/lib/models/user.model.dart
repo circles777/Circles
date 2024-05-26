@@ -20,7 +20,7 @@ class User {
   final UserRole role;
   final Gender gender;
   final DateTime birthDate;
-  final Address address;
+  late Address address;  //addressは後から変更可能にする // addressをlate修飾子を使用して遅延初期化
   //final University? university; //テストのために一時的に必須ではなくしてる
   final UniversityDictionary university;
   final String faculty;
@@ -56,6 +56,63 @@ class User {
       this.password,
       required this.sanka,
       required this.kikaku});
+
+  // copyWithメソッドを追加
+  User copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? firstNameKana,
+    String? lastNameKana,
+    String? username,
+    String? email,
+    String? photoUrl,
+    UserRole? role,
+    Gender? gender,
+    DateTime? birthDate,
+    Address? address, // addressの変更を可能にする
+    UniversityDictionary? university,
+    String? faculty,
+    String? department,
+    int? grade,
+    String? introduction,
+    List<Tag>? tags,
+    List<EventTag>? eventTags,
+    String? password,
+    String? sanka,
+    String? kikaku}){
+    return User(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      firstNameKana: firstNameKana ?? this.firstNameKana,
+      lastNameKana: lastNameKana ?? this.lastNameKana,
+      username: username ?? this.username,
+      email: email ?? this.email,
+      photoUrl: photoUrl ?? this.photoUrl,
+      role: role ?? this.role,
+      gender: gender ?? this.gender,
+      birthDate: birthDate ?? this.birthDate,
+      address: address ?? this.address, // addressの変更を可能にする
+      university: university ?? this.university,
+      faculty: faculty ?? this.faculty,
+      department: department ?? this.department,
+      grade: grade ?? this.grade,
+      introduction: introduction ?? this.introduction,
+      tags: tags ?? this.tags,
+      eventTags: eventTags ?? this.eventTags,
+      password: password ?? this.password,
+      sanka: sanka ?? this.sanka,
+      kikaku: kikaku ?? this.kikaku
+    );
+  }
+
+
+
+
+
+
+
 
   // Getterを利用してクラスのプライベート変数を参照できるようにする
   /*int get id => _id;

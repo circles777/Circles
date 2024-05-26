@@ -58,7 +58,7 @@ class EventCard extends StatelessWidget {
                             Container(
                               width: 170,
                               child: Text(
-                                '${event.address.prefecture.toJP()} ${event.address.municipalities} ${event.address.houseNumber}',
+                                '${event.address.prefecture.toJP()} ${event.address.addition}',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),

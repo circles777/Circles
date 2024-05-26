@@ -26,15 +26,19 @@ import 'package:mobile/models/event.model.dart';
 import 'package:mobile/models/user.model.dart';
 import 'package:mobile/providers/user.provider.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/Profile/AdressAddtionEditor.dart';
+import 'package:mobile/screens/Profile/AdressEditor.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:mobile/utils/url/header.dart';
 import 'package:mobile/screens/Profile/MyProfile.dart';
+import 'package:mobile/screens/Profile/AdressEditor.dart';
+
 
 import '../../components/common/SquareCard.dart';
 import '../../components/search/SearchEventHomeCard.dart';
 
-class MyProfileEditor extends ConsumerWidget {
+class MyProfileEditor extends ConsumerStatefulWidget {
   final User user;
 
   MyProfileEditor({super.key, required this.user});
@@ -48,8 +52,32 @@ class MyProfileEditor extends ConsumerWidget {
     );
   }
 
+@override
+  _MyProfileEditorState createState() => _MyProfileEditorState();
+}
+
+class _MyProfileEditorState extends ConsumerState<MyProfileEditor> {
+  late User user;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    user = widget.user; // 初期状態として渡されたユーザーを設定
+  }
+
+/*
+   void setState(Null Function() param0) {}
+
+   @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
+*/
+
+
+  @override
+  Widget build(BuildContext context, /*WidgetRef ref*/) {
     print(user.toJson());
     const List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     final double deviceWidth = MediaQuery.of(context).size.width;
@@ -186,7 +214,8 @@ class MyProfileEditor extends ConsumerWidget {
                               ),
                             ),
                           ])
-                        ])),
+                        ])
+                        ),
 
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 8), // 左に10の空白を追加
@@ -234,7 +263,8 @@ class MyProfileEditor extends ConsumerWidget {
                               ),
                             ),
                           ])
-                        ])),
+                        ])
+                        ),
 
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 8), // 左に10の空白を追加
@@ -282,7 +312,8 @@ class MyProfileEditor extends ConsumerWidget {
                               ),
                             ),
                           ])
-                        ])),
+                        ])
+                        ),
 
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 8), // 左に10の空白を追加
@@ -330,7 +361,8 @@ class MyProfileEditor extends ConsumerWidget {
                               ),
                             ),
                           ])
-                        ])),
+                        ])
+                        ),
 
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 8), // 左に10の空白を追加
@@ -378,7 +410,8 @@ class MyProfileEditor extends ConsumerWidget {
                               ),
                             ),
                           ])
-                        ])),
+                        ])
+                        ),
 
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 8), // 左に10の空白を追加
@@ -395,7 +428,30 @@ class MyProfileEditor extends ConsumerWidget {
                             ),
                           ),
                           ColumnViewWithGap(gap: 0, children: [
-                            Container(
+
+                            GestureDetector(
+                              onTap: () async {
+                                final selectedAddress = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => AdressEditor()),
+                                );
+
+                                 
+                                if (selectedAddress != null) {
+                                  // 所在地が変更された場合、反映する
+                                  setState(() {
+                                     user.address = Address(
+                                        prefecture: selectedAddress,
+                                        addition: user.address.addition,
+                                      );
+                                  });
+                                }
+                                
+
+
+                              },
+
+                            child: Container(
                               decoration: BoxDecoration(
                                 color: Color(0xFFF0F1F3), // 背景色を青色に設定
                                 borderRadius:
@@ -409,7 +465,7 @@ class MyProfileEditor extends ConsumerWidget {
                                     MainAxisAlignment.spaceBetween, // マークを右端に配置
                                 children: [
                                   Text(
-                                    '${user.address.prefecture.toJP()} ${user.address.municipalities} ${user.address.houseNumber}',
+                                    '${user.address.prefecture.toJP()} ${user.address.addition} ',
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
@@ -425,8 +481,9 @@ class MyProfileEditor extends ConsumerWidget {
                                 ],
                               ),
                             ),
-                          ])
+                          )])
                         ])),
+            
 
                 Container(
                   margin: EdgeInsets.only(left: 8), // 左に10の空白を追加
@@ -832,4 +889,8 @@ class MyProfileEditor extends ConsumerWidget {
 
         ]));
   }
+  
+ 
+  
+ 
 }

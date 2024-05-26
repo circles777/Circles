@@ -3,14 +3,14 @@ import 'package:mobile/models/common/enums.dart';
 
 class Address {
   final Prefecture prefecture;
-  final String municipalities;
-  final String houseNumber;
+  final String? municipalities;  //必須の項目を都道府県のみに変更
+  final String? houseNumber;
   final String? addition;
 
   Address(
       {required this.prefecture,
-      required this.municipalities,
-      required this.houseNumber,
+      this.municipalities,
+      this.houseNumber,
       this.addition});
 
   factory Address.fromJson(Map<String, dynamic> json) {
