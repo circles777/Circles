@@ -36,7 +36,8 @@ import { UniversityModule } from './modules/university/university.module';
     MongooseModule.forRoot(
       configuration().NODE_ENV === 'production'
         ? configuration().MONGODB_URI
-        : 'mongodb://localhost:27017/circles',
+        : 'mongodb://127.0.0.1:27017/circles',
+      //: 'mongodb://localhost:27017/circles',
       { useNewUrlParser: true, useUnifiedTopology: true },
     ),
     StripeModule,
