@@ -118,7 +118,7 @@ class Home extends ConsumerWidget {
                 child: ColumnViewWithGap(
                   gap: 8,
                   children: <Widget>[
-                        Text('おすすめイベント',
+                        Text('おすすめイベント2',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600))
                       ] +
