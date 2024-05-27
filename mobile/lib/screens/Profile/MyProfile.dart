@@ -250,7 +250,7 @@ Container(
           color: Color(0xFF074A83),
         ),
       ),
-      Text('${user.address.prefecture.toJP()} ${user.address.municipalities} ${user.address.houseNumber}',
+      Text('${user.address.prefecture.toJP()} ${user.address.addition}',
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,

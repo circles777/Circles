@@ -12,8 +12,10 @@ import '../models/user.model.dart';
 
 final mockAddress = Address(
     prefecture: Prefecture.chiba,
-    municipalities: '八千代市富田町',
-    houseNumber: '8-9-38');
+    addition: '流山市、運河'); //ここに都道府県以外の項目を自由に記入
+
+    /*municipalities: '八千代市富田町',
+    houseNumber: '8-9-38'); */
 /*final mockUniversity = University(
     //id: '873',
     university: UniversityDictionary.tus,
