@@ -66,35 +66,40 @@ class AdressAdditionEditor extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40.0),
+
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '詳細（任意）',
-                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,color: Color(0xFF0C2D49)),
+                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,color: Color(0xFF0C2D49),),
                   ),
-                  SizedBox(height: 8.0),
+     
                   TextField(
-                    controller: _additionController,
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFFE9E9E9),
-                          width: 1.2,
-                        ),
-                      ),
-                      labelText: '詳細住所',
-                      labelStyle: TextStyle(fontSize: 16.0, color: Color(0xFFE9E9E9)),
-                      contentPadding: EdgeInsets.fromLTRB(0, 4, 0, 0), // 上下左右それぞれ4の間隔を空ける
-                    ),
-                  ),
+                                  controller: _additionController,
+                                  style: TextStyle(fontSize: 16.0, color: Color(0xFF396E9C), fontWeight: FontWeight.bold),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none, // 下の線を削除
+                                    hintText: '詳細住所', // labelText を hintText に変更
+                                    hintStyle: TextStyle(fontSize: 16.0, color: Color(0xFF396E9C)), // ヒントテキストのスタイルを設定
+                                     contentPadding: EdgeInsets.all(0), // 上下左右それぞれの間隔をすべて 0 に設定
+                                  ),
+                                ),
+ 
+                  Container(
+                    height: 1.2,
+                    color: Color(0xFFE9E9E9),
+                  )
                 ],
               ),
             ),
+
+     
+            
             SizedBox(height: 40.0),
             Container(
-              width: double.infinity,
+              alignment: Alignment.center, // Container全体を中央に配置
               child: ElevatedButton(
                 onPressed: () {
                   // 入力された情報を適用して新しい住所を作成
@@ -112,7 +117,17 @@ class AdressAdditionEditor extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('決定'),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(220, 40), // 横220、縦40
+                  backgroundColor: Color(0xFF34AAFF), // 色は34AAFF
+                ),
+                child: Text(
+                    '決定',
+                    style: TextStyle(
+                      fontSize: 16, // 文字サイズ16
+                      color: Colors.white, // 文字色を白に設定
+                    ),
+                  ),
               ),
             ),
           ],
