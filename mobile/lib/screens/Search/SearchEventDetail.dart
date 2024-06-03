@@ -6,9 +6,11 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:like_button/like_button.dart';
 import 'package:mobile/api/user/user.clent.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/BaseLayout.dart';
@@ -17,6 +19,8 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
+import 'package:mobile/components/event/EventDialog.dart';
+import 'package:mobile/components/event/EventList/EventSortLocation.dart';
 import 'package:mobile/components/search/SearchEventListCard.dart';
 import 'package:mobile/mocks/mocks.dart';
 import 'package:mobile/models/common/address.model.dart';
@@ -130,6 +134,30 @@ class SearchEventDetail extends ConsumerWidget {
                 )
               ])
             ]),
+            //参加条件
+             GestureDetector(
+                    onTap: () {
+                      showDialog<void>(
+          context: context,
+          builder: (_) {
+            return EventDialog(title: "このイベントの参加条件",);
+                    },
+                  );
+                    },
+                    child: RowViewWithGap(gap: 12, children: [
+                      const Icon(Icons.error_outline,
+                          size: 18, color: Color.fromRGBO(248, 6, 6, 1)),
+                          Container(
+                            width: 220,
+                      child:  Text(
+                        "招待制　3年生のみ　女性のみ　東京理科大学",
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromRGBO(248, 6, 6, 1)),
+                        overflow: TextOverflow.ellipsis,
+                      ))
+                    ])),
             //タグ
             Container(
               width: deviceWidth,
@@ -310,11 +338,16 @@ class SearchEventDetail extends ConsumerWidget {
         selectedItemColor: Color.fromRGBO(118, 118, 118, 1),
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border), label: "お気に入り"),
+              icon: LikeButton(
+                size: 30,
+              ),
+              label: "お気に入り"),
           BottomNavigationBarItem(
               icon: Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20),color: Color.fromRGBO(52, 170, 255, 1),),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Color.fromRGBO(52, 170, 255, 1),
+                ),
                 padding:
                     EdgeInsets.only(left: 40, right: 40, top: 15, bottom: 15),
                 child: Text(

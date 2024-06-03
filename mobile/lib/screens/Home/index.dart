@@ -24,6 +24,7 @@ import 'package:mobile/screens/Event/JoinedEventList.dart';
 import 'package:mobile/screens/Event/joinedEventDetail.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
 import 'package:mobile/screens/Forum/NewForumForm.dart';
+import 'package:mobile/screens/Home/Home1.dart';
 import 'package:mobile/screens/Lesson/LessonDetail.dart';
 import 'package:mobile/screens/Lesson/LessonList.dart';
 import 'package:mobile/screens/Profile/MyProfile.dart';
@@ -69,7 +70,7 @@ class Index extends ConsumerWidget {
           date: DateTime.now(),
           name: "基礎電子数学及び演習A",
           tags: ["電子電気情報工学科", "機械工学科"]),*/
-      Home(),
+      Home1(),
       //EventDetail(),
       MyProfile(user: ref.read(userProvider.notifier).state ?? mockUser),
       SearchEventHome(),
