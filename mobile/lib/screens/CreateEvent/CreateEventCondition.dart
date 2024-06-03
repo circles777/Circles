@@ -15,7 +15,8 @@ import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
-import '../../components/event/EventList/EventDialog.dart';
+import '../../components/event/EventDialog.dart';
+
 
 class CreateEventCondition extends ConsumerWidget {
   CreateEventCondition({super.key});

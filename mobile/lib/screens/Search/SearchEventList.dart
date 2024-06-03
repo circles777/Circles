@@ -15,7 +15,7 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
-import 'package:mobile/components/event/EventList/EventDialog.dart';
+import 'package:mobile/components/event/EventDialog.dart';
 import 'package:mobile/components/event/EventList/EventSortDate.dart';
 import 'package:mobile/components/event/EventListCard.dart';
 import 'package:mobile/components/search/SearchEventListCard.dart';
