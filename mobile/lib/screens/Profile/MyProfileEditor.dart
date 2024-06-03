@@ -33,10 +33,11 @@ import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:mobile/utils/url/header.dart';
 import 'package:mobile/screens/Profile/MyProfile.dart';
 import 'package:mobile/screens/Profile/AdressEditor.dart';
-
+import 'package:mobile/screens/Profile/IntroductionEditor.dart';
 
 import '../../components/common/SquareCard.dart';
 import '../../components/search/SearchEventHomeCard.dart';
+
 
 class MyProfileEditor extends ConsumerStatefulWidget {
   final User user;
@@ -167,7 +168,7 @@ class _MyProfileEditorState extends ConsumerState<MyProfileEditor> {
                         fontWeight: FontWeight.w700,
                         fontFamily:
                             'YourFontFamily')), //フォントの種類をこれで変更できるがあまり変わっていない
-
+/*
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 8), // 左に10の空白を追加
                     child: ColumnViewWithGap(
@@ -315,6 +316,7 @@ class _MyProfileEditorState extends ConsumerState<MyProfileEditor> {
                         ])
                         ),
 
+
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 8), // 左に10の空白を追加
                     child: ColumnViewWithGap(
@@ -412,6 +414,86 @@ class _MyProfileEditorState extends ConsumerState<MyProfileEditor> {
                           ])
                         ])
                         ),
+
+*/
+                
+                Container(
+                          margin: EdgeInsets.only(left: 8), // 左に10の空白を追加
+                          child: ColumnViewWithGap(
+                            gap: 2,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('大学',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF074A83),
+                                ),
+                              ),
+                              ColumnViewWithGap(
+                                gap: 0,
+                                children: [ 
+                                  Text(user.university.toJP(),
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      height: 0.85,
+                                    ),
+                                  ),
+                                  Text('${user.faculty}-${user.department}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),],),),
+              
+
+                Container(
+  margin: EdgeInsets.only(left: 8), // 左に10の空白を追加
+  child: ColumnViewWithGap(
+    gap: 2,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text('性別',
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Color(0xFF074A83),
+        ),
+      ),
+      Text('${user.gender.toJP()}',
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    ],
+  ),
+),
+Container(
+  margin: EdgeInsets.only(left: 8), // 左に10の空白を追加
+  child: ColumnViewWithGap(
+    gap: 2,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text('学年',
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Color(0xFF074A83),
+        ),
+      ),
+      Text('${user.grade}',
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    ],
+  ),
+),
 
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 8), // 左に10の空白を追加
@@ -574,38 +656,41 @@ class _MyProfileEditorState extends ConsumerState<MyProfileEditor> {
                             ),
                           ),
                           ColumnViewWithGap(gap: 0, children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFFF0F1F3), // 背景色を青色に設定
-                                borderRadius:
-                                    BorderRadius.circular(10), // 角丸を適用する場合
+                            GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => IntroductionEditor()),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF0F1F3), // 背景色を青色に設定
+                            borderRadius: BorderRadius.circular(10), // 角丸を適用する場合
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12), // マークを追加するためのパディング
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, // マークを右端に配置
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  '${user.introduction}',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    height: 1,
+                                  ),
+                                ),
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 12), // マークを追加するためのパディング
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween, // マークを右端に配置
-                                children: [
-                                  Expanded(
-                                      child: Text(
-                                    '${user.introduction}',
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      height: 1,
-                                    ),
-                                  )),
-
-                                  Icon(
-                                    Icons.keyboard_arrow_right_sharp,
-                                    color: const Color.fromARGB(255, 0, 0, 0),
-                                    size: 28.0,
-                                  ), //
+                              Icon(
+                                Icons.keyboard_arrow_right_sharp,
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                                size: 28.0,
+                              ),
                                 ],
                               ),
                             ),
-                          ])
+                          )])
                         ])),
               ],
             ),
