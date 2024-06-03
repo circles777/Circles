@@ -15,9 +15,9 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
-import 'package:mobile/components/event/EventDialog.dart';
+import 'package:mobile/components/event/EventList/EventDialog.dart';
+import 'package:mobile/components/event/EventList/EventSortDate.dart';
 import 'package:mobile/components/event/EventListCard.dart';
-import 'package:mobile/components/event/EventSort.dart';
 import 'package:mobile/components/search/SearchEventListCard.dart';
 import 'package:mobile/components/search/SearchEventSort.dart';
 import 'package:mobile/mocks/mocks.dart';
@@ -32,7 +32,7 @@ import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:mobile/utils/url/header.dart';
 
-import '../../components/event/EventTagDialog.dart';
+import '../../components/event/EventList/EventSortLocation.dart';
 import '../../components/search/SearchEventHomeCard.dart';
 import 'SearchEventDetail.dart';
 
@@ -93,79 +93,42 @@ class SearchEventList extends HookWidget {
                   SearchEventSort(
                     name: "並び替え",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                    onTap: () {
-                      EventSort(title: "並び替え", context, actions: [
-                        ActionItem(text: "人気順"),
-                        ActionItem(text: "おすすめ順"),
-                        ActionItem(text: "新着順"),
-                      ]);
-                    },
-                  ),
+                    onTap: () {}
+                       ),
                   SearchEventSort(
                     name: "開催地域",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
                     onTap: () {
-                      EventSort(title: "開催地域", context, actions: [
-                        ActionItem(text: Prefecture.hokkaido.toJP(),),
-                        ActionItem(text: Prefecture.aomori.toJP(),),
-                        ActionItem(text: Prefecture.iwate.toJP(),),
-                      ]);
+                      EventSortLocation(context, title: "開催地域");
                     },
                   ),
                   SearchEventSort(
                     name: "大学",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
                     onTap: () async {
-                      EventSort(title: "大学", context, actions: [
-                        ActionItem(text: UniversityDictionary.sophia.toJP()),
-                        ActionItem(text: UniversityDictionary.tus.toJP()),
-                        ActionItem(text: UniversityDictionary.waseda.toJP()),
-                      ]);
                     },
                   ),
                   SearchEventSort(
                     name: "キャンパス",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                    onTap: () {
-                      EventSort(title: "キャンパス", context, actions: [
-                        ActionItem(text: ""),
-                        ActionItem(text: ""),
-                        ActionItem(text: ""),
-                      ]);
-                    },
+                    onTap: () {},
                   ),
                   SearchEventSort(
                     name: "日時",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
                     onTap: () {
-                      EventSort(title: "日時", context, actions: [
-                        ActionItem(text: ""),
-                        ActionItem(text: ""),
-                        ActionItem(text:"日時を選択"),
-                      ]);
+                      EventSortDate(context, title: "日時");
                     },
                   ),
                   SearchEventSort(
                     name: "開催方法",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                    onTap: () {
-                      EventSort(title: "開催方法", context, actions: [
-                        ActionItem(text: "対面・オンライン"),
-                        ActionItem(text: "対面"),
-                        ActionItem(text: "オンライン"),
-                      ]);
-                    },
+                    onTap: () {},
                   ),
                   SearchEventSort(
                     name: "タグ",
                     backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-                    onTap: () {
-                      EventSort(title: "タグ", context, actions: [
-                        ActionItem(text: Prefecture.hokkaido.toJP(),),
-                        ActionItem(text: Prefecture.aomori.toJP(),),
-                        ActionItem(text: Prefecture.iwate.toJP(),),
-                      ]);
-                    },
+                    onTap: () {},
                   ),
                 ]),
               ),

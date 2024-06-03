@@ -7,6 +7,7 @@ import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
+import 'package:mobile/components/event/EventDialog.dart';
 import 'package:mobile/components/search/SearchEventHomeCard.dart';
 import 'package:mobile/mocks/mocks.dart';
 import 'package:mobile/models/event.model.dart';
@@ -107,6 +108,30 @@ class joinedEventDetail extends ConsumerWidget {
                 )
               ])
             ]),
+            //参加条件
+            GestureDetector(
+                    onTap: () {
+                      showDialog<void>(
+          context: context,
+          builder: (_) {
+            return EventDialog(title: "このイベントの参加条件",);
+                    },
+                  );
+                    },
+                    child: RowViewWithGap(gap: 12, children: [
+                      const Icon(Icons.error_outline,
+                          size: 18, color: Color.fromRGBO(248, 6, 6, 1)),
+                          Container(
+                            width: 220,
+                      child:  Text(
+                        "招待制　3年生のみ　女性のみ　東京理科大学",
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromRGBO(248, 6, 6, 1)),
+                        overflow: TextOverflow.ellipsis,
+                      ))
+                    ])),
             //タグ
             Container(
               width: deviceWidth,

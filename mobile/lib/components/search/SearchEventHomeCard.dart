@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:like_button/like_button.dart';
 import 'package:mobile/components/common/Avater.dart';
 import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
@@ -120,14 +121,10 @@ class SearchEventHomeCard extends StatelessWidget {
                       child: RowViewWithGap(
                         gap: 5,
                         children: [
-                          Icon(CupertinoIcons.heart,
-                              size: 27,
-                              color: Color.fromARGB(255, 255, 159, 159)),
-                          Text('7',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 123, 140, 153),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500))
+                         LikeButton(
+                            size: 25,
+                            likeCount: 8,
+                          )
                         ],
                       ))
       ])

@@ -8,6 +8,7 @@ import 'package:mobile/components/common/ColumnWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/mocks/mocks.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:like_button/like_button.dart';
 
 import '../../models/event.model.dart';
 import '../../screens/Search/SearchEventDetail.dart';
@@ -23,11 +24,13 @@ class EventListCard extends StatelessWidget {
     String start_format = DateFormat('MM/dd hh:mm〜').format(event.startedAt);
     final double deviceWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: ()=> pushNewScreen<dynamic>(
-                    context,
-                    screen: SearchEventDetail(event: mockEvent11,),
-                    withNavBar: false,
-                  ),
+      onTap: () => pushNewScreen<dynamic>(
+        context,
+        screen: SearchEventDetail(
+          event: mockEvent11,
+        ),
+        withNavBar: false,
+      ),
       child: Container(
           width: deviceWidth,
           decoration: BoxDecoration(
@@ -150,13 +153,10 @@ class EventListCard extends StatelessWidget {
                       child: RowViewWithGap(
                         gap: 5,
                         children: [
-                          Icon(CupertinoIcons.heart,
-                              size: 25,
-                              color: Color.fromARGB(255, 255, 159, 159)),
-                          Text('7',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 123, 140, 153),
-                                  fontSize: 16))
+                          LikeButton(
+                            size: 25,
+                            likeCount: 8,
+                          )
                         ],
                       ))
                 ],
