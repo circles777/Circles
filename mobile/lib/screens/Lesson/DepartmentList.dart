@@ -14,21 +14,23 @@ import 'package:mobile/components/common/ListViewWithGap.dart';
 import 'package:mobile/components/common/RowWithGap.dart';
 import 'package:mobile/components/common/SimpleEventCard.dart';
 import 'package:mobile/components/common/TextFormWithOutLine.dart';
+import 'package:mobile/components/Lesson/DepartmentListCard.dart';
 import 'package:mobile/models/common/enums.dart';
 import 'package:mobile/screens/Auth/Login.dart';
+import 'package:mobile/screens/Lesson/DepartmentList.dart';
 import 'package:mobile/screens/Forum/ForumList.dart';
 import 'package:mobile/utils/helpers/alert.dart';
 import 'package:mobile/utils/helpers/successDialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../components/forum/ForumCategoryCard.dart';
+import '../../components/Lesson/DepartmentListcard.dart';
 
-class ForumCategories extends HookWidget {
-  ForumCategories({super.key});
+class DepartmentListList extends HookWidget {
+  DepartmentListList({super.key});
 
   static Route<dynamic> route() {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => ForumCategories(),
+      builder: (_) => DepartmentListList(),
       //settings: RouteSettings(arguments: someId),
     );
   }
@@ -36,69 +38,50 @@ class ForumCategories extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
-        title: '掲示板カテゴリ',
+        title: '学部',
         child: Padding(
             padding: EdgeInsets.all(16.0),
             child: ListViewWithGap(
               gap: 16,
               children: const [
                 ColumnViewWithGap(gap: 8, children: [
-                  //就活
-                  ForumCategoryCard(
+                  //理学部第一部
+                  DepartmentListCard(
                     icon: Icon(FontAwesomeIcons.userTie,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.part,
+                    category: DepartmentList.science1,
                   ),
-                  //バイト
-                  //就活
-                  ForumCategoryCard(
+                  //工学部
+                  DepartmentListCard(
                     icon: Icon(FontAwesomeIcons.briefcase,
                         size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.part,
+                    category: DepartmentList.engineering,
                   ),
 
-                  //恋愛
-                  ForumCategoryCard(
+                  //薬学部
+                  DepartmentListCard(
                     icon: Icon(FontAwesomeIcons.heart,
                         size: 40, color: Color.fromRGBO(195, 82, 82, 1)),
-                    category: ForumCategory.love,
+                    category: DepartmentList.phscience,
                   ),
-                  //スポーツ
-                  ForumCategoryCard(
+                  //創域理工学部
+                  DepartmentListCard(
                     icon: Icon(FontAwesomeIcons.dumbbell,
                         size: 40, color: Color.fromRGBO(0, 0, 0, 1)),
-                    category: ForumCategory.sport,
+                    category: DepartmentList.scienceandtech,
                   ),
-                  //ゲーム
-                  ForumCategoryCard(
+                  //先進工学部
+                  DepartmentListCard(
                     icon: Icon(FontAwesomeIcons.gamepad,
                         size: 40, color: Color.fromRGBO(154, 44, 227, 1)),
-                    category: ForumCategory.game,
+                    category: DepartmentList.adengineering,
                   ),
 
-                  //食べ物
-                  ForumCategoryCard(
+                  //経営学部
+                  DepartmentListCard(
                     icon: Icon(FontAwesomeIcons.pizzaSlice,
                         size: 40, color: Color.fromRGBO(180, 46, 13, 1)),
-                    category: ForumCategory.food,
-                  ),
-                  //エンタメ
-                  ForumCategoryCard(
-                    icon: Icon(FontAwesomeIcons.tv,
-                        size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.entertainment,
-                  ),
-                  //怖い話
-                  ForumCategoryCard(
-                    icon: Icon(FontAwesomeIcons.ghost,
-                        size: 40, color: Color.fromARGB(255, 97, 132, 215)),
-                    category: ForumCategory.scaryStory,
-                  ),
-                  //面白い話
-                  ForumCategoryCard(
-                    icon: Icon(FontAwesomeIcons.peopleRobbery,
-                        size: 40, color: Color.fromRGBO(103, 102, 102, 1)),
-                    category: ForumCategory.funnyStory,
+                    category: DepartmentList.management,
                   ),
                 ])
               ],
